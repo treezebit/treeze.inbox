@@ -1,14 +1,18 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.4" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="InBox/obj/Debug/LoginView.xaml.g.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.4" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/packages.config">
     <Files>
-      <File FileName="InBox/View/LoginView.xaml" Line="8" Column="23" />
-      <File FileName="InBox/obj/Debug/LoginView.xaml.g.cs" Line="20" Column="3" />
-      <File FileName="InBox/View/LoginView.xaml.cs" Line="14" Column="23" />
+      <File FileName="iOS/Main.cs" Line="1" Column="1" />
+      <File FileName="iOS/AppDelegate.cs" Line="24" Column="1" />
+      <File FileName="iOS/FodyWeavers.xml" Line="1" Column="1" />
+      <File FileName="iOS/packages.config" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/EduardoBaltazar/treeze.inbox/iOS/AppDelegate.cs" line="14" column="1" />
+      <Breakpoint file="/Users/EduardoBaltazar/treeze.inbox/iOS/Main.cs" line="14" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

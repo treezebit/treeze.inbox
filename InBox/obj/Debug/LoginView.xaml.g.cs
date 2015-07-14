@@ -14,10 +14,10 @@ namespace InBox {
     using Xamarin.Forms.Xaml;
     
     
-	public partial class LoginView : global::InBox.LoginView {
+    public partial class LoginView : global::InBox.LoginViewBase {
         
-        private void InitializeComponent() 
-		{
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        private void InitializeComponent() {
             this.LoadFromXaml(typeof(LoginView));
         }
     }

@@ -9,7 +9,8 @@ namespace InBox
 
 		public T ViewModel
 		{
-			get {
+			get 
+			{
 				return _viewModel;
 			}
 		}

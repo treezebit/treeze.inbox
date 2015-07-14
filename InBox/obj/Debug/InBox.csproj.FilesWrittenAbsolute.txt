@@ -1,0 +1,12 @@
+/Users/EduardoBaltazar/Projects/InBox/InBox/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/Users/EduardoBaltazar/Projects/InBox/InBox/obj/Debug/InBox.View.LoginView.xaml
+/Users/EduardoBaltazar/Projects/InBox/InBox/obj/Debug/LoginView.xaml.g.cs
+/Users/EduardoBaltazar/Projects/InBox/InBox/bin/Debug/Xamarin.Forms.Core.dll
+/Users/EduardoBaltazar/Projects/InBox/InBox/bin/Debug/Xamarin.Forms.Xaml.dll
+/Users/EduardoBaltazar/Projects/InBox/InBox/bin/Debug/PropertyChanged.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/.NETPortable,Version=v4.5,Profile=Profile78.AssemblyAttribute.cs
+/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.LoginView.xaml
+/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/LoginView.xaml.g.cs
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/Xamarin.Forms.Core.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/Xamarin.Forms.Xaml.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/PropertyChanged.dll

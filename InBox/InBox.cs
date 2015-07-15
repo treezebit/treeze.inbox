@@ -1,7 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Cirrious.CrossCore.IoC;
-using Cirrious.CrossCore;
 
 namespace InBox
 {
@@ -9,28 +7,34 @@ namespace InBox
 	{
 		public App ()
 		{
-			//var repository = Mvx.Resolve<IUsuarioRepository>();
+			RegistrarInjecaoDeDependencia ();
 
-			//if (repository.Get ().Count > 0) 
-			//{
-			//	MainPage = new LoginView ();	
-			//} 
-			//else 
-			//{
+			var repository = DependencyService.Get<IUsuarioRepository>();
+
+			if (repository.Buscar ().Count > 0)
+			{
+				MainPage = new ListaCanaisView ();
+			}
+			else 
+			{
 				MainPage = new LoginView ();
-			//}
+			}
 		}
 
-		public static void Initializer()
+		private void RegistrarInjecaoDeDependencia()
 		{
-			MvxSimpleIoCContainer.Initialize ();
-			Mvx.RegisterType<IUsuarioRepository, UsuarioRepository> ();
-			Mvx.RegisterType<INoticiaRepository, NoticiaRepository> ();
+			DependencyService.Register<ICanalRepository, CanalRepository> ();
+			DependencyService.Register<ICurtidaRepository, CurtidaRepository> ();
+			DependencyService.Register<INoticiaRepository, NoticiaRepository> ();
+			DependencyService.Register<IUsuarioRepository, UsuarioRepository> ();
+
+			DependencyService.Register<IMessageService, MessageService> ();
+			DependencyService.Register<INavigationService, NavigationService> ();
 		}
 
 		protected override void OnStart ()
 		{
-			Initializer ();
+			
 		}
 
 		protected override void OnSleep ()

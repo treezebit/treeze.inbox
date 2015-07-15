@@ -1,51 +1,64 @@
 ﻿using System;
-using PropertyChanged;
-using Xamarin.Forms;
-using Cirrious.CrossCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Windows.Input;
+using PropertyChanged;
+using Xamarin.Forms;
 
 namespace InBox
 {
 	[ImplementPropertyChanged]
-	public class UsuarioViewModel : IViewModel
+	public class UsuarioViewModel
 	{
+		#region properties
+
 		public string Login { get; set; }
 
 		public string Senha { get; set; }
 
-		public string Mensagem { get; set; }
+		public ICommand Entrar => new Command (Logar);
 
-		public Command Entrar 
-		{ 
-			get
+		#endregion
+
+		#region properties private
+
+		private IMessageService _messageService => DependencyService.Get<IMessageService> ();
+		private INavigationService _navigationService = DependencyService.Get<INavigationService> ();
+
+		#endregion
+
+		#region Commands
+
+		private async void Logar()
+		{
+			try
 			{
-				return new Command (a => {
+				var usuarioRepository = DependencyService.Get<IUsuarioRepository>();
 
-					Mensagem = string.Empty;
+				var usuario = new Usuario(Login, Senha);
 
-					var repository = Mvx.Resolve<IUsuarioRepository>();
+				if (usuarioRepository.Logar(usuario))
+				{
+					//TODO: Salvar no banco local e mudar de pagina
 
-					var usuario = new Usuario(Login, Senha);
+					usuarioRepository.Adicionar(usuario);
 
-					if (usuario.Valido)
-					{
-						usuario = repository.Logar(usuario);
-					}
+					await _navigationService.NavigateToNoticia ();
+				}
+				else
+				{
+					await _messageService.ShowAsync ("Atencao", "Usuario ou senha invalido");
+				}
 
-					if (usuario.Valido)
-					{
-						repository.Add(usuario);
-						//TODO: Salvar no banco local e mudar de pagina
-					}
-					else
-					{
-						foreach (var mensagem in usuario.Mensagens) {
-							Mensagem = $"{ Mensagem }- { mensagem }\n"; 
-						}
-					}
-				});
+
+			}
+			catch (Exception ex) 
+			{
+				await _messageService.ShowAsync ("Atencao", ex.Message);
 			}
 		}
+
+		#endregion
 	}
 }

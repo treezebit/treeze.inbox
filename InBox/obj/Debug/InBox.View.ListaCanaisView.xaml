@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="InBox.ListaCanaisView">
+
+	<ContentPage.Content>
+		<StackLayout
+			Spacing="10"
+			VerticalOptions="CenterAndExpand">
+			<Button Text="Novo canal" Command="{Binding NovoCanal}" />
+			<ListView 
+				x:Name="listView"
+			    ItemsSource="{Binding Canais}">
+			    <ListView.ItemTemplate>
+			        <DataTemplate>
+			        	<StackLayout>
+			        		<Label Text="{Binding Name}" />
+			        	</StackLayout>
+			        </DataTemplate>
+			    </ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

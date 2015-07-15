@@ -5,32 +5,21 @@ using System.Collections.Generic;
 
 namespace InBox
 {
-	public class UsuarioRepository : IUsuarioRepository
+	public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
 	{
-		private SQLiteConnection _connection { get; set; } = ContextSQLite._connection;
-
-		public Usuario Logar(Usuario usuario)
+		public bool Logar(Usuario usuario)
 		{
-			usuario.Equals (usuario.Login, "eduardo" , "O usuario nao existe");
+			var retorno = false;
 
-			if (usuario.Valido)
+			if (usuario.Login == "eduardo") 
 			{
-				usuario.Equals (usuario.Senha, "123456", "A senha esta incorreta");
+				if (usuario.Senha == "123456") 
+				{
+					retorno = true;
+				}
 			}
-
-			return usuario;
-		}
-
-		public List<Usuario> Get()
-		{
-			throw new NotImplementedException ();
-			//return _connection.Table<Usuario> ().ToList ();
-		}
-
-		public void Add(Usuario usuario)
-		{
-			throw new NotImplementedException ();
-			//_connection.Insert (usuario);
+				
+			return retorno;
 		}
 	}
 }

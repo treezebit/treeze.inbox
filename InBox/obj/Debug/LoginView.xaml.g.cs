@@ -14,7 +14,7 @@ namespace InBox {
     using Xamarin.Forms.Xaml;
     
     
-    public partial class LoginView : global::InBox.LoginViewBase {
+    public partial class LoginView : ContentPage {
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {

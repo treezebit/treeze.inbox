@@ -13,8 +13,11 @@ namespace InBox
 		{
 			get 
 			{
-				var con = DependencyService.Get<ISQLite> ().GetConnection ();
+				var config = DependencyService.Get<IConfig> ();
+				var con = new SQLite.Net.SQLiteConnection(config.Plataforma, System.IO.Path.Combine(config.DiretorioDB, "InBoxBD.db3"));
 
+				con.CreateTable<Canal> ();
+				con.CreateTable<Curtida> ();
 				con.CreateTable<Noticia> ();
 				con.CreateTable<Usuario> ();
 
@@ -23,4 +26,3 @@ namespace InBox
 		}
 	}
 }
-

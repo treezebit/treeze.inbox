@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace InBox.iOS
 {
@@ -18,10 +19,11 @@ namespace InBox.iOS
 			Xamarin.Calabash.Start();
 			#endif
 
+			DependencyService.Register<IConfig, Config> ();
+
 			LoadApplication (new App ());
 
 			return base.FinishedLaunching (app, options);
 		}
 	}
 }
-

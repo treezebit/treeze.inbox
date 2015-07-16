@@ -5,12 +5,13 @@ using Xamarin.Forms;
 
 namespace InBox
 {
-	public partial class GestaoCanalView : NavigationPage
+	public partial class GestaoCanalView : ContentPage
 	{
 		public GestaoCanalView ()
 		{
 			InitializeComponent ();
+
+			BindingContext = new GestaoCanalViewModel ();
 		}
 	}
 }
-

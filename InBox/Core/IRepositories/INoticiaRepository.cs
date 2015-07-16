@@ -5,7 +5,7 @@ namespace InBox
 {
 	public interface INoticiaRepository : IRepositoryBase<Noticia>
 	{
-		
+		List<Noticia> Buscar (Canal canal);
 	}
 }
 

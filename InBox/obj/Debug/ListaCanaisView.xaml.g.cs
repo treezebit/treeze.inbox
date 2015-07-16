@@ -14,15 +14,15 @@ namespace InBox {
     using Xamarin.Forms.Xaml;
     
     
-	public partial class ListaCanaisView : NavigationPage {
+    public partial class ListaCanaisView : ContentPage {
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private ListView listView;
+        private ListView lstCanais;
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             this.LoadFromXaml(typeof(ListaCanaisView));
-            listView = this.FindByName <ListView>("listView");
+            lstCanais = this.FindByName <ListView>("lstCanais");
         }
     }
 }

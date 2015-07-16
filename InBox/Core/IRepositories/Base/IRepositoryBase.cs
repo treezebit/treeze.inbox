@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace InBox
 {
-	public interface IRepositoryBase<TEntity> where TEntity : class
+	public interface IRepositoryBase<TEntity> : IDisposable where TEntity : class
 	{
 		List<TEntity> Buscar();
 		TEntity Obter(int cod);

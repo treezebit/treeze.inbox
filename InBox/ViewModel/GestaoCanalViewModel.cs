@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Input;
 using Xamarin.Forms;
+using PropertyChanged;
 
 namespace InBox
 {
-	public class GestaoCanalViewModel
+	[ImplementPropertyChanged]
+	public class GestaoCanalViewModel : Services
 	{
 		#region Properties
 
@@ -12,41 +14,17 @@ namespace InBox
 
 		public string Nome { get; set; }
 
-		public ICommand Salvar { get; set; }
-
-		#endregion
-
-		#region properties private
-
-		private IMessageService _messageService => DependencyService.Get<IMessageService> ();
-		private INavigationService _navigationService => DependencyService.Get<INavigationService> ();
-
-		#endregion
-
-		#region Constructor
-
-		public GestaoCanalViewModel ()
-		{
-			Salvar = new Command (SalvarNoBanco);
-		}
+		public ICommand Salvar => new Command (Salvarcommand);
 
 		#endregion
 
 		#region Commands
 
-		private async void SalvarNoBanco()
+		private async void Salvarcommand()
 		{
 			var canalRep = DependencyService.Get<ICanalRepository> ();
 
 			if (CodCanal > 0) 
-			{
-				var canal = new Canal (Nome);
-
-				canalRep.Adicionar (canal);
-
-				await _messageService.ShowAsync ("Parabens", "Canal criado com sucesso!");
-			}
-			else
 			{
 				var canal = canalRep.Obter (CodCanal);
 
@@ -54,7 +32,23 @@ namespace InBox
 
 				canalRep.Atualizar (canal);
 
+				//TODO: Atualizar no BackEnd
+
 				await _messageService.ShowAsync ("Parabens", "Canal atualizado com sucesso!");
+
+				await _navigationService.NavigateToListaCanais();
+			}
+			else
+			{
+				var canal = new Canal (Nome);
+
+				canalRep.Adicionar (canal);
+
+				//TODO: Adicionar no BackEnd
+
+				await _messageService.ShowAsync ("Parabens", "Canal criado com sucesso!");
+
+				await _navigationService.NavigateToListaCanais();
 			}
 		}
 

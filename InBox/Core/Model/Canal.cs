@@ -14,14 +14,8 @@ namespace InBox
 
 		public string Nome { get; private set; }
 
-		[OneToMany] 
+		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert)]
 		public List<Noticia> Noticias { get; private set; } = new List<Noticia> ();
-
-		[ForeignKey(typeof(Usuario))]
-		public int CodUsuario { get; private set; }
-
-		[ManyToOne]
-		public Usuario Usuario { get; private set; }
 
 		#endregion
 

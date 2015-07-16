@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SQLite.Net;
+using SQLiteNetExtensions.Extensions;
 
 namespace InBox
 {
@@ -11,22 +12,22 @@ namespace InBox
 
 		public List<TEntity> Buscar ()
 		{
-			return _connection.Table<TEntity> ().ToList();
+			return _connection.GetAllWithChildren<TEntity> ().ToList();
 		}
 
 		public TEntity Obter (int cod)
 		{
-			return _connection.Get<TEntity> (cod);
+			return _connection.GetWithChildren<TEntity> (cod);
 		}
 
 		public void Adicionar (TEntity obj)
 		{
-			_connection.Insert (obj);
+			_connection.InsertWithChildren (obj);
 		}
 
 		public void Atualizar (TEntity obj)
 		{
-			_connection.Update (obj);
+			_connection.UpdateWithChildren (obj);
 		}
 
 		public void Remover (TEntity obj)

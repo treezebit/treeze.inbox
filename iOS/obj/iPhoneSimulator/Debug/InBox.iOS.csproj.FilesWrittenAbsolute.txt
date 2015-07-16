@@ -26,6 +26,10 @@
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/Icon-Small-40.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/Icon-Small-40@2x.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/Icon-Small-40@3x.png
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.iOS.exe.mdb
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.iOS.exe
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/InBox.iOS.exe
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/InBox.iOS.exe.mdb
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Calabash.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Platform.iOS.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Xamarin.Forms.Core.dll
@@ -39,13 +43,7 @@
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Cirrious.CrossCore.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Cirrious.MvvmCross.Binding.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Cirrious.MvvmCross.Localization.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Cirrious.MvvmCross.Touch.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Cirrious.MvvmCross.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll.mdb
-/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/InBox.iOS.exe
-/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/InBox.iOS.exe.mdb
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.iOS.exe.mdb
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.iOS.exe
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Newtonsoft.Json.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/SQLiteNetExtensions.dll
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll.mdb

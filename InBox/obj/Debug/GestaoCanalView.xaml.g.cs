@@ -14,7 +14,7 @@ namespace InBox {
     using Xamarin.Forms.Xaml;
     
     
-	public partial class GestaoCanalView : NavigationPage {
+    public partial class GestaoCanalView : ContentPage {
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {

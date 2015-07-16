@@ -28,6 +28,8 @@ namespace InBox.Droid
 		{
 			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::InBox.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Forms.Platform.Resource.String.Hello = global::InBox.Droid.Resource.String.Hello;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::InBox.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::InBox.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute

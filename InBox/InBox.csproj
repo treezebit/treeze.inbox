@@ -37,7 +37,6 @@
     </Compile>
     <Compile Include="Core\Model\Usuario.cs" />
     <Compile Include="Core\IRepositories\IUsuarioRepository.cs" />
-    <Compile Include="ViewModel\UsuarioViewModel.cs" />
     <Compile Include="Infra\Repositories\UsuarioRepository.cs" />
     <Compile Include="Core\Model\Noticia.cs" />
     <Compile Include="Core\Model\Error\Erro.cs" />
@@ -49,12 +48,6 @@
     <Compile Include="View\Services\MessageService.cs" />
     <Compile Include="View\Services\NavigationService.cs" />
     <Compile Include="Infra\Context\IConfig.cs" />
-    <Compile Include="View\NoticiaView.xaml.cs">
-      <DependentUpon>NoticiaView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CanalView.xaml.cs">
-      <DependentUpon>CanalView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\GestaoCanalView.xaml.cs">
       <DependentUpon>GestaoCanalView.xaml</DependentUpon>
     </Compile>
@@ -66,13 +59,25 @@
     <Compile Include="Infra\Repositories\CurtidaRepository.cs" />
     <Compile Include="Core\IRepositories\Base\IRepositoryBase.cs" />
     <Compile Include="Infra\Repositories\Base\RepositoryBase.cs" />
-    <Compile Include="ViewModel\NoticiaViewModel.cs" />
     <Compile Include="ViewModel\GestaoCanalViewModel.cs" />
-    <Compile Include="ViewModel\ListaCanalViewModel.cs" />
+    <Compile Include="ViewModel\Services\Services.cs" />
     <Compile Include="View\ListaCanaisView.xaml.cs">
       <DependentUpon>ListaCanaisView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Services\Services.cs" />
+    <Compile Include="ViewModel\GestaoNoticiaViewModel.cs" />
+    <Compile Include="View\GestaoNoticiaView.xaml.cs">
+      <DependentUpon>GestaoNoticiaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ListaCanaisViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="View\ListaNoticiasView.xaml.cs">
+      <DependentUpon>ListaNoticiasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ListaNoticiasViewModel.cs" />
+    <Compile Include="View\DetalheNoticiaView.xaml.cs">
+      <DependentUpon>DetalheNoticiaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\DetalheNoticiaViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -129,16 +134,19 @@
     <EmbeddedResource Include="View\LoginView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\NoticiaView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\CanalView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\GestaoCanalView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ListaCanaisView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\GestaoNoticiaView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ListaNoticiasView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DetalheNoticiaView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

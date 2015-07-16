@@ -19,7 +19,7 @@ namespace InBox
 		[ForeignKey(typeof(Noticia))]
 		public int CodNoticia { get; private set; }
 
-		[ManyToOne]
+		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert)]
 		public Noticia Noticia { get; private set; }
 
 		#endregion

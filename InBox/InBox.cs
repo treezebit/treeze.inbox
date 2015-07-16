@@ -7,21 +7,29 @@ namespace InBox
 	{
 		public App ()
 		{
+			MainPage = App.GetMainPage ();
+		}
+
+		public static Page GetMainPage()
+		{
 			RegistrarInjecaoDeDependencia ();
 
 			var repository = DependencyService.Get<IUsuarioRepository>();
+			Page retorno = null;
 
 			if (repository.Buscar ().Count > 0)
 			{
-				MainPage = new ListaCanaisView ();
+				retorno = new NavigationPage(new ListaCanaisView());
 			}
 			else 
 			{
-				MainPage = new LoginView ();
+				retorno = new NavigationPage(new LoginView ());
 			}
+
+			return retorno;
 		}
 
-		private void RegistrarInjecaoDeDependencia()
+		private static void RegistrarInjecaoDeDependencia()
 		{
 			DependencyService.Register<ICanalRepository, CanalRepository> ();
 			DependencyService.Register<ICurtidaRepository, CurtidaRepository> ();
@@ -30,21 +38,6 @@ namespace InBox
 
 			DependencyService.Register<IMessageService, MessageService> ();
 			DependencyService.Register<INavigationService, NavigationService> ();
-		}
-
-		protected override void OnStart ()
-		{
-			
-		}
-
-		protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
-
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
 		}
 	}
 }

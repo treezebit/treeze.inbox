@@ -13,7 +13,7 @@ namespace InBox
 
 			InitializeComponent();
 
-			this.BindingContext = new UsuarioViewModel ();
+			this.BindingContext = new LoginViewModel ();
 		}
 	}
 }

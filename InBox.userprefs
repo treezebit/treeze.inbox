@@ -1,13 +1,6 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.4" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="InBox/Infra/Repositories/UsuarioRepository.cs">
-    <Files>
-      <File FileName="InBox/InBox.cs" Line="28" Column="63" />
-      <File FileName="InBox/ViewModel/UsuarioViewModel.cs" Line="21" Column="7" />
-      <File FileName="InBox/Core/IRepositories/IUsuarioRepository.cs" Line="12" Column="23" />
-      <File FileName="InBox/Infra/Repositories/UsuarioRepository.cs" Line="10" Column="10" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.4" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

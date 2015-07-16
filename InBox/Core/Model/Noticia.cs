@@ -21,7 +21,7 @@ namespace InBox
 
 		public bool Lida { get; private set; } = false;
 
-		[OneToMany]
+		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert)]
 		public List<Curtida> Curtidas { get; private set; } = new List<Curtida> ();
 
 		[ForeignKey(typeof(Canal))]
@@ -36,11 +36,13 @@ namespace InBox
 
 		public Noticia () { }
 
-		public Noticia (string titulo, string conteudo)
+		public Noticia (string titulo, string conteudo, Canal canal)
 		{
 			this.Titulo = titulo;
 			this.Conteudo = conteudo;
 			this.DataCriacao = DateTime.Now;
+			this.Canal = canal;
+			this.CodCanal = canal.CodCanal;
 		}
 
 		#endregion
@@ -74,6 +76,16 @@ namespace InBox
 		public void Ler()
 		{
 			this.Lida = true;
+		}
+
+		public void TrocarTitulo(string titulo)
+		{
+			this.Titulo = titulo;
+		}
+
+		public void TrocarConteudo(string conteudo)
+		{
+			this.Conteudo = conteudo;
 		}
 
 		#endregion

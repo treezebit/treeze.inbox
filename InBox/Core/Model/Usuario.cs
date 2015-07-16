@@ -16,9 +16,6 @@ namespace InBox
 
 		public string Senha { get; private set; }
 
-		[OneToMany]
-		public List<Canal> Canais { get; private set; } = new List<Canal>();
-
 		#endregion
 
 		#region Constructor
@@ -29,34 +26,6 @@ namespace InBox
 		{
 			Login = login;
 			Senha = senha;
-		}
-
-		#endregion
-
-		#region Methods
-
-		public void IncluirCanal(Canal canal)
-		{
-			if (!Canais.Exists (x => x == canal)) 
-			{
-				Canais.Add (canal);
-			}
-			else 
-			{
-				//TODO: tratar erro
-			}
-		}
-
-		public void RemoverCanal(Canal canal)
-		{
-			if (Canais.Exists (x => x == canal)) 
-			{
-				Canais.Remove (canal);
-			}
-			else 
-			{
-				//TODO: tratar erro
-			}
 		}
 
 		#endregion

@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="InBox.GestaoCanalView">
 	<ContentPage.Content>
+		<StackLayout>
+			<Entry Placeholder="Nome do canal" Text="{ Binding Nome }" />
+			<Button Text="Salvar" Command="{ Binding Salvar }" />
+			<Button Text="Nova noticia" Command="{ Binding NovaNoticia }" />
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

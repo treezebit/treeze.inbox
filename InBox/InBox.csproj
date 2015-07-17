@@ -36,31 +36,21 @@
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Model\Usuario.cs" />
-    <Compile Include="Core\IRepositories\IUsuarioRepository.cs" />
     <Compile Include="Infra\Repositories\UsuarioRepository.cs" />
     <Compile Include="Core\Model\Noticia.cs" />
     <Compile Include="Core\Model\Error\Erro.cs" />
     <Compile Include="Infra\Context\ContextSQLite.cs" />
     <Compile Include="Infra\Repositories\NoticiaRepository.cs" />
-    <Compile Include="Core\IRepositories\INoticiaRepository.cs" />
-    <Compile Include="ViewModel\Services\IMessageService.cs" />
-    <Compile Include="ViewModel\Services\INavigationService.cs" />
-    <Compile Include="View\Services\MessageService.cs" />
-    <Compile Include="View\Services\NavigationService.cs" />
     <Compile Include="Infra\Context\IConfig.cs" />
     <Compile Include="View\GestaoCanalView.xaml.cs">
       <DependentUpon>GestaoCanalView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Model\Canal.cs" />
     <Compile Include="Core\Model\Curtida.cs" />
-    <Compile Include="Core\IRepositories\ICanalRepository.cs" />
-    <Compile Include="Core\IRepositories\ICurtidaRepository.cs" />
     <Compile Include="Infra\Repositories\CanalRepository.cs" />
     <Compile Include="Infra\Repositories\CurtidaRepository.cs" />
-    <Compile Include="Core\IRepositories\Base\IRepositoryBase.cs" />
     <Compile Include="Infra\Repositories\Base\RepositoryBase.cs" />
     <Compile Include="ViewModel\GestaoCanalViewModel.cs" />
-    <Compile Include="ViewModel\Services\Services.cs" />
     <Compile Include="View\ListaCanaisView.xaml.cs">
       <DependentUpon>ListaCanaisView.xaml</DependentUpon>
     </Compile>
@@ -74,10 +64,28 @@
       <DependentUpon>ListaNoticiasView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ListaNoticiasViewModel.cs" />
-    <Compile Include="View\DetalheNoticiaView.xaml.cs">
-      <DependentUpon>DetalheNoticiaView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\DetalheNoticiaViewModel.cs" />
+    <Compile Include="Core\Contracts\Repositories\Base\IRepositoryBase.cs" />
+    <Compile Include="Core\Contracts\Repositories\ICanalRepository.cs" />
+    <Compile Include="Core\Contracts\Repositories\ICurtidaRepository.cs" />
+    <Compile Include="Core\Contracts\Repositories\INoticiaRepository.cs" />
+    <Compile Include="Core\Contracts\Repositories\IUsuarioRepository.cs" />
+    <Compile Include="Core\Contracts\Services\IMessageService.cs" />
+    <Compile Include="Core\Contracts\Services\INavigationService.cs" />
+    <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\Services.cs" />
+    <Compile Include="View\TesteImage.xaml.cs">
+      <DependentUpon>TesteImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Contracts\Services\IMediaPicker.cs" />
+    <Compile Include="Core\Contracts\Services\MediaFile.cs" />
+    <Compile Include="Core\Contracts\Services\MediaStorageOptions.cs" />
+    <Compile Include="ViewModel\TesteCamera.cs" />
+    <Compile Include="View\TesteCameraView.xaml.cs">
+      <DependentUpon>TesteCameraView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetalheNoticiaView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -110,6 +118,9 @@
     <Reference Include="SQLiteNetExtensions">
       <HintPath>..\packages\SQLiteNetExtensions.1.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="ExifLib">
+      <HintPath>..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -122,13 +133,12 @@
     <Folder Include="View\" />
     <Folder Include="Infra\Repositories\" />
     <Folder Include="Core\Model\" />
-    <Folder Include="Core\IRepositories\" />
     <Folder Include="Core\Model\Error\" />
     <Folder Include="Infra\Context\" />
-    <Folder Include="ViewModel\Services\" />
-    <Folder Include="View\Services\" />
-    <Folder Include="Core\IRepositories\Base\" />
     <Folder Include="Infra\Repositories\Base\" />
+    <Folder Include="Services\" />
+    <Folder Include="Core\Contracts\" />
+    <Folder Include="Core\Contracts\Services\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\LoginView.xaml">
@@ -146,7 +156,10 @@
     <EmbeddedResource Include="View\ListaNoticiasView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\DetalheNoticiaView.xaml">
+    <EmbeddedResource Include="View\TesteImage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TesteCameraView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -32,6 +32,16 @@ namespace InBox
 			await _navigationService.NavigateToDetalheNoticias (noticia);
 		}
 
+		public void DeletaNoticia(Noticia noticia)
+		{
+			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+			{
+				noticiaRep.Remover (noticia);
+
+				Noticias.Remove (noticia);
+			}
+		}
+
 		#endregion
 	}
 }

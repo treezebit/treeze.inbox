@@ -9,6 +9,7 @@
 			<Label Text="Conteudo" />
 			<Editor Text="{ Binding Conteudo }" />
 			<Button Command="{ Binding Salvar }" Text="Salvar" />
+			<Button Command="{ Binding ObterImagem }" Text="Obter imagem" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

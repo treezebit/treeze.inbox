@@ -7,7 +7,7 @@
 			  	<DataTemplate>
 		      		<ViewCell>
 	    	  			<ViewCell.ContextActions>
-					       	<MenuItem Text="Delete" IsDestructive="true" />
+					       	<MenuItem Text="Delete" IsDestructive="true" Clicked="DeletaItem" CommandParameter="{Binding .}" />
 					   	</ViewCell.ContextActions>
 		      			<StackLayout>
 		      				<Label Text="{Binding Titulo}" />

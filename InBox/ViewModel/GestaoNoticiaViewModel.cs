@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace InBox
 {
@@ -14,7 +15,11 @@ namespace InBox
 
 		public string Conteudo { get; set; }
 
+		public Image ImageSource { get; set; }
+
 		public ICommand Salvar => new Command(SalvarCommand);
+
+		public ICommand ObterImagem => new Command(SalvarCommand);
 
 		private Canal Canal { get; set; }
 

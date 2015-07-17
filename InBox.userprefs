@@ -1,6 +1,14 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.4" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Services/MediaPickerDelegate.cs">
+    <Files>
+      <File FileName="iOS/Services/MediaPicker.cs" Line="226" Column="21" />
+      <File FileName="iOS/Services/MediaPickerController.cs" Line="6" Column="20" />
+      <File FileName="iOS/Services/MediaPickerDelegate.cs" Line="356" Column="38" />
+      <File FileName="iOS/AppDelegate.cs" Line="19" Column="51" />
+      <File FileName="iOS/Services/MediaPickerPopoverDelegate.cs" Line="4" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

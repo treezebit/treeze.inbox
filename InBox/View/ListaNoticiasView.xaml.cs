@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
 namespace InBox
@@ -13,9 +12,9 @@ namespace InBox
 		{
 			InitializeComponent ();
 
+			listaNoticiasViewModel = new ListaNoticiasViewModel (canal);
 
-
-			BindingContext = listaNoticiasViewModel = new ListaNoticiasViewModel (canal);
+			BindingContext = listaNoticiasViewModel;
 		}
 
 		public void SelecionaItem (object sender, EventArgs e) 
@@ -27,6 +26,15 @@ namespace InBox
 			{
 				listaNoticiasViewModel.DetalheNoticia (noticia);
 			}
+		}
+
+		public void DeletaItem (object sender, EventArgs e) 
+		{
+			var menuItem = ((MenuItem)sender);
+			var noticia = (Noticia)menuItem.CommandParameter;
+			listaNoticiasViewModel.DeletaNoticia (noticia);
+
+			BindingContext = listaNoticiasViewModel;
 		}
 	}
 }

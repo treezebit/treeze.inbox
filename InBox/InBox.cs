@@ -26,7 +26,10 @@ namespace InBox
 				retorno = new NavigationPage(new LoginView ());
 			}
 
+
+
 			return retorno;
+			//return new NavigationPage(new TesteCameraView());
 		}
 
 		private static void RegistrarInjecaoDeDependencia()

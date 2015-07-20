@@ -4,6 +4,8 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
+using ImageCircle.Forms.Plugin.iOS;
+
 
 namespace InBox.iOS
 {
@@ -13,6 +15,7 @@ namespace InBox.iOS
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			Forms.Init ();
+			ImageCircleRenderer.Init();
 
 			DependencyService.Register<IConfig, Config> ();
 			DependencyService.Register<IMediaPicker, MediaPicker> ();
@@ -21,14 +24,15 @@ namespace InBox.iOS
 			window.RootViewController = App.GetMainPage ().CreateViewController ();
 			window.MakeKeyAndVisible ();
 
+			LoadApplication (new App ());
+
 			//Cor de fundo barra de navegacao
-			UINavigationBar.Appearance.BarTintColor = UIColor.Red;
+			//UINavigationBar.Appearance.BarTintColor = UIColor.Red;
 
 			//Cor da letra da barra de navegacao
-			UINavigationBar.Appearance.TintColor = UIColor.Green;
-			UIPageControl.Appearance.BackgroundColor = UIColor.Red;
+			//UINavigationBar.Appearance.TintColor = UIColor.Green;
 
-			return true;
+			return base.FinishedLaunching (app, options);;
 		}
 	}
 }

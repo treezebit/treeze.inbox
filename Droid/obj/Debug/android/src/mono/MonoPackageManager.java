@@ -139,6 +139,7 @@ class MonoPackageManager_Resources {
 		"SQLiteNetExtensions.dll",
 		"Newtonsoft.Json.dll",
 		"ExifLib.dll",
+		"ImageCircle.Forms.Plugin.Abstractions.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

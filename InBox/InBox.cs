@@ -5,9 +5,11 @@ namespace InBox
 {
 	public class App : Application
 	{
+		public static MasterDetailPage MasterDetailPage;
+
 		public App ()
 		{
-			MainPage = App.GetMainPage ();
+			MainPage = GetMainPage ();
 		}
 
 		public static Page GetMainPage()
@@ -19,17 +21,19 @@ namespace InBox
 
 			if (repository.Buscar ().Count > 0)
 			{
-				retorno = new NavigationPage(new ListaCanaisView());
+				retorno = new NavigationPage(new ListaCanaisView("A"));
 			}
 			else 
 			{
 				retorno = new NavigationPage(new LoginView ());
 			}
 
+			MasterDetailPage = new MasterDetailPage {
+				Master = new MenuView(),
+				Detail = retorno,
+			};
 
-
-			return retorno;
-			//return new NavigationPage(new TesteCameraView());
+			return MasterDetailPage;
 		}
 
 		private static void RegistrarInjecaoDeDependencia()

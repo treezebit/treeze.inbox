@@ -23,7 +23,7 @@
 /Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/SQLite.Net.Platform.XamarinAndroid.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/InBox.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/InBox.dll.mdb
-/Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/System.Diagnostics.Tools.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/SQLiteNetExtensions.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/ExifLib.dll
+/Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/ImageCircle.Forms.Plugin.Abstractions.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/bin/Debug/Newtonsoft.Json.dll

@@ -23,7 +23,7 @@ namespace InBox
 
 		public async Task NavigateToListaCanais()
 		{
-			await App.Current.MainPage.Navigation.PushAsync (new ListaCanaisView());
+			await App.Current.MainPage.Navigation.PushAsync (new ListaCanaisView("A"));
 		}
 
 		public async Task NavigateToListaNoticias(Canal canal)
@@ -33,7 +33,7 @@ namespace InBox
 
 		public async Task NavigateToDetalheNoticias(Noticia noticia)
 		{
-			await App.Current.MainPage.Navigation.PushAsync (new DetalheNoticiaView(noticia));
+			//await App.Current.MainPage.Navigation.PushAsync (new DetalheNoticiaView(noticia));
 		}
 	}
 }

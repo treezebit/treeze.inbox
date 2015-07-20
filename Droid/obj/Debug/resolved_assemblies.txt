@@ -58,3 +58,4 @@
 /Users/EduardoBaltazar/treeze.inbox/Droid/obj/Debug/assemblies/SQLiteNetExtensions.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/obj/Debug/assemblies/Newtonsoft.Json.dll
 /Users/EduardoBaltazar/treeze.inbox/Droid/obj/Debug/assemblies/ExifLib.dll
+/Users/EduardoBaltazar/treeze.inbox/Droid/obj/Debug/assemblies/ImageCircle.Forms.Plugin.Abstractions.dll

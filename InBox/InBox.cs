@@ -9,7 +9,7 @@ namespace InBox
 
 		public App ()
 		{
-			MainPage = GetMainPage ();
+			//MainPage = GetMainPage ();
 		}
 
 		public static Page GetMainPage()
@@ -21,7 +21,7 @@ namespace InBox
 
 			if (repository.Buscar ().Count > 0)
 			{
-				retorno = new NavigationPage(new ListaCanaisView("A"));
+				retorno = new NavigationPage(new ListaNoticiasView());
 			}
 			else 
 			{

@@ -32,7 +32,10 @@ namespace InBox
 		{
 			var canalRep = DependencyService.Get<ICanalRepository> ();
 
-			Canais = canalRep.Buscar();
+			Canais.Add(new Canal("Teste1"));
+			Canais.Add(new Canal("Teste2"));
+			Canais.Add(new Canal("Teste3"));
+			Canais.Add(new Canal("Teste4"));
 		}
 
 		#endregion
@@ -54,7 +57,7 @@ namespace InBox
 
 				await _messageService.ShowAsync("Parabens", "Canal excluido com sucesso");
 
-				await _navigationService.NavigateToListaCanais();
+				//await _navigationService.NavigateToListaCanais();
 			}
 		}
 

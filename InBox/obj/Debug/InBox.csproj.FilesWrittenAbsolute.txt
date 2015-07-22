@@ -2,13 +2,11 @@
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.LoginView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.GestaoCanalView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.GestaoNoticiaView.xaml
-/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.ListaNoticiasView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.TesteImage.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.TesteCameraView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/LoginView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/GestaoCanalView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/GestaoNoticiaView.xaml.g.cs
-/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/ListaNoticiasView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/TesteImage.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/TesteCameraView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/InBox.dll.mdb

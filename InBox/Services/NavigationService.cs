@@ -6,6 +6,11 @@ namespace InBox
 {
 	public class NavigationService : INavigationService
 	{
+		public async Task NavigateToCanais ()
+		{
+			await App.MasterDetailPage.Detail.Navigation.PushAsync(new NavigationPage (new ListaCanaisView ()));
+		}
+
 		public async Task NavigateToLogin ()
 		{
 			await App.Current.MainPage.Navigation.PushAsync (new LoginView());
@@ -21,14 +26,9 @@ namespace InBox
 			await App.Current.MainPage.Navigation.PushAsync (new GestaoNoticiaView(canal));
 		}
 
-		public async Task NavigateToListaCanais()
-		{
-			await App.Current.MainPage.Navigation.PushAsync (new ListaCanaisView("A"));
-		}
-
 		public async Task NavigateToListaNoticias(Canal canal)
 		{
-			await App.Current.MainPage.Navigation.PushAsync (new ListaNoticiasView(canal));
+			await App.Current.MainPage.Navigation.PushAsync (new ListaNoticiasView());
 		}
 
 		public async Task NavigateToDetalheNoticias(Noticia noticia)

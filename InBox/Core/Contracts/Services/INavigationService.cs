@@ -11,10 +11,10 @@ namespace InBox
 
 		Task NavigateToGestaoNoticia(Canal canal);
 
-		Task NavigateToListaCanais();
-
 		Task NavigateToListaNoticias(Canal canal);
 
 		Task NavigateToDetalheNoticias(Noticia noticia);
+
+		Task NavigateToCanais();
 	}
 }

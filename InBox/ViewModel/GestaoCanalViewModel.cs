@@ -36,7 +36,7 @@ namespace InBox
 
 				await _messageService.ShowAsync ("Parabens", "Canal atualizado com sucesso!");
 
-				await _navigationService.NavigateToListaCanais();
+				//await _navigationService.NavigateToListaCanais();
 			}
 			else
 			{
@@ -48,7 +48,7 @@ namespace InBox
 
 				await _messageService.ShowAsync ("Parabens", "Canal criado com sucesso!");
 
-				await _navigationService.NavigateToListaCanais();
+				//await _navigationService.NavigateToListaCanais();
 			}
 		}
 

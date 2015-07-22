@@ -22,7 +22,6 @@ namespace InBox.Droid
 
 			DependencyService.Register<IConfig, Config> ();
 
-
 			LoadApplication (new App() );
 		}
 	}

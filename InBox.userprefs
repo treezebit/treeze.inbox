@@ -1,18 +1,10 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.4" />
-  <MonoDevelop.Ide.Workbench>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="InBox" expanded="True">
-            <Node name="InBox" expanded="True">
-              <Node name="View" expanded="True" />
-            </Node>
-            <Node name="InBox.iOS" expanded="True" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
+  <MonoDevelop.Ide.Workbench ActiveDocument="InBox/View/ListaCanaisView.cs">
+    <Files>
+      <File FileName="InBox/View/ListaNoticiasView.cs" Line="16" Column="3" />
+      <File FileName="InBox/View/ListaCanaisView.cs" Line="10" Column="3" />
+    </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

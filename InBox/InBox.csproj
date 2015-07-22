@@ -57,9 +57,6 @@
     </Compile>
     <Compile Include="ViewModel\ListaCanaisViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="View\ListaNoticiasView.xaml.cs">
-      <DependentUpon>ListaNoticiasView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\ListaNoticiasViewModel.cs" />
     <Compile Include="ViewModel\DetalheNoticiaViewModel.cs" />
     <Compile Include="Core\Contracts\Repositories\Base\IRepositoryBase.cs" />
@@ -82,8 +79,9 @@
     <Compile Include="View\TesteCameraView.xaml.cs">
       <DependentUpon>TesteCameraView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ListaCanaisView.cs" />
     <Compile Include="View\MenuView.cs" />
+    <Compile Include="View\ListaNoticiasView.cs" />
+    <Compile Include="View\ListaCanaisView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -149,9 +147,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\GestaoNoticiaView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ListaNoticiasView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="View\TesteImage.xaml">

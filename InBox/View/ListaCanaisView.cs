@@ -1,136 +1,69 @@
 ﻿using System;
 using Xamarin.Forms;
-using System.Linq;
-using System.Collections.Generic;
 using ImageCircle.Forms.Plugin.Abstractions;
 
 namespace InBox
 {
 	public class ListaCanaisView : ContentPage
 	{
-		StackLayout lista = new StackLayout { Padding = new Thickness(10, 0, 10, 0) };
+		public ListaCanaisViewModel listaCanaisViewModel { get; set; } = new ListaCanaisViewModel();
 
-		public ListaCanaisView (string name)
+		public ListaCanaisView ()
 		{
-			Title = name;
-
-			var sbrPesquisa = new SearchBar ();
-			sbrPesquisa.IsVisible = false;
-			sbrPesquisa.Placeholder = "Pesquisar";
-
-			var lblNovidades = new Label
-			{
-				Text = "Voce tem 3 novidades",
-				HorizontalOptions = LayoutOptions.CenterAndExpand
-			};
-
-			this.ToolbarItems.Add (
-				new ToolbarItem 
-				{ 
-					//Icon = "Icon-Small.png",
-					Text = "Pesquisa",
-					Command = new Command(() => sbrPesquisa.IsVisible = !sbrPesquisa.IsVisible ),
-					Order = 0
-				}
-			);
-
-			var grid = new Grid {
-				VerticalOptions = LayoutOptions.FillAndExpand,
-				RowDefinitions = {
-					new RowDefinition { Height = 100 },
-					new RowDefinition { Height = 100 },
-					new RowDefinition { Height = 100 }
-				},
-				ColumnDefinitions = {
-					new ColumnDefinition { Width = GridLength.Auto },
-					new ColumnDefinition { Width = GridLength.Auto },
-					new ColumnDefinition { Width = GridLength.Auto }
-				}
-			};
-
-			grid.Children.Add ( Canal() , 0, 0);
-
-			grid.Children.Add ( TextoCanal("Moda") , 0, 0);
-
-			grid.Children.Add ( Canal() , 1, 0);
-
-			grid.Children.Add ( TextoCanal("Estilo") , 1, 0);
-
-			grid.Children.Add ( Canal() , 2, 0);
-
-			grid.Children.Add ( TextoCanal("Produtos") , 2, 0);
-
-			for (int count = 0; count < 3; count++) 
-			{
-				lista.Children.Add (Noticia (string.Concat ("Teste", count + 1)));
-			}
-
-			Content = new StackLayout 
-			{ 
-				Children = { 
-					new ScrollView {
-						Content = new StackLayout {
-							Children = {
-								sbrPesquisa,
-								lblNovidades,
-								lista,
-								new Button { Text = "Visualizar mais", Command = new Command(() => IncluirItensLista()) },
-								new StackLayout {
-									Padding = new Thickness(10, 0, 10, 0),
-									Children = {
-										new Frame { 
-											Content = new StackLayout {
-												//BackgroundColor = Color.Green,
-												HorizontalOptions = LayoutOptions.FillAndExpand,
-												HeightRequest = 370,
-												Spacing = 20,
-												Children = {
-													new Label { Text = "Canais", HorizontalOptions = LayoutOptions.Center },
-													grid
-												}
-											},
-											OutlineColor = Color.Black
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			};
+			Content = MontarListaCanais ();
 		}
 
-		private void IncluirItensLista()
+		private StackLayout MontarListaCanais()
 		{
-			lista.Children.Add (Noticia ("Teste4"));
-			lista.Children.Add (Noticia ("Teste5"));
-		}
-
-		private StackLayout Noticia(string name) 
-		{
-			var tamanhoImagem = 80;
+			var grid = MontarGridCanais();
 
 			return new StackLayout {
-				HorizontalOptions = LayoutOptions.CenterAndExpand,
-				Orientation = StackOrientation.Horizontal,
+				Padding = new Thickness (10, 10, 10, -10),
+				//BackgroundColor = Color.Green,
+				HorizontalOptions = LayoutOptions.FillAndExpand,
+				HeightRequest = 370,
+				Spacing = 20,
 				Children = {
-					new Image {
-						Source = UriImageSource.FromUri (new Uri ("http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg")),
-						HeightRequest = tamanhoImagem,
-						WidthRequest = tamanhoImagem,
-						HorizontalOptions = LayoutOptions.Start
-					},
-					new StackLayout {
-						Children = {
-							new Label { Text = "Titulo" },
-							new Label { Text = "Conteudo da noticia" }
-						}
-					}
+					new Label { Text = "Canais", HorizontalOptions = LayoutOptions.Center },
+					grid
 				}
 			};
 		}
 
-		private CircleImage Canal()
+		private Grid MontarGridCanais()
+		{
+			var grid = new Grid {
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				ColumnSpacing = 30,
+				RowSpacing = 15
+			};
+
+			for (int count = 0, countColunaAtual = 0, countLinhaAtual = -1; count < listaCanaisViewModel.Canais.Count; count++, countColunaAtual++) 
+			{
+				if (count == 0 || count % 3 == 0) 
+				{
+					countColunaAtual = 0;
+				}
+
+				if (count < 3) 
+				{
+					grid.ColumnDefinitions.Add (new ColumnDefinition { Width = GridLength.Auto });
+				}
+
+				if (count == 0 || count % 3 == 0)
+				{
+					grid.RowDefinitions.Add (new RowDefinition { Height = 100 });
+					countLinhaAtual++;
+				}
+
+				grid.Children.Add (CanalImagem (), countColunaAtual, countLinhaAtual);
+				grid.Children.Add (TextoCanal (listaCanaisViewModel.Canais[count].Nome), countColunaAtual, countLinhaAtual);
+			}
+
+			return grid;
+		}
+
+		private CircleImage CanalImagem()
 		{
 			var tamanho = 80;
 

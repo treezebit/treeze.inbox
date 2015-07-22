@@ -24,7 +24,7 @@ namespace InBox.iOS
 			window.RootViewController = App.GetMainPage ().CreateViewController ();
 			window.MakeKeyAndVisible ();
 
-			LoadApplication (new App ());
+			//LoadApplication (new App ());
 
 			//Cor de fundo barra de navegacao
 			//UINavigationBar.Appearance.BarTintColor = UIColor.Red;
@@ -32,7 +32,7 @@ namespace InBox.iOS
 			//Cor da letra da barra de navegacao
 			//UINavigationBar.Appearance.TintColor = UIColor.Green;
 
-			return base.FinishedLaunching (app, options);;
+			return true;
 		}
 	}
 }

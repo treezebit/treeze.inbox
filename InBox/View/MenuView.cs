@@ -40,7 +40,7 @@ namespace InBox
 			return new Button {
 				Text = name,
 				Command = new Command(o => {
-					App.MasterDetailPage.Detail = new NavigationPage(new ListaCanaisView(name));
+					App.MasterDetailPage.Detail = new NavigationPage(new ListaNoticiasView());
 					App.MasterDetailPage.IsPresented = false;
 				})
 			};

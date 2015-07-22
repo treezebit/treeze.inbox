@@ -63,6 +63,8 @@
 	-r \
 	/Users/EduardoBaltazar/treeze.inbox/packages/Xam.Plugins.Forms.ImageCircle.1.0.14/lib/Xamarin.iOS10/ImageCircle.Forms.Plugin.Abstractions.dll \
 	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Net.Http.dll \
+	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Core.dll \
 	-r \
 	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/InBox.dll \
@@ -191,5 +193,11 @@
 	-r \
 	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/InBox.dll \
 	-r \
-	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/ExifLib.dll \
+	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/RestSharp.Portable.dll \
+	-r \
+	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/System.Net.Http.Primitives.dll \
+	-r \
+	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/Microsoft.Threading.Tasks.dll \
+	-r \
+	/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/Microsoft.Threading.Tasks.Extensions.dll \
 	/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug//InBox.iOS.exe \

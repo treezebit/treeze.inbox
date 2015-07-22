@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace InBox
 {
@@ -12,9 +13,11 @@ namespace InBox
 
 		public List<Noticia> Noticias { get; set; } = new List<Noticia> ();
 
-		public List<Canal> Canais { get; set; } = new List<Canal> ();
-
 		public int quantidadeNovasNoticias => Noticias.Count;
+
+		public string Titulo { get; set; }
+
+		public ICommand SelecionarNoticia => new Command<Noticia>(a => SelecionarNoticiaCommand(a));
 
 		public ICommand ExibirCanais => new Command(ExibirCanaisCommand);
 
@@ -22,13 +25,29 @@ namespace InBox
 
 		#region Constructor
 
-		public ListaNoticiasViewModel ()
+		public ListaNoticiasViewModel (Canal canal)
 		{
 			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 			{
-				Noticias.Add (new Noticia ("Titulo1", "Conteudo1", new Canal()));
-				Noticias.Add (new Noticia ("Titulo2", "Conteudo2", new Canal()));
-				Noticias.Add (new Noticia ("Titulo3", "Conteudo3", new Canal()));
+				if (canal != null)
+				{
+					//TODO: Buscar as noticias do canal
+					Titulo = canal.Nome;
+
+					Noticias.Add(new Noticia("Teste1Canal", "Conteudo1Canal", new Canal()));
+					Noticias.Add(new Noticia("Teste2Canal", "Conteudo2Canal", new Canal()));
+				}
+				else
+				{
+					//TODO: Buscar as noticias mais recentes
+					Titulo = "Noticias";
+
+					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
+					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
+					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
+					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
+					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
+				}
 			}
 		}
 
@@ -36,22 +55,12 @@ namespace InBox
 
 		#region Commands
 
-		public async void DetalheNoticia(Noticia noticia)
+		public async void SelecionarNoticiaCommand(Noticia param)
 		{
-			await _navigationService.NavigateToDetalheNoticias (noticia);
+			await _navigationService.NavigateToDetalheNoticias (param);
 		}
 
-		public void DeletaNoticia(Noticia noticia)
-		{
-			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
-			{
-				noticiaRep.Remover (noticia);
-
-				Noticias.Remove (noticia);
-			}
-		}
-
-		private async void ExibirCanaisCommand()
+		public async void ExibirCanaisCommand()
 		{
 			await _navigationService.NavigateToCanais();
 		}

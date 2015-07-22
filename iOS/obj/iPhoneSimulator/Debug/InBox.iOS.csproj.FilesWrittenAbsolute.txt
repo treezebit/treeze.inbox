@@ -51,4 +51,7 @@
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/ImageCircle.Forms.Plugin.Abstractions.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll.mdb
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/ExifLib.dll
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/RestSharp.Portable.dll
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/System.Net.Http.Primitives.dll
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Microsoft.Threading.Tasks.dll
+/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Microsoft.Threading.Tasks.Extensions.dll

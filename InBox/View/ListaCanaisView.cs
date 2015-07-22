@@ -1,15 +1,18 @@
 ﻿using System;
 using Xamarin.Forms;
 using ImageCircle.Forms.Plugin.Abstractions;
+using System.Diagnostics;
 
 namespace InBox
 {
 	public class ListaCanaisView : ContentPage
 	{
-		public ListaCanaisViewModel listaCanaisViewModel { get; set; } = new ListaCanaisViewModel();
+		public ListaCanaisViewModel listaCanaisViewModel { get; set; }
 
 		public ListaCanaisView ()
 		{
+			listaCanaisViewModel = new ListaCanaisViewModel();
+
 			Content = MontarListaCanais ();
 		}
 
@@ -56,18 +59,18 @@ namespace InBox
 					countLinhaAtual++;
 				}
 
-				grid.Children.Add (CanalImagem (), countColunaAtual, countLinhaAtual);
+				grid.Children.Add (CanalImagem (listaCanaisViewModel.Canais[count]) , countColunaAtual, countLinhaAtual);
 				grid.Children.Add (TextoCanal (listaCanaisViewModel.Canais[count].Nome), countColunaAtual, countLinhaAtual);
 			}
 
 			return grid;
 		}
 
-		private CircleImage CanalImagem()
+		private ImageButton CanalImagem(Canal canal)
 		{
 			var tamanho = 80;
 
-			return new CircleImage {
+			return new ImageButton {
 				BorderColor = Color.White,
 				BorderThickness = 3,
 				HeightRequest = tamanho,
@@ -75,7 +78,9 @@ namespace InBox
 				Aspect = Aspect.AspectFill,
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				Source = UriImageSource.FromUri (new Uri ("http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg"))
+				Source = UriImageSource.FromUri (new Uri ("http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg")),
+				Command = listaCanaisViewModel.SelecionarCanal,
+				CommandParameter = canal
 			};
 		}
 

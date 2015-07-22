@@ -14,15 +14,7 @@ namespace InBox
 
 		public ICommand NovoCanal => new Command(NovoCanalCommand);
 
-		public ICommand Deletar => new Command((cod) => 
-			{ 
-				DeletarCommand((Canal)cod); 
-			});
-
-		public ICommand NovaNoticia => new Command((cod) => 
-			{ 
-				DeletarCommand((Canal)cod); 
-			});
+		public ICommand SelecionarCanal => new Command<Canal>(canal => SelecionarCanalCommand(canal));
 
 		#endregion
 
@@ -30,12 +22,14 @@ namespace InBox
 
 		public ListaCanaisViewModel ()
 		{
-			var canalRep = DependencyService.Get<ICanalRepository> ();
+			using (var canalRep = DependencyService.Get<ICanalRepository> ())
+			{
 
 			Canais.Add(new Canal("Teste1"));
 			Canais.Add(new Canal("Teste2"));
 			Canais.Add(new Canal("Teste3"));
 			Canais.Add(new Canal("Teste4"));
+			}
 		}
 
 		#endregion
@@ -47,26 +41,7 @@ namespace InBox
 			await _navigationService.NavigateToGestaoCanal();
 		}
 
-		public async void DeletarCommand(Canal canal)
-		{
-			using (var canalRep = DependencyService.Get<ICanalRepository> ()) 
-			{
-				canalRep.Remover(canal);
-
-				Canais.Remove(canal);
-
-				await _messageService.ShowAsync("Parabens", "Canal excluido com sucesso");
-
-				//await _navigationService.NavigateToListaCanais();
-			}
-		}
-
-		public async void NovaNoticiaCommand(Canal canal)
-		{
-			await _navigationService.NavigateToGestaoNoticia(canal);
-		}
-
-		public async void ListaNoticias(Canal canal)
+		private async void SelecionarCanalCommand(Canal canal)
 		{
 			await _navigationService.NavigateToListaNoticias(canal);
 		}

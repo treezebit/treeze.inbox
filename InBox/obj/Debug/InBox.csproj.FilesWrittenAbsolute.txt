@@ -2,13 +2,9 @@
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.LoginView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.GestaoCanalView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.GestaoNoticiaView.xaml
-/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.TesteImage.xaml
-/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.View.TesteCameraView.xaml
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/LoginView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/GestaoCanalView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/GestaoNoticiaView.xaml.g.cs
-/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/TesteImage.xaml.g.cs
-/Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/TesteCameraView.xaml.g.cs
 /Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/InBox.dll.mdb
 /Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/InBox.dll
 /Users/EduardoBaltazar/treeze.inbox/InBox/obj/Debug/InBox.dll
@@ -24,3 +20,9 @@
 /Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/SQLiteNetExtensions.dll
 /Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/ExifLib.dll
 /Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/ImageCircle.Forms.Plugin.Abstractions.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/Microsoft.Threading.Tasks.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/Microsoft.Threading.Tasks.Extensions.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/RestSharp.Portable.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/System.Net.Http.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/System.Net.Http.Primitives.dll
+/Users/EduardoBaltazar/treeze.inbox/InBox/bin/Debug/System.Net.Http.Extensions.dll

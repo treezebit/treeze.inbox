@@ -13,7 +13,9 @@ namespace InBox
 
 		public async Task NavigateToLogin ()
 		{
-			await App.Current.MainPage.Navigation.PushAsync (new LoginView());
+			App.MasterDetailPage.Detail = new NavigationPage ( new LoginView());
+			App.MasterDetailPage.IsPresented = false;
+			App.MasterDetailPage.IsEnabled = false;
 		}
 
 		public async Task NavigateToGestaoCanal()
@@ -26,14 +28,14 @@ namespace InBox
 			await App.Current.MainPage.Navigation.PushAsync (new GestaoNoticiaView(canal));
 		}
 
-		public async Task NavigateToListaNoticias(Canal canal)
+		public async Task NavigateToListaNoticias(Canal canal = null)
 		{
-			await App.Current.MainPage.Navigation.PushAsync (new ListaNoticiasView());
+			App.MasterDetailPage.Detail = new NavigationPage ( new ListaNoticiasView(canal));
 		}
 
-		public async Task NavigateToDetalheNoticias(Noticia noticia)
+		public async Task NavigateToDetalheNoticias(Noticia noticia = null)
 		{
-			//await App.Current.MainPage.Navigation.PushAsync (new DetalheNoticiaView(noticia));
+			await App.MasterDetailPage.Detail.Navigation.PushAsync(new NavigationPage (new DetalheNoticiaView (noticia)));
 		}
 	}
 }

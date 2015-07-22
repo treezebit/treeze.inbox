@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InBox
 {
 	public interface IUsuarioRepository : IRepositoryBase<Usuario>
 	{
-		bool Logar(Usuario usuario);
+		Task<bool> Logar(Usuario usuario);
+		void Logout ();
 	}
 }

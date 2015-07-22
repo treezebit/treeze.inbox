@@ -31,11 +31,11 @@ namespace InBox
 
 				var usuario = new Usuario(Login, Senha);
 
-				if (usuarioRepository.Logar(usuario))
+				if (Convert.ToBoolean(usuarioRepository.Logar(usuario)))
 				{
 					usuarioRepository.Adicionar(usuario);
 
-					await _navigationService.NavigateToGestaoCanal();
+					await _navigationService.NavigateToListaNoticias();
 				}
 				else
 				{
@@ -47,6 +47,8 @@ namespace InBox
 				await _messageService.ShowAsync ("Atencao", ex.Message);
 			}
 		}
+
+
 
 		#endregion
 	}

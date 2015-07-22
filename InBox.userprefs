@@ -1,11 +1,6 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.4" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="InBox/View/ListaCanaisView.cs">
-    <Files>
-      <File FileName="InBox/View/ListaNoticiasView.cs" Line="16" Column="3" />
-      <File FileName="InBox/View/ListaCanaisView.cs" Line="10" Column="3" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

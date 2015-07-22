@@ -11,7 +11,7 @@ namespace InBox
 
 		Task NavigateToGestaoNoticia(Canal canal);
 
-		Task NavigateToListaNoticias(Canal canal);
+		Task NavigateToListaNoticias(Canal canal = null);
 
 		Task NavigateToDetalheNoticias(Noticia noticia);
 

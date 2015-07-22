@@ -1,11 +1,14 @@
 ﻿using System;
 using Xamarin.Forms;
 using ImageCircle.Forms.Plugin.Abstractions;
+using System.Windows.Input;
 
 namespace InBox
 {
 	public class MenuView : ContentPage
 	{
+		private MenuViewModel menuViewModel { get; set; } = new MenuViewModel();
+
 		public MenuView ()
 		{
 			Content = new StackLayout {
@@ -20,9 +23,9 @@ namespace InBox
 						HorizontalOptions = LayoutOptions.CenterAndExpand,
 						Source = UriImageSource.FromUri (new Uri ("http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg"))
 					},
-					MainLink("Page A"),
-					MainLink("Page B"),
-					MainLink("Page C"),
+					ButtonPersonalizado("Perfil", menuViewModel.AbrirPerfil),
+					ButtonPersonalizado("Favoritos", menuViewModel.AbrirNoticiasFavoritas),
+					ButtonPersonalizado("Sair", menuViewModel.Sair),
 					new Button {
 						Text = "Config",
 						HorizontalOptions = LayoutOptions.Start,
@@ -35,14 +38,11 @@ namespace InBox
 			//Icon = "mobile_menu_icon.gif";
 		}
 
-		public Button MainLink (string name)
+		private Button ButtonPersonalizado (string name, ICommand command)
 		{
 			return new Button {
 				Text = name,
-				Command = new Command(o => {
-					App.MasterDetailPage.Detail = new NavigationPage(new ListaNoticiasView());
-					App.MasterDetailPage.IsPresented = false;
-				})
+				Command = command
 			};
 		}
 	}

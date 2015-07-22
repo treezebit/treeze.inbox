@@ -7,9 +7,7 @@ namespace InBox
 	{
 		#region Properties
 
-		public string Titulo { get; set; }
-
-		public string Conteudo { get; set; }
+		public string UrlImagemCapa { get; set; }
 
 		public Noticia Noticia { get; set; }
 
@@ -20,10 +18,9 @@ namespace InBox
 		public DetalheNoticiaViewModel (Noticia noticia)
 		{
 			this.Noticia = noticia;
-			this.Titulo = noticia.Titulo;
-			this.Conteudo = noticia.Conteudo;
+			this.UrlImagemCapa = "http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg";
 
-			if (!noticia.Lida) 
+			if (!noticia.Lida)
 			{
 				noticia.Ler ();
 
@@ -37,4 +34,3 @@ namespace InBox
 		#endregion
 	}
 }
-

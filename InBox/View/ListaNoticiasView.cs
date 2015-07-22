@@ -10,7 +10,7 @@ namespace InBox
 	{
 		#region Properties
 
-		private ListaNoticiasViewModel listaNoticiasViewModel { get; set; } = new ListaNoticiasViewModel();
+		private ListaNoticiasViewModel listaNoticiasViewModel { get; set; }
 
 		private Label lblNovidades { get; set; } = new Label();
 
@@ -18,8 +18,10 @@ namespace InBox
 
 		#region Constructor
 
-		public ListaNoticiasView ()
+		public ListaNoticiasView (Canal canal = null)
 		{
+			listaNoticiasViewModel = new ListaNoticiasViewModel(canal);
+
 			MontarTela ();
 		}
 
@@ -29,7 +31,7 @@ namespace InBox
 
 		private void MontarTela()
 		{
-			Title = "Novidades";
+			Title = listaNoticiasViewModel.Titulo;
 			Icon = "mobile_menu_icon.gif";
 
 			var listaNoticias = new StackLayout 
@@ -102,11 +104,11 @@ namespace InBox
 			MontarNovidades ();
 		}
 
-		private StackLayout Noticia(string titulo, string conteudo) 
+		private StackLayout Noticia(Noticia noticia) 
 		{
 			var tamanhoImagem = 80;
 
-			return new StackLayout {
+			var btn =  new StackLayoutButton {
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				Orientation = StackOrientation.Horizontal,
 				WidthRequest = 300,
@@ -119,12 +121,24 @@ namespace InBox
 					},
 					new StackLayout {
 						Children = {
-							new Label { Text = titulo },
-							new Label { Text = conteudo }
+							new Label { Text = noticia.Titulo },
+							new Label { Text = noticia.Conteudo }
 						}
 					}
-				}
+				},
+				Command = listaNoticiasViewModel.SelecionarNoticia,
+				CommandParameter = noticia
 			};
+
+//			btn.OnLinhaSelecionada += (obj) => {
+//			};
+
+			return btn;
+		}
+
+		private void Teste(object sender, EventArgs e )
+		{
+			
 		}
 
 		private void PopularLista(StackLayout lista)
@@ -133,7 +147,7 @@ namespace InBox
 
 			foreach (var item in listaNoticiasViewModel.Noticias) 
 			{
-				lista.Children.Add (Noticia (item.Titulo, item.Conteudo));
+				lista.Children.Add (Noticia (item));
 			}
 
 			lista.Children.Add (new Button { Text = "Visualizar mais", Command = new Command(() => IncluirItensLista(lista)) });

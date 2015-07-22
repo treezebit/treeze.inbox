@@ -8,7 +8,7 @@ namespace InBox
 {
 	public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
 	{
-		private SQLiteConnection _connection => ContextSQLite._connection;
+		public SQLiteConnection _connection => ContextSQLite._connection;
 
 		public List<TEntity> Buscar ()
 		{

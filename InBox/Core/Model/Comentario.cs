@@ -1,4 +1,6 @@
 ﻿using System;
+using SQLiteNetExtensions.Attributes;
+using SQLite.Net.Attributes;
 
 namespace InBox
 {
@@ -6,11 +8,16 @@ namespace InBox
 	{
 		#region Properties
 
+		[PrimaryKey]
 		public int CodComentario { get; private set; }
 
 		public string Texto { get; private set; }
 
+		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert)]
 		public Usuario Usuario { get; private set; }
+
+		[ForeignKey(typeof(Usuario))]
+		public int CodUsuario { get; private set; }
 
 		#endregion
 

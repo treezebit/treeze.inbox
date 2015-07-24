@@ -9,24 +9,14 @@ namespace InBox
 	{
 		#region Properties
 
-		[PrimaryKey, AutoIncrement]
-		public int CodUsuario { get; private set; }
+		[PrimaryKey]
+		public string Token { get; set; }
 
-		public string Login { get; private set; }
+		public string Nome { get; set; }
 
-		public string Senha { get; private set; }
+		public string Login { get; set; }
 
-		#endregion
-
-		#region Constructor
-
-		public Usuario () { }
-
-		public Usuario (string login, string senha)
-		{
-			Login = login;
-			Senha = senha;
-		}
+		public string Thumb { get; set; }
 
 		#endregion
 	}

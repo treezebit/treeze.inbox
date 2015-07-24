@@ -26,6 +26,11 @@
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/Icon-Small-40.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/Icon-Small-40@2x.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/Icon-Small-40@3x.png
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/logo.png
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/menu.png
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/canais@2x.png
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/menu@2x.png
+/Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/logo@2x.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/InBox.iOS.Resources.xamarin-logo@2x.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/obj/iPhoneSimulator/Debug/InBox.iOS.Resources.teste.png
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.iOS.exe.mdb
@@ -51,7 +56,3 @@
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/ImageCircle.Forms.Plugin.Abstractions.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll
 /Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/InBox.dll.mdb
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/RestSharp.Portable.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/System.Net.Http.Primitives.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Microsoft.Threading.Tasks.dll
-/Users/EduardoBaltazar/treeze.inbox/iOS/bin/iPhoneSimulator/Debug/Microsoft.Threading.Tasks.Extensions.dll

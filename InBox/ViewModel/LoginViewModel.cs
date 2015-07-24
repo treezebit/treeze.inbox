@@ -27,19 +27,24 @@ namespace InBox
 		{
 			try
 			{
-				var usuarioRepository = DependencyService.Get<IUsuarioRepository>();
-
-				var usuario = new Usuario(Login, Senha);
-
-				if (Convert.ToBoolean(usuarioRepository.Logar(usuario)))
+				using (var usuarioRepository = DependencyService.Get<IUsuarioRepository>())
 				{
-					usuarioRepository.Adicionar(usuario);
+					var usuario = await usuarioRepository.Logar(Login, Senha);
 
-					await _navigationService.NavigateToListaNoticias();
-				}
-				else
-				{
-					await _messageService.ShowAsync ("Atencao", "Usuario ou senha invalido");
+					if (!string.IsNullOrEmpty(usuario.Token))
+					{
+						usuario = await usuarioRepository.ObterInformacoesUsuario(usuario.Token);
+
+						usuarioRepository.Adicionar(usuario);
+
+						_atualizarDadosService.Atualizar(true);
+
+						_navigationService.NavigateToListaNoticias();
+					}
+					else
+					{
+						await _messageService.ShowAsync ("Atencao", "Usuario ou senha invalido");
+					}
 				}
 			}
 			catch (Exception ex) 
@@ -47,8 +52,6 @@ namespace InBox
 				await _messageService.ShowAsync ("Atencao", ex.Message);
 			}
 		}
-
-
 
 		#endregion
 	}

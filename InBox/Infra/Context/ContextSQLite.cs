@@ -17,6 +17,7 @@ namespace InBox
 				var con = new SQLite.Net.SQLiteConnection(config.Plataforma, System.IO.Path.Combine(config.DiretorioDB, "InBoxBD.db3"));
 
 				con.CreateTable<Canal> ();
+				con.CreateTable<Comentario> ();
 				con.CreateTable<Curtida> ();
 				con.CreateTable<Noticia> ();
 				con.CreateTable<Usuario> ();

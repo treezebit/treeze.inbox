@@ -18,9 +18,14 @@ namespace InBox
 
 			var repository = DependencyService.Get<IUsuarioRepository>();
 			Page retorno = null;
+			var usuario = repository.ObterUsuarioLogado ();
 
-			if (repository.Buscar ().Count > 0)
+			if (usuario != null)
 			{
+				var _atualizarDadosService = DependencyService.Get<IAtualizarDadosService> ();
+
+				_atualizarDadosService.Atualizar (true);
+
 				retorno = new NavigationPage(new ListaNoticiasView());
 			}
 			else 
@@ -29,11 +34,13 @@ namespace InBox
 			}
 
 			MasterDetailPage = new MasterDetailPage {
-				Master = new MenuView(),
+				Master = new MenuView(usuario),
 				Detail = retorno,
 			};
 
 			return MasterDetailPage;
+
+			//return new NavigationPage (new TesteWebBrowser ());
 		}
 
 		private static void RegistrarInjecaoDeDependencia()
@@ -45,6 +52,7 @@ namespace InBox
 
 			DependencyService.Register<IMessageService, MessageService> ();
 			DependencyService.Register<INavigationService, NavigationService> ();
+			DependencyService.Register<IAtualizarDadosService, AtualizarDadosService> ();
 		}
 	}
 }

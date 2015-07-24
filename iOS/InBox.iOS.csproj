@@ -142,6 +142,11 @@
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40%403x.png" />
     <BundleResource Include="Resources\mobile_menu_icon.gif" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\canais%402x.png" />
+    <BundleResource Include="Resources\menu%402x.png" />
+    <BundleResource Include="Resources\logo%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -156,7 +161,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Extensions\NsDataStream.cs" />
+    <Compile Include="Extensions\ExtendedSearchBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="ITunesArtwork" />

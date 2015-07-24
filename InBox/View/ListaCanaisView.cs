@@ -13,21 +13,35 @@ namespace InBox
 		{
 			listaCanaisViewModel = new ListaCanaisViewModel();
 
-			Content = MontarListaCanais ();
+			var cancelar = new ToolbarItem {
+				Order = ToolbarItemOrder.Primary,
+				Text = "Cancelar", 
+				Priority = 0,
+			};
+
+			cancelar.Command = new Command (() => Navigation.PopModalAsync ());
+
+			this.ToolbarItems.Add (cancelar);
+
+			Content = new StackLayoutPersonalizado {
+				Children = {
+					MontarListaCanais ()
+				}
+			};
 		}
 
 		private StackLayout MontarListaCanais()
 		{
 			var grid = MontarGridCanais();
 
+			Title = "Canais";
+
 			return new StackLayout {
 				Padding = new Thickness (10, 10, 10, -10),
-				//BackgroundColor = Color.Green,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				HeightRequest = 370,
 				Spacing = 20,
 				Children = {
-					new Label { Text = "Canais", HorizontalOptions = LayoutOptions.Center },
 					grid
 				}
 			};
@@ -78,7 +92,7 @@ namespace InBox
 				Aspect = Aspect.AspectFill,
 				HorizontalOptions = LayoutOptions.CenterAndExpand,
 				VerticalOptions = LayoutOptions.StartAndExpand,
-				Source = UriImageSource.FromUri (new Uri ("http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg")),
+				Source = UriImageSource.FromUri (new Uri (canal.Thumb)),
 				Command = listaCanaisViewModel.SelecionarCanal,
 				CommandParameter = canal
 			};
@@ -89,7 +103,8 @@ namespace InBox
 			return new Label { 
 				Text = texto, 
 				HorizontalOptions = LayoutOptions.Center, 
-				VerticalOptions = LayoutOptions.End
+				VerticalOptions = LayoutOptions.End,
+				TextColor = Color.White
 			};
 		}
 	}

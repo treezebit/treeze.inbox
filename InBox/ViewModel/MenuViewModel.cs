@@ -8,6 +8,8 @@ namespace InBox
 	{
 		#region Properties
 
+		public Usuario Usuario { get; set; }
+
 		public ICommand AbrirPerfil => new Command(AbrirPerfilCommand);
 
 		public ICommand AbrirNoticiasFavoritas => new Command(AbrirNoticiasFavoritasCommand);
@@ -16,26 +18,35 @@ namespace InBox
 
 		#endregion
 
+		#region Constructor
+
+		public MenuViewModel (Usuario usuario)
+		{
+			Usuario = usuario;
+		}
+
+		#endregion
+
 		#region Commands
 
-		private async void AbrirPerfilCommand()
+		private void AbrirPerfilCommand()
 		{
-			await _navigationService.NavigateToLogin();
+			_navigationService.NavigateToLogin();
 		}
 
-		private async void AbrirNoticiasFavoritasCommand()
+		private void AbrirNoticiasFavoritasCommand()
 		{
-			await _navigationService.NavigateToListaNoticias(new Canal());
+			_navigationService.NavigateToListaNoticias(new Canal());
 		}
 
-		private async void SairCommand()
+		private void SairCommand()
 		{
 			using (var usuariorep = DependencyService.Get<IUsuarioRepository>())
 			{
 				usuariorep.Logout();
 			}
 
-			await _navigationService.NavigateToLogin();
+			_navigationService.NavigateToLogin();
 		}
 
 		#endregion

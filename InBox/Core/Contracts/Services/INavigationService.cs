@@ -5,13 +5,9 @@ namespace InBox
 {
 	public interface INavigationService
 	{
-		Task NavigateToLogin();
+		void NavigateToLogin();
 
-		Task NavigateToGestaoCanal();
-
-		Task NavigateToGestaoNoticia(Canal canal);
-
-		Task NavigateToListaNoticias(Canal canal = null);
+		void NavigateToListaNoticias(Canal canal = null);
 
 		Task NavigateToDetalheNoticias(Noticia noticia);
 

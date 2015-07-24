@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Linq;
 
 namespace InBox
 {
@@ -17,9 +18,14 @@ namespace InBox
 
 		public string Titulo { get; set; }
 
-		public ICommand SelecionarNoticia => new Command<Noticia>(a => SelecionarNoticiaCommand(a));
+		public ICommand SelecionarNoticia => new Command<Noticia>(a =>
+			{
+				SelecionarNoticiaCommand(a);
+			});
 
 		public ICommand ExibirCanais => new Command(ExibirCanaisCommand);
+
+		public ICommand Pesquisar => new Command<string>(texto => PesquisaCommand(texto));
 
 		#endregion
 
@@ -31,22 +37,15 @@ namespace InBox
 			{
 				if (canal != null)
 				{
-					//TODO: Buscar as noticias do canal
 					Titulo = canal.Nome;
 
-					Noticias.Add(new Noticia("Teste1Canal", "Conteudo1Canal", new Canal()));
-					Noticias.Add(new Noticia("Teste2Canal", "Conteudo2Canal", new Canal()));
+					Noticias = noticiaRep.Buscar();
 				}
 				else
 				{
-					//TODO: Buscar as noticias mais recentes
 					Titulo = "Noticias";
 
-					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
-					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
-					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
-					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
-					Noticias.Add(new Noticia("Teste1", "Conteudo1", new Canal()));
+					Noticias = noticiaRep.Buscar();
 				}
 			}
 		}
@@ -55,14 +54,22 @@ namespace InBox
 
 		#region Commands
 
-		public async void SelecionarNoticiaCommand(Noticia param)
+		public void SelecionarNoticiaCommand(Noticia param)
 		{
-			await _navigationService.NavigateToDetalheNoticias (param);
+			_navigationService.NavigateToDetalheNoticias (param);
 		}
 
 		public async void ExibirCanaisCommand()
 		{
 			await _navigationService.NavigateToCanais();
+		}
+
+		public void PesquisaCommand(string texto)
+		{
+			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+			{
+				Noticias = noticiaRep.Buscar().Where(x => x.Titulo.Contains(texto) || x.Resumo.Contains(texto)).ToList();
+			}
 		}
 
 		#endregion
@@ -71,8 +78,7 @@ namespace InBox
 
 		public void MaisNoticias()
 		{
-			Noticias.Add (new Noticia ("Titulo4", "Conteudo4", new Canal()));
-			Noticias.Add (new Noticia ("Titulo5", "Conteudo5", new Canal()));
+			
 		}
 
 		#endregion

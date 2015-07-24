@@ -12,8 +12,6 @@ namespace InBox
 
 		public List<Canal> Canais { get; set; } = new List<Canal>();
 
-		public ICommand NovoCanal => new Command(NovoCanalCommand);
-
 		public ICommand SelecionarCanal => new Command<Canal>(canal => SelecionarCanalCommand(canal));
 
 		#endregion
@@ -24,11 +22,7 @@ namespace InBox
 		{
 			using (var canalRep = DependencyService.Get<ICanalRepository> ())
 			{
-
-			Canais.Add(new Canal("Teste1"));
-			Canais.Add(new Canal("Teste2"));
-			Canais.Add(new Canal("Teste3"));
-			Canais.Add(new Canal("Teste4"));
+				Canais = canalRep.Buscar();
 			}
 		}
 
@@ -36,14 +30,9 @@ namespace InBox
 
 		#region Commands
 
-		private async void NovoCanalCommand()
+		private void SelecionarCanalCommand(Canal canal)
 		{
-			await _navigationService.NavigateToGestaoCanal();
-		}
-
-		private async void SelecionarCanalCommand(Canal canal)
-		{
-			await _navigationService.NavigateToListaNoticias(canal);
+			_navigationService.NavigateToListaNoticias(canal);
 		}
 
 		#endregion

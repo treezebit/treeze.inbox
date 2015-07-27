@@ -17,9 +17,17 @@ namespace InBox
 
 		public string Senha { get; set; }
 
+		public bool IsBusy { get; set; }
+
+		public string SituacaoTexto { get; set; }
+
 		public ICommand Entrar => new Command (Logar);
 
 		#endregion
+
+		public LoginViewModel(){
+			SituacaoTexto = "Entrar";
+		}
 
 		#region Commands
 
@@ -27,6 +35,14 @@ namespace InBox
 		{
 			try
 			{
+				IsBusy = true;
+				SituacaoTexto = "Aguarde....";
+
+				if(string.IsNullOrEmpty (Login) || string.IsNullOrEmpty (Senha)){
+					await _messageService.ShowAsync ("Atenção", "Campos com login e senha devem ser preenchidos!");
+					return;
+				}
+
 				using (var usuarioRepository = DependencyService.Get<IUsuarioRepository>())
 				{
 					var usuario = await usuarioRepository.Logar(Login, Senha);
@@ -49,7 +65,12 @@ namespace InBox
 			}
 			catch (Exception ex) 
 			{
-				await _messageService.ShowAsync ("Atencao", ex.Message);
+				await _messageService.ShowAsync ("Atenção", ex.Message);
+			}
+			finally 
+			{
+				IsBusy = false;
+				SituacaoTexto = "Entrar";
 			}
 		}
 

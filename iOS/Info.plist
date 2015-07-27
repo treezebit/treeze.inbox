@@ -26,8 +26,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -61,6 +59,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
@@ -69,9 +69,18 @@
 			<string>UIBarStyleDefault</string>
 			<key>Translucent</key>
 			<false/>
+			<key>TintColor</key>
+			<dict>
+				<key>Red</key>
+				<real>0</real>
+				<key>Green</key>
+				<real>0</real>
+				<key>Blue</key>
+				<real>0</real>
+			</dict>
 		</dict>
 	</dict>
-	<key>UIStatusBarHidden</key>
-	<true/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

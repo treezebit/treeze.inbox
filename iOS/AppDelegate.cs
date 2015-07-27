@@ -21,14 +21,20 @@ namespace InBox.iOS
 			DependencyService.Register<IConfig, Config> ();
 
 			UIWindow window = new UIWindow (UIScreen.MainScreen.Bounds);
+
+
+//
 			window.RootViewController = App.GetMainPage ().CreateViewController ();
-			window.MakeKeyAndVisible ();
 
 			//Cor de fundo barra de navegacao
 			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(0,0,0);
-
-			//Cor da letra da barra de navegacao
+			UINavigationBar.Appearance.BackgroundColor =UIColor.FromRGB(255,255,255);
+			//
+			//			//Cor da letra da barra de navegacao
 			UINavigationBar.Appearance.TintColor = UIColor.White;
+			UIApplication.SharedApplication.SetStatusBarStyle (UIStatusBarStyle.LightContent, false);
+
+			window.MakeKeyAndVisible ();
 
 			return true;
 		}

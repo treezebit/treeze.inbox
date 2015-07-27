@@ -27,19 +27,25 @@ namespace InBox
 				_atualizarDadosService.Atualizar (true);
 
 				retorno = new NavigationPage(new ListaNoticiasView());
+
+				MasterDetailPage = new MasterDetailPage {
+					Master = new MenuView(usuario),
+					Detail = retorno,
+				};
+				return MasterDetailPage;
 			}
 			else 
 			{
-				retorno = new NavigationPage(new LoginView ());
+				ApresentacaoView apresentacao = new ApresentacaoView ();
+				return apresentacao;
+//				retorno = new NavigationPage (new LoginView ()) {
+//					BarBackgroundColor = Color.Black,
+//					BarTextColor = Color.White
+//				};
+
+
+//				return retorno;
 			}
-
-			MasterDetailPage = new MasterDetailPage {
-				Master = new MenuView(usuario),
-				Detail = retorno,
-			};
-
-			return MasterDetailPage;
-
 			//return new NavigationPage (new TesteWebBrowser ());
 		}
 

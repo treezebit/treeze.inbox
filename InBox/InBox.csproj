@@ -76,6 +76,16 @@
     <Compile Include="Services\AtualizarDadosService.cs" />
     <Compile Include="Core\Model\Canal.cs" />
     <Compile Include="Core\Model\Noticia.cs" />
+    <Compile Include="View\ApresentacaoView.xaml.cs">
+      <DependentUpon>ApresentacaoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ApresentacaoViews\ApresentacaoEtapa1View.xaml.cs">
+      <DependentUpon>ApresentacaoEtapa1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ApresentacaoViews\ApresentacaoEtapa2View.xaml.cs">
+      <DependentUpon>ApresentacaoEtapa2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\NegativeConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -152,9 +162,20 @@
     <Folder Include="Core\Contracts\" />
     <Folder Include="Core\Contracts\Services\" />
     <Folder Include="View\Componentes\" />
+    <Folder Include="View\ApresentacaoViews\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\LoginView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ApresentacaoView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ApresentacaoViews\ApresentacaoEtapa1View.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ApresentacaoViews\ApresentacaoEtapa2View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

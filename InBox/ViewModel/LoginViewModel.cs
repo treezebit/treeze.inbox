@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using PropertyChanged;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace InBox
 {
@@ -21,24 +22,29 @@ namespace InBox
 
 		public string SituacaoTexto { get; set; }
 
-		public ICommand Entrar => new Command (Logar);
+		public ICommand Entrar => new Command (async () => { 
+			await Logar();
+		});
 
 		#endregion
 
-		public LoginViewModel(){
+		public LoginViewModel()
+		{
 			SituacaoTexto = "Entrar";
 		}
 
 		#region Commands
 
-		private async void Logar()
+		private async Task  Logar()
 		{
 			try
 			{
 				IsBusy = true;
+
 				SituacaoTexto = "Aguarde....";
 
-				if(string.IsNullOrEmpty (Login) || string.IsNullOrEmpty (Senha)){
+				if(string.IsNullOrEmpty (Login) || string.IsNullOrEmpty (Senha))
+				{
 					await _messageService.ShowAsync ("Atenção", "Campos com login e senha devem ser preenchidos!");
 					return;
 				}
@@ -56,6 +62,8 @@ namespace InBox
 						_atualizarDadosService.Atualizar(true);
 
 						_navigationService.NavigateToListaNoticias();
+
+						App.MasterDetailPage.Master = new MenuView(usuario);
 					}
 					else
 					{
@@ -65,7 +73,8 @@ namespace InBox
 			}
 			catch (Exception ex) 
 			{
-				await _messageService.ShowAsync ("Atenção", ex.Message);
+						await _messageService.ShowAsync ("Atenção", ex.Message);
+					
 			}
 			finally 
 			{

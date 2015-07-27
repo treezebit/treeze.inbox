@@ -1,47 +1,15 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone5s.8.4" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="InBox/obj/Debug/ApresentacaoView.xaml.g.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.iPhone de Felipe" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/Main.cs">
     <Files>
-      <File FileName="InBox/View/ApresentacaoView.xaml" Line="3" Column="82" />
-      <File FileName="InBox/View/ApresentacaoViews/ApresentacaoEtapa2View.xaml" Line="7" Column="1" />
-      <File FileName="InBox/View/ApresentacaoViews/ApresentacaoEtapa1View.xaml" Line="3" Column="25" />
-      <File FileName="InBox/View/LoginView.xaml.cs" Line="13" Column="4" />
-      <File FileName="InBox/ViewModel/LoginViewModel.cs" Line="73" Column="30" />
-      <File FileName="InBox/View/LoginView.xaml" Line="18" Column="15" />
-      <File FileName="InBox/Converters/NegativeConverter.cs" Line="7" Column="32" />
-      <File FileName="InBox/obj/Debug/ApresentacaoView.xaml.g.cs" Line="21" Column="1" />
+      <File FileName="iOS/Main.cs" Line="17" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="InBox" expanded="True">
-            <Node name="InBox" expanded="True">
-              <Node name="Converters" expanded="True">
-                <Node name="NegativeConverter.cs" selected="True" />
-              </Node>
-              <Node name="View" expanded="True">
-                <Node name="LoginView.xaml" expanded="True" />
-              </Node>
-              <Node name="ViewModel" expanded="True" />
-            </Node>
-            <Node name="InBox.iOS" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State name="__root__">
-          <Node name="InBox" expanded="True" selected="True" />
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/felipepimentel/Projects/TreezeBit/EmporioDoAco/treeze.inbox/InBox/Converters/NegativeConverter.cs" line="11" column="1" />
       <Breakpoint file="/Users/felipepimentel/Projects/TreezeBit/EmporioDoAco/treeze.inbox/InBox/Converters/NegativeConverter.cs" line="15" column="1" />
+      <Breakpoint file="/Users/EduardoBaltazar/treeze.inbox/treeze.inbox/InBox/InBox.cs" line="34" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

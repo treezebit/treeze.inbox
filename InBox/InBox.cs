@@ -17,36 +17,37 @@ namespace InBox
 			RegistrarInjecaoDeDependencia ();
 
 			var repository = DependencyService.Get<IUsuarioRepository>();
-			Page retorno = null;
 			var usuario = repository.ObterUsuarioLogado ();
+			var pagina = new NavigationPage ();
 
 			if (usuario != null)
 			{
 				var _atualizarDadosService = DependencyService.Get<IAtualizarDadosService> ();
 
-				_atualizarDadosService.Atualizar (true);
+				try
+				{
+					_atualizarDadosService.Atualizar (true);
 
-				retorno = new NavigationPage(new ListaNoticiasView());
+					pagina = new NavigationPage(new ListaNoticiasView());
+				}
+				catch (Exception ex) 
+				{
+					repository.Logout ();
 
-				MasterDetailPage = new MasterDetailPage {
-					Master = new MenuView(usuario),
-					Detail = retorno,
-				};
-				return MasterDetailPage;
+					pagina = new NavigationPage (new ApresentacaoView ());
+				}
 			}
 			else 
 			{
-				ApresentacaoView apresentacao = new ApresentacaoView ();
-				return apresentacao;
-//				retorno = new NavigationPage (new LoginView ()) {
-//					BarBackgroundColor = Color.Black,
-//					BarTextColor = Color.White
-//				};
-
-
-//				return retorno;
+				pagina = new NavigationPage (new ApresentacaoView ());
 			}
-			//return new NavigationPage (new TesteWebBrowser ());
+
+			MasterDetailPage = new MasterDetailPage {
+				Master = new MenuView(usuario),
+				Detail = pagina
+			};
+
+			return MasterDetailPage;
 		}
 
 		private static void RegistrarInjecaoDeDependencia()

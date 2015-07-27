@@ -8,20 +8,5 @@
 	<string>JWW6KSK42F.com.treeze.inbox</string>
 	<key>com.apple.developer.team-identifier</key>
 	<string>JWW6KSK42F</string>
-	<key>com.apple.developer.icloud-services</key>
-	<array>
-		<string>CloudDocuments</string>
-		<string>CloudKit</string>
-	</array>
-	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
-	<string>JWW6KSK42F.com.treeze.inbox</string>
-	<key>com.apple.developer.homekit</key>
-	<true/>
-	<key>com.apple.external-accessory.wireless-configuration</key>
-	<true/>
-	<key>com.apple.developer.networking.vpn-api</key>
-	<array>
-		<string>allow-vpn</string>
-	</array>
 </dict>
 </plist>

@@ -39,7 +39,7 @@ namespace InBox
 				{
 					Titulo = canal.Nome;
 
-					Noticias = noticiaRep.Buscar();
+					Noticias = noticiaRep.Buscar(canal);
 				}
 				else
 				{

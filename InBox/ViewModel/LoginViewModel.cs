@@ -62,8 +62,6 @@ namespace InBox
 						_atualizarDadosService.Atualizar(true);
 
 						_navigationService.NavigateToListaNoticias();
-
-						App.MasterDetailPage.Master = new MenuView(usuario);
 					}
 					else
 					{
@@ -71,11 +69,11 @@ namespace InBox
 					}
 				}
 			}
-			catch (Exception ex) 
-			{
-						await _messageService.ShowAsync ("Atenção", ex.Message);
-					
-			}
+//			catch (Exception ex) 
+//			{
+//						await _messageService.ShowAsync ("Atenção", ex.Message);
+//					
+//			}
 			finally 
 			{
 				IsBusy = false;

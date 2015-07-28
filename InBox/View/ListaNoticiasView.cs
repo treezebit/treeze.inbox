@@ -14,8 +14,9 @@ namespace InBox
 
 		private Label lblNovidades { get; set; } = new Label();
 
-		private StackLayout listaNoticias = new StackLayout 
-		{
+		public Canal Canal { get; set; }
+
+		private StackLayout listaNoticias = new StackLayout {
 			Padding = new Thickness (10, 0, 10, 0)
 		};
 
@@ -25,38 +26,53 @@ namespace InBox
 
 		public ListaNoticiasView (Canal canal = null)
 		{
-			listaNoticiasViewModel = new ListaNoticiasViewModel(canal);
+			this.Canal = canal;
+			listaNoticiasViewModel = new ListaNoticiasViewModel (canal);
 
 			MontarTela ();
-
-
+			
 		}
 
 		#endregion
 
 		#region Methods
 
-		private void MontarTela()
+		private void MontarTela ()
 		{
 			//Title = listaNoticiasViewModel.Titulo;
-			NavigationPage.SetTitleIcon(this, (FileImageSource)FileImageSource.FromFile("logo.png"));
-			Icon = (FileImageSource)FileImageSource.FromFile("menu.png");
+			if (this.Canal == null) {
+				NavigationPage.SetTitleIcon (this, (FileImageSource)FileImageSource.FromFile ("logo.png"));
+				Icon = (FileImageSource)FileImageSource.FromFile ("menu.png");
+			} else {
+				var cancelar = new ToolbarItem {
+					Order = ToolbarItemOrder.Primary,
+					Text = "Cancelar", 
+					Priority = 0,
+					Icon = (FileImageSource)FileImageSource.FromFile ("btn-fechar.png"), 
+				};
 
-			PopularLista(listaNoticias);
+				cancelar.Command = new Command (() => Navigation.PopModalAsync ());
 
-			var lista = new StackLayout 
-			{
-				Children = 
-				{
+				this.Title = this.Canal.Nome;
+				this.ToolbarItems.Add (cancelar);
+			}
+
+			PopularLista (listaNoticias);
+
+			var lista = new StackLayout {
+				Children = {
 					listaNoticias
 				}
 			};
 
 			var sbrPesquisa = MontarTextBoxPesquisa ();
 
+
 			MontarNovidades ();
 
-			MontarToolbar (sbrPesquisa);
+			if (this.Canal == null) {
+				MontarToolbar (sbrPesquisa);
+			}
 
 			Content = new StackLayoutPersonalizado {
 				Spacing = 15,
@@ -75,10 +91,9 @@ namespace InBox
 			};
 		}
 
-		private CustomSearchBar MontarTextBoxPesquisa()
+		private CustomSearchBar MontarTextBoxPesquisa ()
 		{
-			var barraDePesquisa = new CustomSearchBar 
-			{
+			var barraDePesquisa = new CustomSearchBar {
 				Placeholder = "Pesquisar"
 			};
 
@@ -90,12 +105,11 @@ namespace InBox
 			return barraDePesquisa;
 		}
 
-		private void MontarToolbar(SearchBar sbrPesquisa)
+		private void MontarToolbar (SearchBar sbrPesquisa)
 		{
 			this.ToolbarItems.Add (
-				new ToolbarItem 
-				{
-					Icon = (FileImageSource)FileImageSource.FromFile("canais.png"),
+				new ToolbarItem {
+					Icon = (FileImageSource)FileImageSource.FromFile ("canais.png"),
 					Text = "Canais",
 					Command = listaNoticiasViewModel.ExibirCanais,
 					Order = ToolbarItemOrder.Primary
@@ -103,14 +117,19 @@ namespace InBox
 			);
 		}
 
-		private void MontarNovidades()
+		private void MontarNovidades ()
 		{
-			lblNovidades.TextColor = Color.White;
-			lblNovidades.Text = $"Voce tem { listaNoticiasViewModel.Noticias.Count } novidades";
-			lblNovidades.HorizontalOptions = LayoutOptions.CenterAndExpand;
+			if (listaNoticiasViewModel.Noticias == null || listaNoticiasViewModel.Noticias.Count == 0) {
+				lblNovidades.IsVisible = false;
+			} else {
+				lblNovidades.IsVisible = true;
+				lblNovidades.TextColor = Color.White;
+				lblNovidades.Text = $"Voce tem { listaNoticiasViewModel.Noticias.Count } novidades";
+				lblNovidades.HorizontalOptions = LayoutOptions.CenterAndExpand;
+			}
 		}
 
-		private void IncluirItensLista(StackLayout lista)
+		private void IncluirItensLista (StackLayout lista)
 		{
 			listaNoticiasViewModel.MaisNoticias ();
 			//PopularLista (lista);
@@ -118,7 +137,7 @@ namespace InBox
 			MontarNovidades ();
 		}
 
-		private StackLayout Noticia(Noticia noticia) 
+		private StackLayout Noticia (Noticia noticia)
 		{
 			var tamanhoImagem = 80;
 			var corTexto = Color.White;
@@ -143,13 +162,21 @@ namespace InBox
 							new StackLayout {
 								Orientation = StackOrientation.Horizontal,
 								Children = {
-									new Label { Text = Convert.ToDateTime(noticia.DataCriacao).ToString("dd/MM/yyyy"), TextColor = corTexto, FontSize = 8 },
-									new Label { Text = "-", TextColor = Color.Yellow, FontSize = 8 },
-									new Label { Text = "Eduardo Baltazar", TextColor = corTexto, FontSize = 8 }
+									new Label {
+										Text = Convert.ToDateTime (noticia.DataCriacao).ToString ("dd/MM/yyyy"),
+										TextColor = corTexto,
+										FontSize = 8
+									},
+//									new Label { Text = "-", TextColor = Color.Yellow, FontSize = 8 },
+//									new Label { Text = noticia.CanalId, TextColor = corTexto, FontSize = 8 }
 								}
 							},
 							new Label { Text = "", HeightRequest = 10 },
-							new Label { Text = noticia.Resumo.Length > 110 ? noticia.Resumo.Substring(0, 110) : noticia.Resumo, TextColor = corTexto, FontSize = 12 }
+							new Label {
+								Text = noticia.Resumo.Length > 110 ? noticia.Resumo.Substring (0, 110) : noticia.Resumo,
+								TextColor = corTexto,
+								FontSize = 12
+							}
 						}
 					}
 				},
@@ -160,12 +187,11 @@ namespace InBox
 			return btn;
 		}
 
-		private void PopularLista(StackLayout lista)
+		private void PopularLista (StackLayout lista)
 		{
 			lista.Children.Clear ();
 
-			foreach (var item in listaNoticiasViewModel.Noticias) 
-			{
+			foreach (var item in listaNoticiasViewModel.Noticias) {
 				lista.Children.Add (Noticia (item));
 			}
 

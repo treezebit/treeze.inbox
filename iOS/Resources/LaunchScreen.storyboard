@@ -16,9 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" misplaced="YES" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" highlightedImage="Default.png" tag="0">
-                                <rect key="frame" x="213" y="218" width="174" height="163"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" highlightedImage="Default.png" tag="0" misplaced="YES">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="606"/>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.13333333333333333" green="0.12549019607843137" blue="0.12941176470588237" alpha="1"/>
@@ -45,5 +48,10 @@
         <image name="logo.png" width="310" height="34"/>
         <image name="menu.png" width="53" height="34"/>
         <image name="canais.png" width="52" height="46"/>
+        <image name="Logo-Inbox.png" width="461" height="196"/>
+        <image name="btn-fechar.png" width="38" height="39"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

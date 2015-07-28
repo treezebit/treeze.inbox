@@ -5,52 +5,44 @@ namespace InBox
 {
 	public class App : Application
 	{
-		public static MasterDetailPage MasterDetailPage;
-
+		public static ContentPage MainContainer;
 		public App ()
 		{
-			//MainPage = GetMainPage ();
 		}
 
-		public static Page GetMainPage()
+		public static Page GetMainPage ()
 		{
 			RegistrarInjecaoDeDependencia ();
 
-			var repository = DependencyService.Get<IUsuarioRepository>();
+			var repository = DependencyService.Get<IUsuarioRepository> ();
+
+
+			MainContainer = new ContentPage ();
+
+//			MainContainer.Content = new StackLayout {
+//				Children = {
+					
+//				}
+//			};
+		
 			var usuario = repository.ObterUsuarioLogado ();
-			var pagina = new NavigationPage ();
-
-			if (usuario != null)
-			{
+			if (usuario != null) {
+				MainContainer.Navigation.PushModalAsync (new MasterDetailPage {
+					Master = new MenuView (usuario),
+					Detail = new NavigationPage (new ListaNoticiasView ()) { BarTextColor = Color.White } 
+				});
 				var _atualizarDadosService = DependencyService.Get<IAtualizarDadosService> ();
-
-				try
-				{
-					_atualizarDadosService.Atualizar (true);
-
-					pagina = new NavigationPage(new ListaNoticiasView());
-				}
-				catch (Exception ex) 
-				{
-					repository.Logout ();
-
-					pagina = new NavigationPage (new ApresentacaoView ());
-				}
-			}
-			else 
-			{
-				pagina = new NavigationPage (new ApresentacaoView ());
+				_atualizarDadosService.Atualizar (true);
+			} else {
+				MainContainer.Navigation.PushModalAsync (new ApresentacaoView () );
+//				MainContainer.Content = 
 			}
 
-			MasterDetailPage = new MasterDetailPage {
-				Master = new MenuView(usuario),
-				Detail = pagina
-			};
+			return MainContainer;
 
-			return MasterDetailPage;
 		}
 
-		private static void RegistrarInjecaoDeDependencia()
+		private static void RegistrarInjecaoDeDependencia ()
 		{
 			DependencyService.Register<ICanalRepository, CanalRepository> ();
 			DependencyService.Register<ICurtidaRepository, CurtidaRepository> ();

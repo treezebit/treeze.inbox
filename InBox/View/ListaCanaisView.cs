@@ -31,30 +31,31 @@ namespace InBox
 			};
 		}
 
-		private StackLayout MontarListaCanais()
+		private Layout  MontarListaCanais()
 		{
 			var grid = MontarCanais();
-
+			grid.Padding = 20;
 			Title = "Canais";
 
-			return new StackLayout {
-				Padding = new Thickness (10, 10, 10, -10),
-				HorizontalOptions = LayoutOptions.FillAndExpand,
-				HeightRequest = 370,
-				Spacing = 20,
-				Children = {
-					grid
-				}
-			};
+//			return new StackLayout {
+//				Padding = new Thickness (10, 10, 10, -10),
+//				HorizontalOptions = LayoutOptions.FillAndExpand,
+//				HeightRequest = 370,
+//				Spacing = 20,
+//				Children = {
+//					grid
+//				}
+//			};
+			return grid;
 		}
 
 		private WrapLayout MontarCanais()
 		{
-			var retorno = new WrapLayout ();
+			var retorno = new WrapLayout () { Orientation = StackOrientation.Horizontal, Spacing = 10 };
 
 			for (int count = 0; count < listaCanaisViewModel.Canais.Count; count++) 
 			{
-				retorno.Children.Add (new StackLayout {
+				retorno.Children.Add (new StackLayout() {
 					Children = {
 						CanalImagem (listaCanaisViewModel.Canais [count]),
 						TextoCanal (listaCanaisViewModel.Canais [count].Nome)
@@ -100,7 +101,7 @@ namespace InBox
 
 		private ImageButton CanalImagem(Canal canal)
 		{
-			var tamanho = 80;
+			var tamanho = 60;
 
 			return new ImageButton {
 				BorderColor = Color.White,
@@ -120,9 +121,10 @@ namespace InBox
 		{
 			return new Label { 
 				Text = texto, 
-				HorizontalOptions = LayoutOptions.Center, 
-				VerticalOptions = LayoutOptions.End,
-				TextColor = Color.White
+				FontSize = 10,
+//				HorizontalOptions = LayoutOptions.Center, 
+//				VerticalOptions = LayoutOptions.End,
+				TextColor = Color.White,
 			};
 		}
 	}

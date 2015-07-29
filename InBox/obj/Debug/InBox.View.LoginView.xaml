@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="InBox.LoginView" BackgroundColor="Black" xmlns:local="clr-namespace:InBox;assembly=InBox">
+	<ContentPage.Content>
+		<Grid Padding="20">
+			<StackLayout Spacing="10" VerticalOptions="CenterAndExpand">
+				<StackLayout
+					Padding="20,0,20,20">
+					<Image Source="Logo-Inbox.png" />
+				</StackLayout>
+				<Entry Text="{ Binding Login  }" Placeholder="Email" HeightRequest="60" />
+				<Entry Text="{ Binding Senha  }" Placeholder="Senha" HeightRequest="60" IsPassword="true" />
+				<Button Text="{ Binding SituacaoTexto }" Command="{ Binding Entrar }" TextColor="Black" BackgroundColor="#FCCD06" BorderColor="White">
+				</Button>
+			</StackLayout>
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

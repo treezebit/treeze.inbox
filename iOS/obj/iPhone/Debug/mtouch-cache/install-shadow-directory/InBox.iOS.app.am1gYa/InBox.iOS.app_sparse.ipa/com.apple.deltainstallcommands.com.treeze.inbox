@@ -1,0 +1,15 @@
+ipaD
+1
+1.0 1.0
++InBox.iOS
++Info.plist
++MonoTouchDebugConfiguration.txt
++ResourceRules.plist
++_CodeSignature/CodeResources
++archived-expanded-entitlements.xcent
++embedded.mobileprovision
+xEOF
+#CreateSparseIPA UUID: EB7DD4A1-F3EF-376E-A499-B6C003A7DBBB
+#Bundle id: com.treeze.inbox
+#Old bundle version: 1.0 1.0
+#New bundle version: 1.0 1.0

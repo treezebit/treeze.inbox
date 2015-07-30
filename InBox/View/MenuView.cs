@@ -28,15 +28,15 @@ namespace InBox
 							HorizontalOptions = LayoutOptions.CenterAndExpand,
 							Source = UriImageSource.FromUri (new Uri (menuViewModel.Usuario.Thumb))
 						},
-						new Label { Text = menuViewModel.Usuario.Nome, TextColor = Color.White, HorizontalOptions = LayoutOptions.CenterAndExpand },
-						//ButtonPersonalizado ("Perfil", menuViewModel.AbrirPerfil),
+						new Label 
+						{
+							Text = menuViewModel.Usuario.Nome, 
+							TextColor = Color.White, 
+							HorizontalOptions = LayoutOptions.CenterAndExpand 
+						},
+						ButtonPersonalizado ("Perfil", menuViewModel.AbrirPerfil),
 						//ButtonPersonalizado ("Favoritos", menuViewModel.AbrirNoticiasFavoritas),
 						ButtonPersonalizado ("Sair", menuViewModel.Sair)
-//						new Button {
-//							Text = "Config",
-//							HorizontalOptions = LayoutOptions.Start,
-//							VerticalOptions = LayoutOptions.End
-//						}
 					}
 				};
 			}

@@ -19,6 +19,12 @@ namespace InBox
 
 				if (primeiroAcesso) 
 				{
+//					con.DropTable<Canal> ();
+//					con.DropTable<Comentario> ();
+//					con.DropTable<Curtida> ();
+//					con.DropTable<Noticia> ();
+//					con.DropTable<Usuario> ();
+
 					con.CreateTable<Canal> ();
 					con.CreateTable<Comentario> ();
 					con.CreateTable<Curtida> ();

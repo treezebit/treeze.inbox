@@ -33,6 +33,31 @@ namespace InBox
 			return noticias;
 		}
 
+		public List<Noticia> BuscarNaoLido()
+		{
+			return _connection.GetAllWithChildren<Noticia>()
+				.Where(x => !x.Lido)
+				.ToList();
+		}
+
+		public bool Like (string token, int noticiaId, bool valor)
+		{
+			var url = $"http://api.treezebit.com/api/v2/inbox/like/emporiodoaco/{token}/{noticiaId}/{valor}";
+			var retorno = true;
+
+			using (var client = new System.Net.Http.HttpClient())
+			{
+				var json = client.GetStringAsync (url).Result;
+
+				if (!string.IsNullOrEmpty (json)) 
+				{
+					retorno = false;
+				}
+			}
+
+			return retorno;
+		}
+
 		public void Excluir()
 		{
 			_connection.DropTable<Noticia> ();

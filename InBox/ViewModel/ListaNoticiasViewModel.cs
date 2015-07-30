@@ -9,7 +9,6 @@ namespace InBox
 {
 	public class ListaNoticiasViewModel : Services
 	{
-
 		#region Properties
 
 		public List<Noticia> Noticias { get; set; } = new List<Noticia> ();
@@ -27,26 +26,39 @@ namespace InBox
 
 		public ICommand Pesquisar => new Command<string>(texto => PesquisaCommand(texto));
 
+		private Canal Canal {get;set;}
+
 		#endregion
 
 		#region Constructor
 
 		public ListaNoticiasViewModel (Canal canal)
 		{
-			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+			try
 			{
-				if (canal != null)
-				{
-					Titulo = canal.Nome;
+				Canal = canal;
 
-					Noticias = noticiaRep.Buscar(canal);
-				}
-				else
+				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 				{
-					Titulo = "Noticias";
+					if (canal != null)
+					{
+						Titulo = canal.Nome;
 
-					Noticias = noticiaRep.Buscar();
+						Noticias = noticiaRep.Buscar(canal);
+					}
+					else
+					{
+						Titulo = "Noticias";
+
+						Noticias = noticiaRep.Buscar();
+					}
+
+					IncluirCanaisNoticias();
 				}
+			}
+			catch (Exception ex)
+			{
+				
 			}
 		}
 
@@ -68,7 +80,11 @@ namespace InBox
 		{
 			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 			{
-				Noticias = noticiaRep.Buscar().Where(x => x.Titulo.Contains(texto) || x.Resumo.Contains(texto)).ToList();
+				var noticias = Canal != null ? noticiaRep.Buscar(Canal) : noticiaRep.Buscar();
+
+				Noticias = noticias.Where(x => x.Titulo.Contains(texto) || x.Resumo.Contains(texto)).ToList();
+
+				IncluirCanaisNoticias();
 			}
 		}
 
@@ -76,9 +92,15 @@ namespace InBox
 
 		#region Methods
 
-		public void MaisNoticias()
+		private void IncluirCanaisNoticias()
 		{
-			
+			using (var canalRep = DependencyService.Get<ICanalRepository> ()) 
+			{
+				for (int count = 0; count < Noticias.Count; count++) 
+				{
+					Noticias [count].Canal = canalRep.Obter (Noticias [count].CanalId);
+				}
+			}
 		}
 
 		#endregion

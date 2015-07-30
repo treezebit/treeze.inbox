@@ -1,20 +1,28 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Windows.Input;
+using PropertyChanged;
 
 namespace InBox
 {
+	[ImplementPropertyChanged]
 	public class DetalheNoticiaViewModel : Services
 	{
 		#region Properties
 
-		public string UrlImagemCapa { get; set; }
-
 		public Noticia Noticia { get; set; }
 
-		public ICommand Curtir => new Command(CurtirCommand);
-
 		public ICommand ExibirComentarios => new Command(ExibirComentariosCommand);
+
+		public string IconeLike { get; set; }
+
+		public string IconeSave
+		{
+			get
+			{
+				return "save.png";
+			}
+		}
 
 		#endregion
 
@@ -23,32 +31,53 @@ namespace InBox
 		public DetalheNoticiaViewModel (Noticia noticia)
 		{
 			this.Noticia = noticia;
-			this.UrlImagemCapa = "http://i1.sndcdn.com/avatars-000051147638-czv21j-original.jpg";
 
-//			if (!noticia.Lida)
-//			{
-//				noticia.Ler ();
-//
-//				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
-//				{
-//					//noticiaRep.Atualizar (noticia);
-//				}
-//			}
+			IconeLike = Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png";
+
+			if (!Noticia.Lido)
+			{
+				Noticia.Lido = true;
+
+				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+				{
+					noticiaRep.Atualizar(Noticia);
+				}
+			}
 		}
 
 		#endregion
 
 		#region Methods
 
-		private async void CurtirCommand()
+		public async void LikeCommand()
 		{
-			
-			//Noticia.AdicionarCurtida(new Curtida());
+			try
+			{
+				using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
+				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+				{
+					if (noticiaRep.Like(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id, !Noticia.Curtiu))
+					{
+						Noticia.Curtiu = !Noticia.Curtiu;
+						Noticia.Likes += Noticia.Curtiu ? 1 : -1;
+						noticiaRep.Atualizar(Noticia);
+						IconeLike = Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png";
+					}
+					else
+					{
+						await _messageService.ShowAsync("Atencao", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos");
+					}
+				}
+			}
+			catch
+			{
+				await _messageService.ShowAsync("Atencao", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos");
+			}
 		}
 
 		private async void ExibirComentariosCommand()
 		{
-			
+			await _navigationService.NavigateToListaComentarios(Noticia);
 		}
 
 		#endregion

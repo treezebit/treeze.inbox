@@ -11,19 +11,30 @@ namespace InBox
 		{
 			listaComentariosViewModel = new ListaComentariosViewModel (noticia);
 
+			ToolbarItems.Add (new ToolbarItem {
+				Order = ToolbarItemOrder.Primary,
+				Text = "Cancelar", 
+				Priority = 0,
+				Icon = (FileImageSource)FileImageSource.FromFile("btn-fechar.png"),
+				Command = new Command (() => Navigation.PopModalAsync ())
+			});
+
 			var conteudo = new StackLayoutPersonalizado ();
 
 			foreach (var item in listaComentariosViewModel.Comentarios) 
 			{
-				conteudo.Children.Add (new StackLayout
+				conteudo.Children.Add (
+					new StackLayout
 					{
-						BackgroundColor = Color.Olive,
-						Children = 
+						BackgroundColor = Color.Gray,
+						Spacing = 10,
+						Children =
 						{
-							new Label { Text = string.Concat("Usuario: ", item.Usuario.Login) },
+							new Label { Text = item.Usuario.Login },
 							new Label { Text = item.Texto }
 						}
-					});
+					}
+				);
 			}
 
 			var comentarioTexto = new Entry 
@@ -33,15 +44,6 @@ namespace InBox
 
 			conteudo.Children.Add (
 				comentarioTexto
-			);
-
-			conteudo.Children.Add (
-				new Button
-				{
-					Text = "Enviar",
-					Command = listaComentariosViewModel.AdicionarComentario,
-					CommandParameter = comentarioTexto.Text
-				}
 			);
 
 			Content = conteudo;

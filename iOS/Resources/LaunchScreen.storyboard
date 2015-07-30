@@ -7,7 +7,7 @@
         <!--View Controller-->
         <scene sceneID="gAE-YM-kbH">
             <objects>
-                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController" modalPresentationStyle="overFullScreen">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
                         <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
@@ -16,19 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" highlightedImage="Default.png" tag="0" misplaced="YES">
+                            <imageView userInteractionEnabled="NO" contentMode="center" misplaced="YES" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" highlightedImage="Default.png" tag="0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="606"/>
-                                </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.13333333333333333" green="0.12549019607843137" blue="0.12941176470588237" alpha="1"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                            <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" constant="0.0" id="53"/>
                         </constraints>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.15686274509803921" green="0.2" blue="0.22745098039215686" alpha="1"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -50,8 +48,17 @@
         <image name="canais.png" width="52" height="46"/>
         <image name="Logo-Inbox.png" width="461" height="196"/>
         <image name="btn-fechar.png" width="38" height="39"/>
+        <image name="img-anel.jpg" width="640" height="1136"/>
+        <image name="img-correntes.jpg" width="640" height="1136"/>
+        <image name="img-pulseira.jpg" width="640" height="1136"/>
+        <image name="comment.png" width="20" height="16"/>
+        <image name="like.png" width="19" height="16"/>
+        <image name="commentGrande-ativo.png" width="38" height="38"/>
+        <image name="commentGrande.png" width="38" height="38"/>
+        <image name="likeGrande-ativo.png" width="46" height="44"/>
+        <image name="likeGrande.png" width="46" height="44"/>
+        <image name="save-ativo.png" width="28" height="38"/>
+        <image name="save.png" width="28" height="38"/>
+        <image name="Default_.png" width="640" height="960"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

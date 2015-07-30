@@ -10,6 +10,10 @@ namespace InBox
 
 		List<Noticia> BuscarNovasNoticias (string token, DateTime ultimaAtualizacao = new DateTime());
 
+		List<Noticia> BuscarNaoLido ();
+
+		bool Like (string token, int noticiaId, bool valor);
+
 		void Excluir();
 	}
 }

@@ -13,6 +13,13 @@ namespace InBox
 		public string Resumo { get; set; }
 		public string Conteudo { get; set; }
 		public string DataCriacao { get; set; }
+		public int Likes { get; set; }
+		public int Comentarios { get; set; }
+		public bool Curtiu { get; set; } 
+
+		public bool Lido { get; set; } = false;
+
+		[Ignore]
+		public Canal Canal { get; set; }
 	}
 }
-

@@ -5,7 +5,9 @@ namespace InBox
 {
 	public class Canal
 	{
-		[PrimaryKey]
+		[PrimaryKey, AutoIncrement]
+		public int Cod { get; set;}
+
 		public int Id { get; set; }
 
 		public string Nome { get; set; }

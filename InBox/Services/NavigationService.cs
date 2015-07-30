@@ -48,7 +48,7 @@ namespace InBox
 				});
 			} else {
 				//OPCAO 1
-				App.MainContainer.Navigation.ModalStack [App.MainContainer.Navigation.ModalStack.Count - 1]
+				await App.MainContainer.Navigation.ModalStack [App.MainContainer.Navigation.ModalStack.Count - 1]
 					.Navigation.PushModalAsync (new NavigationPageCustom(new ListaNoticiasView (canal)));
 
 				//OPCAO 2 
@@ -62,7 +62,17 @@ namespace InBox
 
 		public async Task NavigateToDetalheNoticias (Noticia noticia = null)
 		{
-			await App.MainContainer.Navigation.PushModalAsync (new NavigationPageCustom (new DetalheNoticiaView (noticia)));
+			await App.MainContainer.Navigation.PushModalAsync (new DetalheNoticiaView (noticia));
+		}
+
+		public async Task NavigateToListaComentarios (Noticia noticia)
+		{
+			await App.MainContainer.Navigation.PushModalAsync (new NavigationPageCustom( new ListaComentariosView (noticia)));
+		}
+
+		public async Task NavigateToPerfil ()
+		{
+			await App.MainContainer.Navigation.PushModalAsync (new NavigationPageCustom( new PerfilView ()));
 		}
 	}
 

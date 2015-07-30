@@ -34,7 +34,7 @@ namespace InBox
 		private Layout  MontarListaCanais()
 		{
 			var grid = MontarCanais();
-			grid.Padding = 20;
+			grid.Padding = new Thickness(10,15,0,0);
 			Title = "Canais";
 
 //			return new StackLayout {
@@ -51,14 +51,51 @@ namespace InBox
 
 		private WrapLayout MontarCanais()
 		{
-			var retorno = new WrapLayout () { Orientation = StackOrientation.Horizontal, Spacing = 10 };
+			var retorno = new WrapLayout
+			{ 
+				Orientation = StackOrientation.Horizontal, 
+				Spacing = 10 
+			};
+
+			int tamanhoIcone = 92;
+			int tamanhoimagem = 60;
+			int tamanhoFonte = 10;
+
+			if (Device.Idiom == TargetIdiom.Tablet) {
+
+				tamanhoIcone = 232;
+				tamanhoimagem = 160;
+				tamanhoFonte = 25;
+			}
 
 			for (int count = 0; count < listaCanaisViewModel.Canais.Count; count++) 
 			{
 				retorno.Children.Add (new StackLayout() {
+					HeightRequest = tamanhoIcone,
+					WidthRequest = tamanhoIcone,
+					VerticalOptions = LayoutOptions.CenterAndExpand,
+					HorizontalOptions = LayoutOptions.CenterAndExpand,
+					Spacing = -2,
 					Children = {
-						CanalImagem (listaCanaisViewModel.Canais [count]),
-						TextoCanal (listaCanaisViewModel.Canais [count].Nome)
+						new CircleImageButton {
+							BorderColor = Color.White,
+							BorderThickness = 3,
+							HeightRequest = tamanhoimagem,
+							WidthRequest = tamanhoimagem,
+							Aspect = Aspect.AspectFill,
+							HorizontalOptions = LayoutOptions.CenterAndExpand,
+							VerticalOptions = LayoutOptions.StartAndExpand,
+							Source = UriImageSource.FromUri (new Uri (listaCanaisViewModel.Canais [count].Thumb)),
+							Command = listaCanaisViewModel.SelecionarCanal,
+							CommandParameter = listaCanaisViewModel.Canais [count]
+						},
+						new Label { 
+							Text = listaCanaisViewModel.Canais [count].Nome, 
+							FontSize = tamanhoFonte,
+							HorizontalOptions = LayoutOptions.CenterAndExpand, 
+							VerticalOptions = LayoutOptions.StartAndExpand,
+							TextColor = Color.White
+						}
 					}
 				});
 			}
@@ -99,11 +136,11 @@ namespace InBox
 //			return grid;
 //		}
 
-		private ImageButton CanalImagem(Canal canal)
+		private CircleImageButton CanalImagem(Canal canal)
 		{
 			var tamanho = 60;
 
-			return new ImageButton {
+			return new CircleImageButton {
 				BorderColor = Color.White,
 				BorderThickness = 3,
 				HeightRequest = tamanho,
@@ -122,9 +159,9 @@ namespace InBox
 			return new Label { 
 				Text = texto, 
 				FontSize = 10,
-//				HorizontalOptions = LayoutOptions.Center, 
-//				VerticalOptions = LayoutOptions.End,
-				TextColor = Color.White,
+				HorizontalOptions = LayoutOptions.CenterAndExpand, 
+				VerticalOptions = LayoutOptions.StartAndExpand,
+				TextColor = Color.White
 			};
 		}
 	}

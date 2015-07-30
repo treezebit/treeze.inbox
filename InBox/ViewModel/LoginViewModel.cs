@@ -18,7 +18,9 @@ namespace InBox
 
 		public string Senha { get; set; }
 
-		public bool IsBusy { get; set; }
+		public bool IsBusy { get; set; } = false;
+
+		public bool IsEnable { get; set; } = true;
 
 		public string SituacaoTexto { get; set; }
 
@@ -40,7 +42,7 @@ namespace InBox
 			try
 			{
 				IsBusy = true;
-
+				IsEnable = false;
 				SituacaoTexto = "Aguarde....";
 
 				if(string.IsNullOrEmpty (Login) || string.IsNullOrEmpty (Senha))
@@ -51,10 +53,15 @@ namespace InBox
 
 				using (var usuarioRepository = DependencyService.Get<IUsuarioRepository>())
 				{
-					var usuario = await usuarioRepository.Logar(Login, Senha);
+					var retorno = await usuarioRepository.Logar(Login, Senha);
 
-					if (!string.IsNullOrEmpty(usuario.Token))
+					if (retorno.Contains("-"))
 					{
+						var usuario = new Usuario
+						{
+							Token = retorno	
+						};
+					
 						usuario = await usuarioRepository.ObterInformacoesUsuario(usuario.Token);
 
 						usuarioRepository.Adicionar(usuario);
@@ -65,18 +72,18 @@ namespace InBox
 					}
 					else
 					{
-						await _messageService.ShowAsync ("Atencao", "Usuario ou senha invalido");
+						await _messageService.ShowAsync ("Atencao", retorno);
 					}
 				}
 			}
-//			catch (Exception ex) 
-//			{
-//						await _messageService.ShowAsync ("Atenção", ex.Message);
-//					
-//			}
+			catch (Exception ex) 
+			{
+				await _messageService.ShowAsync ("Atenção", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos");
+			}
 			finally 
 			{
 				IsBusy = false;
+				IsEnable = true;
 				SituacaoTexto = "Entrar";
 			}
 		}

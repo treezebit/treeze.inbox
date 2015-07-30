@@ -29,9 +29,9 @@ namespace InBox
 
 		#region Commands
 
-		private void AbrirPerfilCommand()
+		private async void AbrirPerfilCommand()
 		{
-			_navigationService.NavigateToLogin();
+			await _navigationService.NavigateToPerfil();
 		}
 
 		private void AbrirNoticiasFavoritasCommand()

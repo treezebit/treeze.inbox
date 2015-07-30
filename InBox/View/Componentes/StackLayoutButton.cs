@@ -9,7 +9,7 @@ namespace InBox
 
 		public event Action<object> OnLinhaSelecionada;
 		public static BindableProperty CommandProperty = 
-			BindableProperty.Create<ImageButton, ICommand> (bp => bp.Command, default(ICommand));
+			BindableProperty.Create<CircleImageButton, ICommand> (bp => bp.Command, default(ICommand));
 
 		public static readonly BindableProperty CommandParameterProperty = 
 			BindableProperty.Create<StackLayoutButton, Object>(w => w.CommandParameter, default(Object), BindingMode.Default, null, null, null, null, null);

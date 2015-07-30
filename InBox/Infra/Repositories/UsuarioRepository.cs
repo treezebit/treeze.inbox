@@ -18,7 +18,8 @@ namespace InBox
 		{
 			
 		}
-		public async Task<Usuario> Logar(string login, string senha)
+
+		public async Task<string> Logar(string login, string senha)
 		{	
 			var client = new HttpClient();
 
@@ -39,12 +40,7 @@ namespace InBox
 
 				var retorno = JsonConvert.DeserializeObject<string>(response.Content.ReadAsStringAsync().Result);
 
-				var usuario = new Usuario 
-				{
-					Token = retorno
-				};
-
-				return usuario ;
+				return retorno ;
 			}
 			catch(Exception ex)
 			{

@@ -6,7 +6,7 @@ namespace InBox
 {
 	public interface IUsuarioRepository : IRepositoryBase<Usuario>
 	{
-		Task<Usuario> Logar(string login, string senha);
+		Task<string> Logar(string login, string senha);
 		void Logout ();
 		Usuario ObterUsuarioLogado ();
 		Task<Usuario> ObterInformacoesUsuario (string token);

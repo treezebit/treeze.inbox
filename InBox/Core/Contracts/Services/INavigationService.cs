@@ -12,5 +12,9 @@ namespace InBox
 		Task NavigateToDetalheNoticias(Noticia noticia);
 
 		Task NavigateToCanais();
+
+		Task NavigateToListaComentarios (Noticia noticia);
+
+		Task NavigateToPerfil ();
 	}
 }

@@ -16,8 +16,8 @@ namespace InBox
 		public int Likes { get; set; }
 		public int Comentarios { get; set; }
 		public bool Curtiu { get; set; } 
-
-		public bool Lido { get; set; } = false;
+		public bool Favoritou { get; set; }
+		public bool Lido { get; set; }
 
 		[Ignore]
 		public Canal Canal { get; set; }

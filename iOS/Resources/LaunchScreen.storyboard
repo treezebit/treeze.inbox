@@ -7,7 +7,7 @@
         <!--View Controller-->
         <scene sceneID="gAE-YM-kbH">
             <objects>
-                <viewController id="X5k-f2-b5h" sceneMemberID="viewController" modalPresentationStyle="overFullScreen">
+                <viewController id="X5k-f2-b5h" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y8P-hJ-Z43"/>
                         <viewControllerLayoutGuide type="bottom" id="9ZL-r4-8FZ"/>
@@ -16,9 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" misplaced="YES" image="Default.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" highlightedImage="Default.png" tag="0">
+                            <imageView contentMode="top" misplaced="YES" image="Default-568h.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" highlightedImage="Default-Portrait.png" tag="0" userInteractionEnabled="NO" highlighted="YES">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="667"/>
+                                </variation>
                             </imageView>
                         </subviews>
                         <constraints>
@@ -28,6 +31,7 @@
                         </constraints>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.15686274509803921" green="0.2" blue="0.22745098039215686" alpha="1"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,4 +65,7 @@
         <image name="save.png" width="28" height="38"/>
         <image name="Default_.png" width="640" height="960"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina47"/>
+    </simulatedMetricsContainer>
 </document>

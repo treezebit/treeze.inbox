@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InBox
 {
@@ -16,11 +17,6 @@ namespace InBox
 		public int quantidadeNovasNoticias => Noticias.Count;
 
 		public string Titulo { get; set; }
-
-		public ICommand SelecionarNoticia => new Command<Noticia>(a =>
-			{
-				SelecionarNoticiaCommand(a);
-			});
 
 		public ICommand ExibirCanais => new Command(ExibirCanaisCommand);
 
@@ -38,23 +34,7 @@ namespace InBox
 			{
 				Canal = canal;
 
-				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
-				{
-					if (canal != null)
-					{
-						Titulo = canal.Nome;
-
-						Noticias = noticiaRep.Buscar(canal);
-					}
-					else
-					{
-						Titulo = "Noticias";
-
-						Noticias = noticiaRep.Buscar();
-					}
-
-					IncluirCanaisNoticias();
-				}
+				PopularListaNoticias();
 			}
 			catch (Exception ex)
 			{
@@ -66,9 +46,16 @@ namespace InBox
 
 		#region Commands
 
-		public void SelecionarNoticiaCommand(Noticia param)
+		public async Task SelecionarNoticiaCommand(Noticia param)
 		{
-			_navigationService.NavigateToDetalheNoticias (param);
+			await _navigationService.NavigateToDetalheNoticias (param);
+		}
+
+		public void AtualizarNoticias()
+		{
+			_atualizarDadosService.Atualizar(true);
+
+			PopularListaNoticias();
 		}
 
 		public async void ExibirCanaisCommand()
@@ -100,6 +87,27 @@ namespace InBox
 				{
 					Noticias [count].Canal = canalRep.Obter (Noticias [count].CanalId);
 				}
+			}
+		}
+
+		private void PopularListaNoticias()
+		{
+			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+			{
+				if (Canal != null)
+				{
+					Titulo = Canal.Nome;
+
+					Noticias = noticiaRep.Buscar(Canal);
+				}
+				else
+				{
+					Titulo = "Noticias";
+
+					Noticias = noticiaRep.Buscar();
+				}
+
+				IncluirCanaisNoticias();
 			}
 		}
 

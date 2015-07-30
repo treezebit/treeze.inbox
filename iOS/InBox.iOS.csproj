@@ -154,8 +154,6 @@
     <BundleResource Include="Resources\Logo-Inbox.png" />
     <BundleResource Include="Resources\Logo-Inbox%402x.png" />
     <BundleResource Include="Resources\btn-fechar%402x.png" />
-    <BundleResource Include="Resources\Default.png" />
-    <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\img-anel.jpg" />
     <BundleResource Include="Resources\img-correntes.jpg" />
     <BundleResource Include="Resources\img-pulseira.jpg" />
@@ -175,7 +173,11 @@
     <BundleResource Include="Resources\save%402x.png" />
     <BundleResource Include="Resources\save-ativo%402x.png" />
     <BundleResource Include="Resources\commentGrande-ativo%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Default-Portrait.png" />
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -188,6 +190,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Extensions\ExtendedSearchBar.cs" />
+    <Compile Include="Extensions\ExtendedTextCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="ITunesArtwork" />
@@ -210,15 +213,7 @@
     <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-568h%402x.png" />
     <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-Portrait.png" />
     <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default-Portrait%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-1.launchimage\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-1.launchimage\Default%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-1.launchimage\Default-568h%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-2.launchimage\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-2.launchimage\Default.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-2.launchimage\Default%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-2.launchimage\Default-568h%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-3.launchimage\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\LaunchImage-3.launchimage\Default.png" />
+    <ImageAsset Include="Resources\Images.xcassets\LaunchImage.launchimage\Default.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

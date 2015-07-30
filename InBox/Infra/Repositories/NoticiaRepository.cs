@@ -58,6 +58,42 @@ namespace InBox
 			return retorno;
 		}
 
+		public bool Lido (string token, int noticiaId, bool valor)
+		{
+			var url = $"http://api.treezebit.com/api/v2/inbox/lido/emporiodoaco/{token}/{noticiaId}/{valor}";
+			var retorno = true;
+
+			using (var client = new System.Net.Http.HttpClient())
+			{
+				var json = client.GetStringAsync (url).Result;
+
+				if (!string.IsNullOrEmpty (json)) 
+				{
+					retorno = false;
+				}
+			}
+
+			return retorno;
+		}
+
+		public bool Favorito (string token, int noticiaId, bool valor)
+		{
+			var url = $"http://api.treezebit.com/api/v2/inbox/favorito/emporiodoaco/{token}/{noticiaId}/{valor}";
+			var retorno = true;
+
+			using (var client = new System.Net.Http.HttpClient())
+			{
+				var json = client.GetStringAsync (url).Result;
+
+				if (!string.IsNullOrEmpty (json)) 
+				{
+					retorno = false;
+				}
+			}
+
+			return retorno;
+		}
+
 		public void Excluir()
 		{
 			_connection.DropTable<Noticia> ();

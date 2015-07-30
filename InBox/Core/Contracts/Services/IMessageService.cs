@@ -6,6 +6,8 @@ namespace InBox
 	public interface IMessageService
 	{
 		Task ShowAsync(string titulo, string message);
+
+		Task ShowAsyncServerError ();
 	}
 }
 

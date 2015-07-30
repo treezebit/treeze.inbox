@@ -12,50 +12,15 @@
 		<dict>
 			<key>affected-items</key>
 			<array>
-				<string>./LaunchImage.launchimage/[iphone][][1x][portrait][full-screen][]</string>
+				<string>./LaunchImage.launchimage/[][][][][][][Default-Portrait.png]</string>
+				<string>./LaunchImage.launchimage/[][][][][][][Default-Portrait@2x.png]</string>
 			</array>
 			<key>catalog</key>
 			<string>/Users/EduardoBaltazar/treeze.inbox/iOS/Resources/Images.xcassets</string>
 			<key>message</key>
-			<string>The file "Default.png" for the image set "LaunchImage" does not exist.</string>
-			<key>type</key>
-			<string>Missing Content</string>
-		</dict>
-		<dict>
-			<key>affected-items</key>
-			<array>
-				<string>./LaunchImage.launchimage/[ipad][][2x][portrait][full-screen][]</string>
-			</array>
-			<key>catalog</key>
-			<string>/Users/EduardoBaltazar/treeze.inbox/iOS/Resources/Images.xcassets</string>
-			<key>message</key>
-			<string>LaunchImage.launchimage/Default-Portrait@2x.png is 1536x2008 but should be 1536x2048.</string>
+			<string>The launch image set "LaunchImage" has 2 unassigned images.</string>
 			<key>type</key>
 			<string>Ambiguous Content</string>
-		</dict>
-		<dict>
-			<key>affected-items</key>
-			<array>
-				<string>./LaunchImage.launchimage/[ipad][][1x][portrait][full-screen][]</string>
-			</array>
-			<key>catalog</key>
-			<string>/Users/EduardoBaltazar/treeze.inbox/iOS/Resources/Images.xcassets</string>
-			<key>message</key>
-			<string>LaunchImage.launchimage/Default-Portrait.png is 768x1004 but should be 768x1024.</string>
-			<key>type</key>
-			<string>Ambiguous Content</string>
-		</dict>
-		<dict>
-			<key>affected-items</key>
-			<array>
-				<string>./LaunchImage-1.launchimage/[iphone][][1x][portrait][full-screen][]</string>
-			</array>
-			<key>catalog</key>
-			<string>/Users/EduardoBaltazar/treeze.inbox/iOS/Resources/Images.xcassets</string>
-			<key>message</key>
-			<string>The file "Default.png" for the image set "LaunchImage-1" does not exist.</string>
-			<key>type</key>
-			<string>Missing Content</string>
 		</dict>
 	</array>
 </dict>

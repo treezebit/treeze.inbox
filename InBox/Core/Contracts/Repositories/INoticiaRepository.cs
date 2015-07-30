@@ -14,7 +14,10 @@ namespace InBox
 
 		bool Like (string token, int noticiaId, bool valor);
 
+		bool Lido (string token, int noticiaId, bool valor);
+
+		bool Favorito (string token, int noticiaId, bool valor);
+
 		void Excluir();
 	}
 }
-

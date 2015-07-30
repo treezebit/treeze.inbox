@@ -18,9 +18,7 @@ namespace InBox
 
 		public Canal Canal { get; set; }
 
-		private StackLayout listaNoticias = new StackLayout {
-			Padding = new Thickness (10, 0, 10, 0)
-		};
+		private ListView ListaNoticias { get; set; }
 
 		#endregion
 
@@ -61,16 +59,33 @@ namespace InBox
 				this.ToolbarItems.Add (cancelar);
 			}
 
-			PopularLista (listaNoticias);
+			ListaNoticias = new ListView {
+				ItemsSource = listaNoticiasViewModel.Noticias,
+				ItemTemplate = new DataTemplate (typeof(DynamicTemplateLayoutNoticias)),
+				IsPullToRefreshEnabled = true,
+				SeparatorVisibility = SeparatorVisibility.None,
+				RowHeight = 95
+			};
 
-			var lista = new StackLayout {
-				Children = {
-					listaNoticias
+			ListaNoticias.ItemSelected += async (sender, e) => {
+
+				if (ListaNoticias.SelectedItem != null)
+				{
+					await listaNoticiasViewModel.SelecionarNoticiaCommand ((Noticia)ListaNoticias.SelectedItem);
+					ListaNoticias.SelectedItem = null;
 				}
 			};
 
-			var sbrPesquisa = MontarTextBoxPesquisa ();
+			ListaNoticias.Refreshing += (sender, e) => {
 
+				listaNoticiasViewModel.AtualizarNoticias();
+
+				ListaNoticias.EndRefresh();
+			};
+
+			ListaNoticias.BackgroundColor = Color.FromRgb (31, 31, 31);
+
+			var sbrPesquisa = MontarTextBoxPesquisa ();
 
 			MontarNovidades ();
 
@@ -79,17 +94,11 @@ namespace InBox
 			}
 
 			Content = new StackLayoutPersonalizado {
+				Spacing = 8,
 				Children = {
-					new ScrollView {
-						Content = new StackLayout {
-							Spacing = 8,
-							Children = {
-								sbrPesquisa,
-								lblNovidades,
-								lista
-							}
-						}
-					}
+					sbrPesquisa,
+					lblNovidades,
+					ListaNoticias
 				}
 			};
 		}
@@ -101,8 +110,10 @@ namespace InBox
 			};
 
 			barraDePesquisa.TextChanged += (sender, e) => {
+				
 				listaNoticiasViewModel.PesquisaCommand(barraDePesquisa.Text);
-				PopularLista(listaNoticias);
+
+				ListaNoticias.ItemsSource = listaNoticiasViewModel.Noticias;
 			};
 
 			return barraDePesquisa;
@@ -137,180 +148,30 @@ namespace InBox
 			}
 		}
 
-		private StackLayout Noticia (Noticia noticia)
-		{
-			var corTexto = Color.White;
-			var corAmarelo = Color.FromRgb (253, 206, 7);
-
-			var titulo = new Label {
-				Text = noticia.Titulo, 
-				TextColor = corAmarelo, 
-				FontSize = 15
-			};
-
-			var relative = new RelativeLayout ();
-
-			relative.Children.Add (ImagemNoticia(80, noticia.Thumb),
-			Constraint.Constant (20),
-			Constraint.Constant (0));
-
-			relative.Children.Add (
-				ImagemCanal(noticia.Canal.Thumb),
-				Constraint.Constant (0),
-				Constraint.Constant (20)
-			);
-
-			relative.Children.Add (
-				CorpoNoticia(titulo, Convert.ToDateTime (noticia.DataCriacao), corTexto, noticia.Resumo),
-				Constraint.Constant (105),
-				Constraint.Constant (0)
-			);
-
-			relative.Children.Add (
-				BarraComentarioCurtidas(corTexto, noticia),
-				Constraint.Constant (105),
-				Constraint.Constant (70)
-			);
-
-			var btn = new StackLayout {
-				Children = {
-					new StackLayoutButton {
-//						HorizontalOptions = LayoutOptions.CenterAndExpand,
-//						Orientation = StackOrientation.Horizontal,
-//						WidthRequest = 300,
-						Children = {
-							relative
-						},
-						Command = listaNoticiasViewModel.SelecionarNoticia,
-						CommandParameter = noticia
-					},
-					new StackLayout{
-						Padding = new Thickness (30, 0, 30, 0),
-						Children = {
-							new StackLayout{
-								HeightRequest = 1,
-								BackgroundColor = Color.Black
-							}
-						}
-					}
-				}
-			};
-
-			if (noticia.Lido) 
-			{
-				titulo.TextColor = Color.White;
-			}
-
-			return btn;
-		}
-
-		private Image ImagemNoticia(int tamanhoImagem, string caminhoImagem)
-		{
-			return new Image {
-				Source = UriImageSource.FromUri (new Uri (caminhoImagem)),
-				HeightRequest = tamanhoImagem,
-				WidthRequest = tamanhoImagem,
-				HorizontalOptions = LayoutOptions.Start
-			};
-		}
-
-		private CircleImage ImagemCanal(string caminhoImagem)
-		{
-			return new CircleImage {
-				BorderColor = Color.Black,
-				BorderThickness = 1,
-				HeightRequest = 40,
-				WidthRequest = 40,
-				Source = UriImageSource.FromUri (new Uri (caminhoImagem)),
-				BackgroundColor = Color.FromRgb (42, 42, 42)
-			};
-		}
-
-		private StackLayout CorpoNoticia(Label titulo, DateTime dataCriacaoNoticia, Color corDoTexto, string resumo)
-		{
-			return new StackLayout {
-				Spacing = -2,
-				Children = {
-					titulo,
-					new StackLayout {
-						Orientation = StackOrientation.Horizontal,
-						Children = {
-							new Label {
-								Text = dataCriacaoNoticia.ToString ("dd/MM/yyyy"),
-								TextColor = corDoTexto,
-								FontSize = 8
-							}
-						}
-					},
-					new Label { Text = "", HeightRequest = 10 },
-					new Label {
-						Text = resumo.Length > 110 ? resumo.Substring (0, 110) : resumo,
-						TextColor = corDoTexto,
-						FontSize = 12
-					}
-				}
-			};
-		}
-
-		private StackLayout BarraComentarioCurtidas(Color corTexto, Noticia noticia)
-		{
-			return new StackLayout {
-				Orientation = StackOrientation.Horizontal,
-				Children = {
-					new StackLayout {
-						Spacing = 2,
-						Orientation = StackOrientation.Horizontal,
-						Children = {
-							new Image {
-								Source = FileImageSource.FromFile ("like.png")
-							},
-							new Label {
-								Text = noticia.Likes.ToString(),
-								FontSize = 8,
-								TextColor = corTexto
-							}
-						}
-					},
-					new StackLayout {
-						Spacing = 2,
-						Orientation = StackOrientation.Horizontal,
-						Children = {
-							new Image {
-								Source = FileImageSource.FromFile ("comment.png")
-							},
-							new Label {
-								Text = noticia.Comentarios.ToString(),
-								FontSize = 8,
-								TextColor = corTexto
-							}
-						}
-					}
-				}
-			};
-		}
-
-		private void PopularLista (StackLayout lista)
-		{
-			try
-			{
-				lista.Children.Clear ();
-
-				foreach (var item in listaNoticiasViewModel.Noticias) {
-					lista.Children.Add (Noticia (item));
-				}
-
-				MontarNovidades ();
-			}
-			catch (Exception ex) 
-			{
-			}
-			//lista.Children.Add (new Button { Text = "Visualizar mais", Command = new Command(() => IncluirItensLista(lista)) });
-		}
+//		private void PopularLista (StackLayout lista)
+//		{
+//			try
+//			{
+//				lista.Children.Clear ();
+//
+//				foreach (var item in listaNoticiasViewModel.Noticias) {
+//					lista.Children.Add (Noticia (item));
+//				}
+//
+//				MontarNovidades ();
+//			}
+//			catch (Exception ex) 
+//			{
+//			}
+//		}
 
 		protected override void OnAppearing ()
 		{
 			listaNoticiasViewModel = new ListaNoticiasViewModel (Canal);
-			PopularLista(listaNoticias);
+
+			ListaNoticias.ItemsSource = listaNoticiasViewModel.Noticias;
+
+			MontarNovidades ();
 		}
 
 		#endregion

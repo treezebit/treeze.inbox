@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace InBox
 {
@@ -13,7 +14,7 @@ namespace InBox
 
 		Task NavigateToCanais();
 
-		Task NavigateToListaComentarios (Noticia noticia);
+		Task NavigateToListaComentarios (List<ComentarioTB> comentarios, Noticia noticia);
 
 		Task NavigateToPerfil ();
 	}

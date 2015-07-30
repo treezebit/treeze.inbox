@@ -9,16 +9,30 @@ namespace InBox
 	{
 		#region Properties
 
-		public List<Comentario> Comentarios { get; set; } = new List<Comentario>();
+		public List<ComentarioTB> Comentarios { get; set; }
+
+		public Noticia Noticia { get; set; }
 
 		#endregion
 
-		public ListaComentariosViewModel (Noticia noticia)
+		public ListaComentariosViewModel (List<ComentarioTB> comentarios, Noticia noticia)
 		{
-			Comentarios.Add (new Comentario ("Teste camentario 1", new Usuario ()));
-			Comentarios.Add (new Comentario ("Teste camentario 2", new Usuario ()));
-			Comentarios.Add (new Comentario ("Teste camentario 3", new Usuario ()));
+			Comentarios = comentarios;
+			Noticia = noticia;
 		}
 
+		public async void IncluirComentarioCommand(string comentario)
+		{
+			var comentarioRep = DependencyService.Get<IComentarioRepository> ();
+
+			using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
+			{
+				var token = usuarioRep.ObterUsuarioLogado ().Token;
+
+				await comentarioRep.Incluir (token, comentario, Noticia.Id);
+
+				Comentarios = comentarioRep.BuscarComentariosNoticia (token, Noticia.Id);
+			}
+		}
 	}
 }

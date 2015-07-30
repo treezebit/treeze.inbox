@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace InBox
 {
@@ -65,9 +66,9 @@ namespace InBox
 			await App.MainContainer.Navigation.PushModalAsync (new DetalheNoticiaView (noticia));
 		}
 
-		public async Task NavigateToListaComentarios (Noticia noticia)
+		public async Task NavigateToListaComentarios (List<ComentarioTB> comentarios, Noticia noticia)
 		{
-			await App.MainContainer.Navigation.PushModalAsync (new NavigationPageCustom( new ListaComentariosView (noticia)));
+			await App.MainContainer.Navigation.PushModalAsync (new NavigationPageCustom( new ListaComentariosView (comentarios, noticia)));
 		}
 
 		public async Task NavigateToPerfil ()

@@ -9,6 +9,11 @@ namespace InBox
 		{
 			await InBox.App.Current.MainPage.DisplayAlert (titulo, message, "ok");
 		}
+
+		public async Task ShowAsyncServerError ()
+		{
+			await InBox.App.Current.MainPage.DisplayAlert ("Atencao", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos", "ok");
+		}
 	}
 }
 

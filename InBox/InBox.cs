@@ -51,6 +51,7 @@ namespace InBox
 			DependencyService.Register<ICurtidaRepository, CurtidaRepository> ();
 			DependencyService.Register<INoticiaRepository, NoticiaRepository> ();
 			DependencyService.Register<IUsuarioRepository, UsuarioRepository> ();
+			DependencyService.Register<IComentarioRepository, ComentarioRepository> ();
 
 			DependencyService.Register<IMessageService, MessageService> ();
 			DependencyService.Register<INavigationService, NavigationService> ();

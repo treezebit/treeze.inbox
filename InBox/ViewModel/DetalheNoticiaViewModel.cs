@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using System.Windows.Input;
 using PropertyChanged;
+using System.Collections.Generic;
 
 namespace InBox
 {
@@ -16,13 +17,7 @@ namespace InBox
 
 		public string IconeLike { get; set; }
 
-		public string IconeSave
-		{
-			get
-			{
-				return "save.png";
-			}
-		}
+		public string IconeSave { get; set; }
 
 		#endregion
 
@@ -34,12 +29,16 @@ namespace InBox
 
 			IconeLike = Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png";
 
+			IconeSave = Noticia.Favoritou ? "save-ativo.png" : "save.png";
+
 			if (!Noticia.Lido)
 			{
 				Noticia.Lido = true;
 
+				using (var usuarioRep = DependencyService.Get<IUsuarioRepository> ())
 				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 				{
+					noticiaRep.Lido(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id, Noticia.Lido);
 					noticiaRep.Atualizar(Noticia);
 				}
 			}
@@ -65,19 +64,58 @@ namespace InBox
 					}
 					else
 					{
-						await _messageService.ShowAsync("Atencao", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos");
+						await _messageService.ShowAsyncServerError();
 					}
 				}
 			}
 			catch
 			{
-				await _messageService.ShowAsync("Atencao", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos");
+				await _messageService.ShowAsyncServerError();
 			}
 		}
 
 		private async void ExibirComentariosCommand()
 		{
-			await _navigationService.NavigateToListaComentarios(Noticia);
+			try
+			{
+				using (var usuarioRep = DependencyService.Get<IUsuarioRepository> ())
+				{
+					var comentarioRep = DependencyService.Get<IComentarioRepository> ();
+
+					var comentarios = comentarioRep.BuscarComentariosNoticia(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id);
+
+					await _navigationService.NavigateToListaComentarios(comentarios, Noticia);
+				}
+			}
+			catch 
+			{
+				await _messageService.ShowAsyncServerError();
+			}
+		}
+
+		public async void FavoritarCommand()
+		{
+			try
+			{
+				using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
+				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
+				{
+					if (noticiaRep.Favorito(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id, !Noticia.Favoritou))
+					{
+						Noticia.Favoritou = !Noticia.Favoritou;
+						noticiaRep.Atualizar(Noticia);
+						IconeSave = Noticia.Favoritou ? "save-ativo.png" : "save.png";
+					}
+					else
+					{
+						await _messageService.ShowAsyncServerError();
+					}
+				}
+			}
+			catch
+			{
+				await _messageService.ShowAsyncServerError();
+			}
 		}
 
 		#endregion

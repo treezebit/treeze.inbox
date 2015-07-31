@@ -11,7 +11,7 @@ namespace InBox
 		{
 			using (var usuarioRep = DependencyService.Get<IUsuarioRepository> ()) 
 			{
-				Usuario = usuarioRep.ObterUsuarioLogado ();
+				Usuario = usuarioRep.ObterUsuarioLogadoLocal ();
 			}
 		}
 	}

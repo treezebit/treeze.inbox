@@ -6,8 +6,6 @@ namespace InBox
 {
 	public class StackLayoutButton : StackLayout
 	{
-
-		public event Action<object> OnLinhaSelecionada;
 		public static BindableProperty CommandProperty = 
 			BindableProperty.Create<CircleImageButton, ICommand> (bp => bp.Command, default(ICommand));
 

@@ -9,9 +9,9 @@ namespace InBox
 	{
 		public ListaCanaisViewModel listaCanaisViewModel { get; set; }
 
-		public ListaCanaisView ()
+		public ListaCanaisView (bool favoritas = false)
 		{
-			listaCanaisViewModel = new ListaCanaisViewModel();
+			listaCanaisViewModel = new ListaCanaisViewModel(favoritas);
 
 			var cancelar = new ToolbarItem {
 				Order = ToolbarItemOrder.Primary,

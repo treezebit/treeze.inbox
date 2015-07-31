@@ -30,12 +30,14 @@ namespace InBox
 						},
 						new Label 
 						{
-							Text = menuViewModel.Usuario.Nome, 
-							TextColor = Color.White, 
-							HorizontalOptions = LayoutOptions.CenterAndExpand 
+							Text = menuViewModel.Usuario.Nome,
+							TextColor = Color.FromRgb(253,206,7),
+							HorizontalOptions = LayoutOptions.CenterAndExpand,
+							FontAttributes = FontAttributes.Bold
 						},
 						ButtonPersonalizado ("Perfil", menuViewModel.AbrirPerfil),
-						//ButtonPersonalizado ("Favoritos", menuViewModel.AbrirNoticiasFavoritas),
+						ButtonPersonalizado ("Todas noticias", menuViewModel.AbrirNoticias),
+						ButtonPersonalizado ("Favoritos", menuViewModel.AbrirNoticiasFavoritas),
 						ButtonPersonalizado ("Sair", menuViewModel.Sair)
 					}
 				};
@@ -52,7 +54,8 @@ namespace InBox
 		{
 			return new Button {
 				Text = name,
-				Command = command
+				Command = command,
+				TextColor = Color.White
 			};
 		}
 	}

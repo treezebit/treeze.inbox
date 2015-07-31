@@ -4,7 +4,7 @@ using SQLite.Net.Attributes;
 
 namespace InBox
 {
-	public class ComentarioTB
+	public class Comentarios
 	{
 		public int Id { get; set; }
 		public string Comentario { get; set; }
@@ -12,7 +12,11 @@ namespace InBox
 		public string Name { get; set; }
 		public string Email { get; set; }
 		public int Likes { get; set; }
-		public int Curtiu { get; set; }
+		public bool Curtiu { get; set; }
 		public string Thumb { get; set; }
+		public int UserId { get; set; }
+		public bool MeuCometario { get; set; }
+
+		public int NoticiaId { get; set; }
 	}
 }

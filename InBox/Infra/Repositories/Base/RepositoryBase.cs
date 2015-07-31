@@ -10,29 +10,34 @@ namespace InBox
 	{
 		public SQLiteConnection _connection => ContextSQLite._connection;
 
-		public List<TEntity> Buscar ()
+		public List<TEntity> BuscarLocal ()
 		{
 			return _connection.GetAllWithChildren<TEntity> ().ToList();
 		}
 
-		public TEntity Obter (int cod)
+		public TEntity ObterLocal (int cod)
 		{
 			return _connection.GetWithChildren<TEntity> (cod);
 		}
 
-		public void Adicionar (TEntity obj)
+		public void AdicionarLocal (TEntity obj)
 		{
 			_connection.InsertWithChildren (obj);
 		}
 
-		public void Atualizar (TEntity obj)
+		public void AtualizarLocal (TEntity obj)
 		{
 			_connection.UpdateWithChildren (obj);
 		}
 
-		public void Remover (TEntity obj)
+		public void RemoverLocal (TEntity obj)
 		{
 			_connection.Delete (obj);
+		}
+
+		public void DropTableLocal ()
+		{
+			_connection.DropTable<TEntity> ();
 		}
 
 		public void Dispose ()

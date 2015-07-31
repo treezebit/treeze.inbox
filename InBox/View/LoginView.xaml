@@ -4,9 +4,8 @@
 		<StackLayout>
 			<AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 				<Grid Padding="20" AbsoluteLayout.LayoutBounds="1, 1, 1, 1" AbsoluteLayout.LayoutFlags="All">
-	    			<StackLayout Spacing="10" VerticalOptions="CenterAndExpand">
-						<StackLayout
-							Padding="20,0,20,20">
+	    			<StackLayout Spacing="10" VerticalOptions="FillAndExpand">
+						<StackLayout Padding="20,40,20,20">
 							<Image Source="Logo-Inbox.png" />
 						</StackLayout>
 						<Entry Text="{ Binding Login  }" Placeholder="Email" HeightRequest="60" IsEnabled="{ Binding IsEnable }" />

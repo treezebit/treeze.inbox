@@ -43,7 +43,6 @@
     <Compile Include="Infra\Context\IConfig.cs" />
     <Compile Include="Core\Model\Curtida.cs" />
     <Compile Include="Infra\Repositories\CanalRepository.cs" />
-    <Compile Include="Infra\Repositories\CurtidaRepository.cs" />
     <Compile Include="Infra\Repositories\Base\RepositoryBase.cs" />
     <Compile Include="ViewModel\ListaCanaisViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -51,7 +50,6 @@
     <Compile Include="ViewModel\DetalheNoticiaViewModel.cs" />
     <Compile Include="Core\Contracts\Repositories\Base\IRepositoryBase.cs" />
     <Compile Include="Core\Contracts\Repositories\ICanalRepository.cs" />
-    <Compile Include="Core\Contracts\Repositories\ICurtidaRepository.cs" />
     <Compile Include="Core\Contracts\Repositories\INoticiaRepository.cs" />
     <Compile Include="Core\Contracts\Repositories\IUsuarioRepository.cs" />
     <Compile Include="Core\Contracts\Services\IMessageService.cs" />
@@ -91,8 +89,8 @@
     <Compile Include="Core\Contracts\Repositories\IComentarioRepository.cs" />
     <Compile Include="Infra\Repositories\ComentarioRepository.cs" />
     <Compile Include="View\Componentes\DynamicTemplateLayoutNoticias.cs" />
-    <Compile Include="View\Componentes\DynamicTemplateLayoutComentarios.cs" />
-    <Compile Include="Core\Model\ComentarioTB.cs" />
+    <Compile Include="Core\Model\Comentarios.cs" />
+    <Compile Include="View\Componentes\ListViewPersonalizada.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6376\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

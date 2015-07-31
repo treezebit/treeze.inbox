@@ -15,10 +15,6 @@ namespace InBox
 
 		public ICommand ExibirComentarios => new Command(ExibirComentariosCommand);
 
-		public string IconeLike { get; set; }
-
-		public string IconeSave { get; set; }
-
 		#endregion
 
 		#region Constructor
@@ -27,9 +23,9 @@ namespace InBox
 		{
 			this.Noticia = noticia;
 
-			IconeLike = Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png";
+			//IconeLike = Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png";
 
-			IconeSave = Noticia.Favoritou ? "save-ativo.png" : "save.png";
+			//IconeSave = Noticia.Favoritou ? "save-ativo.png" : "save.png";
 
 			if (!Noticia.Lido)
 			{
@@ -38,8 +34,8 @@ namespace InBox
 				using (var usuarioRep = DependencyService.Get<IUsuarioRepository> ())
 				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 				{
-					noticiaRep.Lido(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id, Noticia.Lido);
-					noticiaRep.Atualizar(Noticia);
+					noticiaRep.Lido(usuarioRep.ObterUsuarioLogadoLocal().Token, Noticia.Id, Noticia.Lido);
+					noticiaRep.AtualizarLocal(Noticia);
 				}
 			}
 		}
@@ -55,12 +51,11 @@ namespace InBox
 				using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
 				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 				{
-					if (noticiaRep.Like(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id, !Noticia.Curtiu))
+					if (noticiaRep.Like(usuarioRep.ObterUsuarioLogadoLocal().Token, Noticia.Id, !Noticia.Curtiu))
 					{
 						Noticia.Curtiu = !Noticia.Curtiu;
 						Noticia.Likes += Noticia.Curtiu ? 1 : -1;
-						noticiaRep.Atualizar(Noticia);
-						IconeLike = Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png";
+						noticiaRep.AtualizarLocal(Noticia);
 					}
 					else
 					{
@@ -71,6 +66,8 @@ namespace InBox
 			catch
 			{
 				await _messageService.ShowAsyncServerError();
+
+				throw new Exception();
 			}
 		}
 
@@ -82,7 +79,7 @@ namespace InBox
 				{
 					var comentarioRep = DependencyService.Get<IComentarioRepository> ();
 
-					var comentarios = comentarioRep.BuscarComentariosNoticia(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id);
+					var comentarios = comentarioRep.BuscarComentariosNoticia(usuarioRep.ObterUsuarioLogadoLocal().Token, Noticia.Id);
 
 					await _navigationService.NavigateToListaComentarios(comentarios, Noticia);
 				}
@@ -100,11 +97,10 @@ namespace InBox
 				using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
 				using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 				{
-					if (noticiaRep.Favorito(usuarioRep.ObterUsuarioLogado().Token, Noticia.Id, !Noticia.Favoritou))
+					if (noticiaRep.Favorito(usuarioRep.ObterUsuarioLogadoLocal().Token, Noticia.Id, !Noticia.Favoritou))
 					{
 						Noticia.Favoritou = !Noticia.Favoritou;
-						noticiaRep.Atualizar(Noticia);
-						IconeSave = Noticia.Favoritou ? "save-ativo.png" : "save.png";
+						noticiaRep.AtualizarLocal(Noticia);
 					}
 					else
 					{
@@ -115,6 +111,8 @@ namespace InBox
 			catch
 			{
 				await _messageService.ShowAsyncServerError();
+
+				throw new Exception();
 			}
 		}
 

@@ -14,11 +14,6 @@ namespace InBox
 {
 	public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
 	{
-		public UsuarioRepository ()
-		{
-			
-		}
-
 		public async Task<string> Logar(string login, string senha)
 		{	
 			var client = new HttpClient();
@@ -42,7 +37,7 @@ namespace InBox
 
 				return retorno ;
 			}
-			catch(Exception ex)
+			catch
 			{
 				return null;
 			}
@@ -55,19 +50,9 @@ namespace InBox
 			public string Dominio {get;set;}
 		}
 
-		public void Logout()
+		public Usuario ObterUsuarioLogadoLocal()
 		{
-			try
-			{
-				_connection.DropTable<Usuario>();
-			}
-			catch{
-			}
-		}
-
-		public Usuario ObterUsuarioLogado()
-		{
-			return Buscar ().FirstOrDefault ();
+			return BuscarLocal ().FirstOrDefault ();
 		}
 
 		public async Task<Usuario> ObterInformacoesUsuario(string token)

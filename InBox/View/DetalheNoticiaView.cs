@@ -76,7 +76,7 @@ namespace InBox
 						lblLike,
 						new Label
 						{
-							Text = "0 Comentários",
+							Text = string.Format("{0} Comentário{1}", detalheNoticiaViewModel.Noticia.Comentarios, detalheNoticiaViewModel.Noticia.Comentarios > 1 ? "s" : string.Empty ),
 							TextColor = textColor,
 							FontSize = fontSize,
 							VerticalOptions = verticalOption,
@@ -86,7 +86,7 @@ namespace InBox
 				}, 0, 0);
 
 			var imagemLike = new ImageButton {
-				Source = ImageSource.FromFile (detalheNoticiaViewModel.IconeLike),
+				Source = ImageSource.FromFile (detalheNoticiaViewModel.Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png"),
 				Aspect = Aspect.AspectFit,
 				HeightRequest = 45,
 				WidthRequest = 45
@@ -94,35 +94,61 @@ namespace InBox
 
 			imagemLike.Command = new Command (async (a) => {
 
-				detalheNoticiaViewModel.LikeCommand ();
-
-				lblLike.Text = TextoLikes();
-
 				var originalScale = imagemLike.Scale;
 				var height = imagemLike.Height;
-				imagemLike.Source = ImageSource.FromFile (detalheNoticiaViewModel.IconeLike);
-				imagemLike.HeightRequest = height;
-				await imagemLike.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
-				await imagemLike.ScaleTo (originalScale, 150, Easing.Linear);
+
+				try
+				{
+					imagemLike.Source = ImageSource.FromFile (!detalheNoticiaViewModel.Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+					imagemLike.HeightRequest = height;
+					await imagemLike.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+					await imagemLike.ScaleTo (originalScale, 150, Easing.Linear);
+
+					detalheNoticiaViewModel.LikeCommand ();
+
+					lblLike.Text = TextoLikes();
+				}
+				catch
+				{
+					imagemLike.Source = ImageSource.FromFile (detalheNoticiaViewModel.Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+					imagemLike.HeightRequest = height;
+					await imagemLike.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+					await imagemLike.ScaleTo (originalScale, 150, Easing.Linear);
+				}
+
+
+
 			});
 
 			var imagemFavorito = new ImageButton {
-				Source = ImageSource.FromFile (detalheNoticiaViewModel.IconeSave),
+				Source = ImageSource.FromFile (detalheNoticiaViewModel.Noticia.Favoritou ? "save-ativo.png" : "save.png"),
 				Aspect = Aspect.AspectFit, 
 				HeightRequest = 45,
 				WidthRequest = 45
 			};
 
-			imagemFavorito.Command = new Command (async () => {
-
-				detalheNoticiaViewModel.FavoritarCommand();
+			imagemFavorito.Command = new Command (async a => {
 
 				var originalScale = imagemFavorito.Scale;
 				var height = imagemFavorito.Height;
-				imagemFavorito.Source = ImageSource.FromFile (detalheNoticiaViewModel.IconeSave);
-				imagemFavorito.HeightRequest = height;
-				await imagemFavorito.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
-				await imagemFavorito.ScaleTo (originalScale, 150, Easing.Linear);
+
+				try
+				{
+					imagemFavorito.Source = ImageSource.FromFile (!detalheNoticiaViewModel.Noticia.Favoritou ? "save-ativo.png" : "save.png");
+					imagemFavorito.HeightRequest = height;
+					await imagemFavorito.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+					await imagemFavorito.ScaleTo (originalScale, 150, Easing.Linear);
+
+					detalheNoticiaViewModel.FavoritarCommand();
+				}
+				catch
+				{
+					imagemFavorito.Source = ImageSource.FromFile (detalheNoticiaViewModel.Noticia.Favoritou ? "save-ativo.png" : "save.png");
+					imagemFavorito.HeightRequest = height;
+					await imagemFavorito.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+					await imagemFavorito.ScaleTo (originalScale, 150, Easing.Linear);
+				}
+
 			});
 
 			grid.Children.Add (new StackLayout () {

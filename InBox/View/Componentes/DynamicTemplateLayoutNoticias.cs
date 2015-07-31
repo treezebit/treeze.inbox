@@ -46,11 +46,16 @@ public class DynamicTemplateLayoutNoticias : ViewCell
 		relative.Children.Add (
 			BarraComentarioCurtidas(corTexto, noticia),
 			Constraint.Constant (105),
-			Constraint.Constant (70)
+			Constraint.Constant (70),
+			Constraint.RelativeToParent ((parent) => {
+				return parent.Width - 100;
+			}),
+			null
 		);
 
 		var btn = new StackLayout {
 			Padding = new Thickness(5,10,5,10),
+			HorizontalOptions = LayoutOptions.FillAndExpand,
 			Children = {
 				new StackLayout {
 					Children = {
@@ -130,12 +135,29 @@ public class DynamicTemplateLayoutNoticias : ViewCell
 	{
 		var tamanhoIcone = 7;
 
+		var iconeFavorito = new StackLayout {
+			Spacing = 2,
+			Orientation = StackOrientation.Horizontal,
+			HorizontalOptions = LayoutOptions.End,
+			Children = {
+				new Image {
+					Source = FileImageSource.FromFile ("save-ativo.png"),
+					HorizontalOptions = LayoutOptions.End,
+					HeightRequest = tamanhoIcone + 6,
+					WidthRequest = tamanhoIcone + 6
+				}
+			}
+		};
+
 		return new StackLayout {
 			Orientation = StackOrientation.Horizontal,
+			HorizontalOptions = LayoutOptions.FillAndExpand,
+			Padding = new Thickness(0,0,10,0),
 			Children = {
 				new StackLayout {
 					Spacing = 2,
 					Orientation = StackOrientation.Horizontal,
+					HorizontalOptions = LayoutOptions.Start,
 					Children = {
 						new Image {
 							Source = FileImageSource.FromFile ("likeGrande-ativo.png"),
@@ -152,6 +174,7 @@ public class DynamicTemplateLayoutNoticias : ViewCell
 				new StackLayout {
 					Spacing = 2,
 					Orientation = StackOrientation.Horizontal,
+					HorizontalOptions = LayoutOptions.StartAndExpand,
 					Children = {
 						new Image {
 							Source = FileImageSource.FromFile ("commentGrande-ativo.png"),
@@ -165,17 +188,7 @@ public class DynamicTemplateLayoutNoticias : ViewCell
 						}
 					}
 				},
-				new StackLayout {
-					Spacing = 2,
-					Orientation = StackOrientation.Horizontal,
-					Children = {
-						new Image {
-							Source = FileImageSource.FromFile (noticia.Favoritou ? "save-ativo.png" : "save.png"),
-							HeightRequest = tamanhoIcone - 1,
-							WidthRequest = tamanhoIcone - 1
-						}
-					}
-				}
+				noticia.Favoritou ? iconeFavorito : new StackLayout { HeightRequest = tamanhoIcone + 6, WidthRequest = tamanhoIcone + 6 },
 			}
 		};
 	}

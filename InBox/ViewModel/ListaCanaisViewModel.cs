@@ -14,15 +14,19 @@ namespace InBox
 
 		public ICommand SelecionarCanal => new Command<Canal>(canal => SelecionarCanalCommand(canal));
 
+		public bool Favoritas { get; set; }
+
 		#endregion
 
 		#region Constructor
 
-		public ListaCanaisViewModel ()
+		public ListaCanaisViewModel (bool favoritas = false)
 		{
+			Favoritas = favoritas;
+
 			using (var canalRep = DependencyService.Get<ICanalRepository> ())
 			{
-				Canais = canalRep.Buscar();
+				Canais = canalRep.BuscarLocal();
 			}
 		}
 
@@ -32,7 +36,7 @@ namespace InBox
 
 		private void SelecionarCanalCommand(Canal canal)
 		{
-			_navigationService.NavigateToListaNoticias(canal);
+			_navigationService.NavigateToListaNoticias(canal, Favoritas);
 		}
 
 		#endregion

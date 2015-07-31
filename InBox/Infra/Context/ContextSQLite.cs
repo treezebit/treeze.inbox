@@ -26,7 +26,7 @@ namespace InBox
 //					con.DropTable<Usuario> ();
 
 					con.CreateTable<Canal> ();
-					con.CreateTable<ComentarioTB> ();
+					con.CreateTable<Comentarios> ();
 					con.CreateTable<Curtida> ();
 					con.CreateTable<Noticia> ();
 					con.CreateTable<Usuario> ();

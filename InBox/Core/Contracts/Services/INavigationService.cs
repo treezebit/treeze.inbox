@@ -8,13 +8,13 @@ namespace InBox
 	{
 		void NavigateToLogin();
 
-		void NavigateToListaNoticias(Canal canal = null);
+		void NavigateToListaNoticias(Canal canal = null, bool favoritas = false);
 
 		Task NavigateToDetalheNoticias(Noticia noticia);
 
-		Task NavigateToCanais();
+		Task NavigateToCanais(bool favoritas = false);
 
-		Task NavigateToListaComentarios (List<ComentarioTB> comentarios, Noticia noticia);
+		Task NavigateToListaComentarios (List<Comentarios> comentarios, Noticia noticia);
 
 		Task NavigateToPerfil ();
 	}

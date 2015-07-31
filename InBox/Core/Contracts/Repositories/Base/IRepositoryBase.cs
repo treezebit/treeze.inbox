@@ -5,10 +5,11 @@ namespace InBox
 {
 	public interface IRepositoryBase<TEntity> : IDisposable where TEntity : class
 	{
-		List<TEntity> Buscar();
-		TEntity Obter(int cod);
-		void Adicionar(TEntity obj);
-		void Atualizar(TEntity obj);
-		void Remover(TEntity obj);
+		List<TEntity> BuscarLocal();
+		TEntity ObterLocal(int cod);
+		void AdicionarLocal(TEntity obj);
+		void AtualizarLocal(TEntity obj);
+		void RemoverLocal(TEntity obj);
+		void DropTableLocal ();
 	}
 }

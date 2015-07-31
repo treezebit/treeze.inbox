@@ -7,10 +7,10 @@ namespace InBox
 {
 	public class NavigationService : INavigationService
 	{
-		public async Task NavigateToCanais ()
+		public async Task NavigateToCanais (bool favoritas = false)
 		{
 			await ((MasterDetailPage)App.MainContainer.Navigation
-				.ModalStack[App.MainContainer.Navigation.ModalStack.Count - 1]).Detail.Navigation.PushModalAsync (new NavigationPageCustom (new ListaCanaisView ()));
+				.ModalStack[App.MainContainer.Navigation.ModalStack.Count - 1]).Detail.Navigation.PushModalAsync (new NavigationPageCustom (new ListaCanaisView (favoritas)));
 		}
 
 		public async void NavigateToLogin ()
@@ -27,11 +27,10 @@ namespace InBox
 			for (var i = 0; i < quantidade; i++) {
 				await App.MainContainer.Navigation.PopModalAsync ();
 			}
-			await App.MainContainer.Navigation.PushModalAsync ( new ApresentacaoView (){
-			});
+			await App.MainContainer.Navigation.PushModalAsync ( new ApresentacaoView ());
 		}
 
-		public async void NavigateToListaNoticias (Canal canal = null)
+		public async void NavigateToListaNoticias (Canal canal = null, bool favoritas = false)
 		{
 			if (canal == null) {
 				var quantidade = App.MainContainer.Navigation.ModalStack.Count;
@@ -39,18 +38,18 @@ namespace InBox
 					await App.MainContainer.Navigation.PopModalAsync ();
 				}
 				var repository = DependencyService.Get<IUsuarioRepository> ();
-				var usuario = repository.ObterUsuarioLogado ();
+				var usuario = repository.ObterUsuarioLogadoLocal ();
 
 				await App.MainContainer.Navigation.PushModalAsync (new MasterDetailPage {
 					Master = new MenuView (usuario),
-					Detail = new NavigationPage (new ListaNoticiasView ()) {
+					Detail = new NavigationPage (new ListaNoticiasView (null, favoritas)) {
 						BarTextColor = Color.White
 					},
 				});
 			} else {
 				//OPCAO 1
 				await App.MainContainer.Navigation.ModalStack [App.MainContainer.Navigation.ModalStack.Count - 1]
-					.Navigation.PushModalAsync (new NavigationPageCustom(new ListaNoticiasView (canal)));
+					.Navigation.PushModalAsync (new NavigationPageCustom(new ListaNoticiasView (canal, favoritas)));
 
 				//OPCAO 2 
 //				await App.MainContainer.Navigation.PopModalAsync ();
@@ -66,7 +65,7 @@ namespace InBox
 			await App.MainContainer.Navigation.PushModalAsync (new DetalheNoticiaView (noticia));
 		}
 
-		public async Task NavigateToListaComentarios (List<ComentarioTB> comentarios, Noticia noticia)
+		public async Task NavigateToListaComentarios (List<Comentarios> comentarios, Noticia noticia)
 		{
 			await App.MainContainer.Navigation.PushModalAsync (new NavigationPageCustom( new ListaComentariosView (comentarios, noticia)));
 		}

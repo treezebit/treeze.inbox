@@ -32,7 +32,7 @@ namespace InBox
 						HorizontalOptions = LayoutOptions.CenterAndExpand,
 						Source = UriImageSource.FromUri (new Uri (perfilViewModel.Usuario.Thumb))
 					},
-					new Label 
+					new Label
 					{
 						Text = perfilViewModel.Usuario.Nome, 
 						TextColor = Color.White, 

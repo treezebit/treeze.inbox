@@ -12,26 +12,26 @@ namespace InBox
 			using (var canalRep = DependencyService.Get <ICanalRepository>())
 			using (var noticiaRep = DependencyService.Get <INoticiaRepository>()) 
 			{
-				var usuario = usuarioRep.ObterUsuarioLogado ();
+				var usuario = usuarioRep.ObterUsuarioLogadoLocal ();
 
 				if (usuario != null) 
 				{
 					var canais = canalRep.BuscarNovosCanais (usuario.Token);
 
-					canalRep.Excluir ();
+					canalRep.DropTableLocal ();
 
 					foreach (var item in canais)
 					{
-						canalRep.Adicionar (item);
+						canalRep.AdicionarLocal (item);
 					}
 
 					var noticias = primeiroAcesso ? noticiaRep.BuscarNovasNoticias (usuario.Token) : noticiaRep.BuscarNovasNoticias (usuario.Token, DateTime.Now);
 
-					noticiaRep.Excluir ();
+					noticiaRep.DropTableLocal ();
 
 					foreach (var item in noticias)
 					{
-						noticiaRep.Adicionar (item);
+						noticiaRep.AdicionarLocal (item);
 					}
 				}
 			}

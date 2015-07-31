@@ -20,10 +20,5 @@ namespace InBox
 
 			return canais;
 		}
-
-		public void Excluir()
-		{
-			_connection.DropTable<Canal>();
-		}
 	}
 }

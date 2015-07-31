@@ -12,11 +12,13 @@ namespace InBox
 {
 	public class NoticiaRepository : RepositoryBase<Noticia>, INoticiaRepository
 	{
-		public List<Noticia> Buscar (Canal canal)
+		public List<Noticia> BuscarPersonalizadaLocal (Canal canal = null, bool favoritas = false)
 		{
-			return _connection.GetAllWithChildren<Noticia>()
-				.Where(x => x.CanalId == canal.Id)
-				.ToList();
+			return _connection.GetAllWithChildren<Noticia> ()
+				.Where (x => 
+					x.CanalId == (canal != null ? canal.Id : x.CanalId) &&
+					x.Favoritou == (favoritas ? true : x.Favoritou))
+				.ToList ();
 		}
 
 		public List<Noticia> BuscarNovasNoticias(string token, DateTime ultimaAtualizacao = new DateTime())
@@ -33,7 +35,7 @@ namespace InBox
 			return noticias;
 		}
 
-		public List<Noticia> BuscarNaoLido()
+		public List<Noticia> BuscarNaoLidoLocal()
 		{
 			return _connection.GetAllWithChildren<Noticia>()
 				.Where(x => !x.Lido)
@@ -81,7 +83,7 @@ namespace InBox
 			var url = $"http://api.treezebit.com/api/v2/inbox/favorito/emporiodoaco/{token}/{noticiaId}/{valor}";
 			var retorno = true;
 
-			using (var client = new System.Net.Http.HttpClient())
+			using (var client = new HttpClient())
 			{
 				var json = client.GetStringAsync (url).Result;
 
@@ -92,11 +94,6 @@ namespace InBox
 			}
 
 			return retorno;
-		}
-
-		public void Excluir()
-		{
-			_connection.DropTable<Noticia> ();
 		}
 	}
 }

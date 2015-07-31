@@ -12,6 +12,8 @@ namespace InBox
 
 		public ICommand AbrirPerfil => new Command(AbrirPerfilCommand);
 
+		public ICommand AbrirNoticias => new Command(AbrirNoticiasCommand);
+
 		public ICommand AbrirNoticiasFavoritas => new Command(AbrirNoticiasFavoritasCommand);
 
 		public ICommand Sair => new Command(SairCommand);
@@ -36,14 +38,19 @@ namespace InBox
 
 		private void AbrirNoticiasFavoritasCommand()
 		{
-			_navigationService.NavigateToListaNoticias(new Canal());
+			_navigationService.NavigateToListaNoticias(null, true);
+		}
+
+		private void AbrirNoticiasCommand()
+		{
+			_navigationService.NavigateToListaNoticias();
 		}
 
 		private void SairCommand()
 		{
 			using (var usuariorep = DependencyService.Get<IUsuarioRepository>())
 			{
-				usuariorep.Logout();
+				usuariorep.DropTableLocal();
 			}
 
 			_navigationService.NavigateToLogin();

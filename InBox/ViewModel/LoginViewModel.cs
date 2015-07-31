@@ -64,7 +64,7 @@ namespace InBox
 					
 						usuario = await usuarioRepository.ObterInformacoesUsuario(usuario.Token);
 
-						usuarioRepository.Adicionar(usuario);
+						usuarioRepository.AdicionarLocal(usuario);
 
 						_atualizarDadosService.Atualizar(true);
 
@@ -76,7 +76,7 @@ namespace InBox
 					}
 				}
 			}
-			catch (Exception ex) 
+			catch
 			{
 				await _messageService.ShowAsync ("Atenção", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos");
 			}

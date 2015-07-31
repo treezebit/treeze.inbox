@@ -24,10 +24,10 @@ namespace InBox
 
 		#region Constructor
 
-		public ListaNoticiasView (Canal canal = null)
+		public ListaNoticiasView (Canal canal = null, bool favoritas = false)
 		{
 			this.Canal = canal;
-			listaNoticiasViewModel = new ListaNoticiasViewModel (canal);
+			listaNoticiasViewModel = new ListaNoticiasViewModel (canal, favoritas);
 
 			MontarTela ();
 		}
@@ -167,7 +167,7 @@ namespace InBox
 
 		protected override void OnAppearing ()
 		{
-			listaNoticiasViewModel = new ListaNoticiasViewModel (Canal);
+			listaNoticiasViewModel = new ListaNoticiasViewModel (Canal, listaNoticiasViewModel.Favoritas);
 
 			ListaNoticias.ItemsSource = listaNoticiasViewModel.Noticias;
 

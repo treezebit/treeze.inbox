@@ -7,17 +7,17 @@ using System.Text;
 
 namespace InBox
 {
-	public class ComentarioRepository : IComentarioRepository, IDisposable
+	public class ComentarioRepository : IComentarioRepository
 	{
-		public List<ComentarioTB> BuscarComentariosNoticia (string token, int noticiaId)
+		public List<Comentarios> BuscarComentariosNoticia (string token, int noticiaId)
 		{
 			var url = $"http://api.treezebit.com/api/v2/inbox/comentarios-noticia/emporiodoaco/{ token }/{ noticiaId }";
-			var Comentarios = new List<ComentarioTB> ();
+			var Comentarios = new List<Comentarios> ();
 
 			using (var client = new System.Net.Http.HttpClient())
 			{
 				var json = client.GetStringAsync(url).Result;
-				Comentarios = JsonConvert.DeserializeObject<List<ComentarioTB>>(json);
+				Comentarios = JsonConvert.DeserializeObject<List<Comentarios>>(json);
 			}
 
 			return Comentarios;
@@ -37,18 +37,11 @@ namespace InBox
 
 			var parametros = new StringContent (JsonConvert.SerializeObject(parametro), Encoding.UTF8, "application/json");
 
-			try
-			{
-				var response = await client.PostAsync("http://api.treezebit.com/api/v2/inbox/comentar", parametros);
+			var response = await client.PostAsync("http://api.treezebit.com/api/v2/inbox/comentar", parametros);
 
-				response.EnsureSuccessStatusCode();
+			response.EnsureSuccessStatusCode();
 
-				var json = response.Content.ReadAsStringAsync().Result;
-			}
-			catch(Exception ex)
-			{
-
-			}
+			var json = response.Content.ReadAsStringAsync().Result;
 		}
 
 		public async Task Deletar (string token, int noticiaId, int comentarioId)
@@ -65,23 +58,29 @@ namespace InBox
 
 			var parametros = new StringContent (JsonConvert.SerializeObject(parametro), Encoding.UTF8, "application/json");
 
-			try
-			{
-				var response = await client.PostAsync("http://api.treezebit.com/api/v2/inbox/excluir-comentario", parametros);
+			var response = await client.PostAsync("http://api.treezebit.com/api/v2/inbox/excluir-comentario", parametros);
 
-				response.EnsureSuccessStatusCode();
+			response.EnsureSuccessStatusCode();
 
-				var json = response.Content.ReadAsStringAsync().Result;
-			}
-			catch(Exception ex)
-			{
-
-			}
+			var json = response.Content.ReadAsStringAsync().Result;
 		}
 
-		public void Dispose()
+		public bool Curtir (string token, int comentarioId, bool valor)
 		{
+			var url = $"http://api.treezebit.com/api/v2/inbox/like-comentario/emporiodoaco/{token}/{comentarioId}/{valor}";
+			var retorno = true;
 
+			using (var client = new HttpClient())
+			{
+				var json = client.GetStringAsync (url).Result;
+
+				if (!string.IsNullOrEmpty (json)) 
+				{
+					retorno = false;
+				}
+			}
+
+			return retorno;
 		}
 
 		private class ParamsIncluir
@@ -100,6 +99,4 @@ namespace InBox
 			public string ComentarioId { get; set; }
 		}
 	}
-
-
 }

@@ -18,7 +18,7 @@ namespace InBox
 
 			MainContainer = new ContentPage ();
 			
-			var usuario = repository.ObterUsuarioLogado ();
+			var usuario = repository.ObterUsuarioLogadoLocal ();
 			if (usuario != null) {
 				MainContainer.Navigation.PushModalAsync (new MasterDetailPage {
 					Master = new MenuView (usuario),
@@ -48,7 +48,6 @@ namespace InBox
 		private static void RegistrarInjecaoDeDependencia ()
 		{
 			DependencyService.Register<ICanalRepository, CanalRepository> ();
-			DependencyService.Register<ICurtidaRepository, CurtidaRepository> ();
 			DependencyService.Register<INoticiaRepository, NoticiaRepository> ();
 			DependencyService.Register<IUsuarioRepository, UsuarioRepository> ();
 			DependencyService.Register<IComentarioRepository, ComentarioRepository> ();

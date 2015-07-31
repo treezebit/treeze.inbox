@@ -22,24 +22,20 @@ namespace InBox
 
 		public ICommand Pesquisar => new Command<string>(texto => PesquisaCommand(texto));
 
-		private Canal Canal {get;set;}
+		private Canal Canal { get; set; }
+
+		public bool Favoritas { get; set; }
 
 		#endregion
 
 		#region Constructor
 
-		public ListaNoticiasViewModel (Canal canal)
+		public ListaNoticiasViewModel (Canal canal, bool favoritas)
 		{
-			try
-			{
-				Canal = canal;
+			Canal = canal;
+			Favoritas = favoritas;
 
-				PopularListaNoticias();
-			}
-			catch (Exception ex)
-			{
-				
-			}
+			PopularListaNoticias();
 		}
 
 		#endregion
@@ -60,14 +56,14 @@ namespace InBox
 
 		public async void ExibirCanaisCommand()
 		{
-			await _navigationService.NavigateToCanais();
+			await _navigationService.NavigateToCanais(Favoritas);
 		}
 
 		public void PesquisaCommand(string texto)
 		{
 			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 			{
-				var noticias = Canal != null ? noticiaRep.Buscar(Canal) : noticiaRep.Buscar();
+				var noticias = noticiaRep.BuscarPersonalizadaLocal(Canal, Favoritas);
 
 				Noticias = noticias.Where(x => x.Titulo.Contains(texto) || x.Resumo.Contains(texto)).ToList();
 
@@ -85,7 +81,7 @@ namespace InBox
 			{
 				for (int count = 0; count < Noticias.Count; count++) 
 				{
-					Noticias [count].Canal = canalRep.Obter (Noticias [count].CanalId);
+					Noticias [count].Canal = canalRep.ObterLocal (Noticias [count].CanalId);
 				}
 			}
 		}
@@ -94,18 +90,11 @@ namespace InBox
 		{
 			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 			{
-				if (Canal != null)
-				{
-					Titulo = Canal.Nome;
+				Titulo = Canal != null ? Canal.Nome : "Noticias";
 
-					Noticias = noticiaRep.Buscar(Canal);
-				}
-				else
-				{
-					Titulo = "Noticias";
+				_atualizarDadosService.Atualizar(true);
 
-					Noticias = noticiaRep.Buscar();
-				}
+				Noticias = noticiaRep.BuscarPersonalizadaLocal(Canal, Favoritas);
 
 				IncluirCanaisNoticias();
 			}

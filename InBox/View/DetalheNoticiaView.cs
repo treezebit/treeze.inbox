@@ -97,27 +97,22 @@ namespace InBox
 				var originalScale = imagemLike.Scale;
 				var height = imagemLike.Height;
 
-				try
+				imagemLike.Source = ImageSource.FromFile (!detalheNoticiaViewModel.Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+				imagemLike.HeightRequest = height;
+				await imagemLike.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+				await imagemLike.ScaleTo (originalScale, 150, Easing.Linear);
+
+				if (await detalheNoticiaViewModel.LikeCommand ())
 				{
-					imagemLike.Source = ImageSource.FromFile (!detalheNoticiaViewModel.Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
-					imagemLike.HeightRequest = height;
-					await imagemLike.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
-					await imagemLike.ScaleTo (originalScale, 150, Easing.Linear);
-
-					detalheNoticiaViewModel.LikeCommand ();
-
 					lblLike.Text = TextoLikes();
 				}
-				catch
+				else
 				{
 					imagemLike.Source = ImageSource.FromFile (detalheNoticiaViewModel.Noticia.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
 					imagemLike.HeightRequest = height;
 					await imagemLike.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
 					await imagemLike.ScaleTo (originalScale, 150, Easing.Linear);
 				}
-
-
-
 			});
 
 			var imagemFavorito = new ImageButton {
@@ -132,23 +127,18 @@ namespace InBox
 				var originalScale = imagemFavorito.Scale;
 				var height = imagemFavorito.Height;
 
-				try
-				{
-					imagemFavorito.Source = ImageSource.FromFile (!detalheNoticiaViewModel.Noticia.Favoritou ? "save-ativo.png" : "save.png");
-					imagemFavorito.HeightRequest = height;
-					await imagemFavorito.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
-					await imagemFavorito.ScaleTo (originalScale, 150, Easing.Linear);
+				imagemFavorito.Source = ImageSource.FromFile (!detalheNoticiaViewModel.Noticia.Favoritou ? "save-ativo.png" : "save.png");
+				imagemFavorito.HeightRequest = height;
+				await imagemFavorito.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+				await imagemFavorito.ScaleTo (originalScale, 150, Easing.Linear);
 
-					detalheNoticiaViewModel.FavoritarCommand();
-				}
-				catch
+				if (!(await detalheNoticiaViewModel.FavoritarCommand()))
 				{
 					imagemFavorito.Source = ImageSource.FromFile (detalheNoticiaViewModel.Noticia.Favoritou ? "save-ativo.png" : "save.png");
 					imagemFavorito.HeightRequest = height;
 					await imagemFavorito.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
 					await imagemFavorito.ScaleTo (originalScale, 150, Easing.Linear);
 				}
-
 			});
 
 			grid.Children.Add (new StackLayout () {

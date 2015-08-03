@@ -24,7 +24,7 @@ namespace InBox
 		public List<Noticia> BuscarNovasNoticias(string token, DateTime ultimaAtualizacao = new DateTime())
 		{
 			var noticias = new List<Noticia> ();
-			var url = ultimaAtualizacao == new DateTime () ? $"http://api.treezebit.com/api/v2/inbox/novidades/emporiodoaco/{token}/null" : $"http://api.treezebit.com/api/v2/inbox/novidades/emporiodoaco/{token}/{ultimaAtualizacao}";
+			var url = ultimaAtualizacao == new DateTime () ? $"http://api.treezebit.com/api/v2/inbox/novidades/emporiodoaco/{token}/null" : String.Format("http://api.treezebit.com/api/v2/inbox/novidades/emporiodoaco/{0}/{1}", token, ultimaAtualizacao.ToString("dd-MM-yyyy"));
 
 			using (var client = new System.Net.Http.HttpClient())
 			{

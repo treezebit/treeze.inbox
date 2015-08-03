@@ -8,6 +8,8 @@ namespace InBox
 		Task ShowAsync(string titulo, string message);
 
 		Task ShowAsyncServerError ();
+
+		Task ShowAsyncConnectFailure ();
 	}
 }
 

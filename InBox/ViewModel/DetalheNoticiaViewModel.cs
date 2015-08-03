@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.Windows.Input;
 using PropertyChanged;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InBox
 {
@@ -44,8 +45,10 @@ namespace InBox
 
 		#region Methods
 
-		public async void LikeCommand()
+		public async Task<bool> LikeCommand()
 		{
+			bool retorno = true;
+
 			try
 			{
 				using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
@@ -63,12 +66,14 @@ namespace InBox
 					}
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
-				await _messageService.ShowAsyncServerError();
+				await _exceptionService.TratarExceptions (ex);
 
-				throw new Exception();
+				retorno = false;
 			}
+
+			return retorno;
 		}
 
 		private async void ExibirComentariosCommand()
@@ -84,14 +89,16 @@ namespace InBox
 					await _navigationService.NavigateToListaComentarios(comentarios, Noticia);
 				}
 			}
-			catch 
+			catch (Exception ex)
 			{
-				await _messageService.ShowAsyncServerError();
+				await _exceptionService.TratarExceptions (ex);
 			}
 		}
 
-		public async void FavoritarCommand()
+		public async Task<bool> FavoritarCommand()
 		{
+			bool retorno = true;
+
 			try
 			{
 				using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
@@ -105,15 +112,19 @@ namespace InBox
 					else
 					{
 						await _messageService.ShowAsyncServerError();
+
+						retorno = false;
 					}
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
-				await _messageService.ShowAsyncServerError();
+				await _exceptionService.TratarExceptions (ex);
 
-				throw new Exception();
+				retorno = false;
 			}
+
+			return retorno;
 		}
 
 		#endregion

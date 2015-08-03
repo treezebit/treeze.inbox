@@ -36,7 +36,6 @@ namespace InBox
 							FontAttributes = FontAttributes.Bold
 						},
 						ButtonPersonalizado ("Perfil", menuViewModel.AbrirPerfil),
-						ButtonPersonalizado ("Todas noticias", menuViewModel.AbrirNoticias),
 						ButtonPersonalizado ("Favoritos", menuViewModel.AbrirNoticiasFavoritas),
 						ButtonPersonalizado ("Sair", menuViewModel.Sair)
 					}

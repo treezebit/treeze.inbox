@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace InBox
 {
@@ -14,6 +15,8 @@ namespace InBox
 			{
 				var usuario = usuarioRep.ObterUsuarioLogadoLocal ();
 
+				List<Noticia> noticias = new List<Noticia> ();
+
 				if (usuario != null) 
 				{
 					var canais = canalRep.BuscarNovosCanais (usuario.Token);
@@ -25,9 +28,16 @@ namespace InBox
 						canalRep.AdicionarLocal (item);
 					}
 
-					var noticias = primeiroAcesso ? noticiaRep.BuscarNovasNoticias (usuario.Token) : noticiaRep.BuscarNovasNoticias (usuario.Token, DateTime.Now);
+					if (primeiroAcesso) 
+					{
+						noticias = noticiaRep.BuscarNovasNoticias (usuario.Token);
 
-					noticiaRep.DropTableLocal ();
+						noticiaRep.DropTableLocal ();
+					}
+					else 
+					{
+						noticias = noticiaRep.BuscarNovasNoticias (usuario.Token, DateTime.Now);
+					}
 
 					foreach (var item in noticias)
 					{

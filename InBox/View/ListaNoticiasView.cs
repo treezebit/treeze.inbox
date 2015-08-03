@@ -38,25 +38,18 @@ namespace InBox
 
 		private void MontarTela ()
 		{
-			//Title = listaNoticiasViewModel.Titulo;
-			if (this.Canal == null) 
+			if (Canal == null && listaNoticiasViewModel.Favoritas) 
+			{
+				this.Title = "Favoritos";
+			}
+			else if (this.Canal == null) 
 			{
 				NavigationPage.SetTitleIcon (this, (FileImageSource)FileImageSource.FromFile ("logo.png"));
 				Icon = (FileImageSource)FileImageSource.FromFile ("menu.png");
-			} 
+			}
 			else 
 			{
-				var cancelar = new ToolbarItem {
-					Order = ToolbarItemOrder.Primary,
-					Text = "Cancelar", 
-					Priority = 0,
-					Icon = (FileImageSource)FileImageSource.FromFile ("btn-fechar.png"), 
-				};
-
-				cancelar.Command = new Command (() => Navigation.PopModalAsync ());
-
 				this.Title = this.Canal.Nome;
-				this.ToolbarItems.Add (cancelar);
 			}
 
 			ListaNoticias = new ListView {
@@ -89,9 +82,7 @@ namespace InBox
 
 			MontarNovidades ();
 
-			if (this.Canal == null) {
-				MontarToolbar (sbrPesquisa);
-			}
+			MontarToolbar (sbrPesquisa);
 
 			Content = new StackLayoutPersonalizado {
 				Spacing = 8,
@@ -100,6 +91,19 @@ namespace InBox
 					lblNovidades,
 					ListaNoticias
 				}
+			};
+		}
+
+		private ToolbarItem Cancelar()
+		{
+			return new ToolbarItem {
+				Order = ToolbarItemOrder.Primary,
+				Text = "Cancelar", 
+				Priority = 0,
+				Icon = (FileImageSource)FileImageSource.FromFile ("btn-fechar.png"),
+				Command = new Command (() => {
+					Navigation.PopModalAsync ();
+				})
 			};
 		}
 
@@ -121,14 +125,21 @@ namespace InBox
 
 		private void MontarToolbar (SearchBar sbrPesquisa)
 		{
-			this.ToolbarItems.Add (
-				new ToolbarItem {
-					Icon = (FileImageSource)FileImageSource.FromFile ("canais.png"),
-					Text = "Canais",
-					Command = listaNoticiasViewModel.ExibirCanais,
-					Order = ToolbarItemOrder.Primary
-				}
-			);
+			if (Canal != null || listaNoticiasViewModel.Favoritas) 
+			{
+				this.ToolbarItems.Add (Cancelar ());
+			}
+			else 
+			{
+				this.ToolbarItems.Add (
+					new ToolbarItem {
+						Icon = (FileImageSource)FileImageSource.FromFile ("canais.png"),
+						Text = "Canais",
+						Command = listaNoticiasViewModel.ExibirCanais,
+						Order = ToolbarItemOrder.Primary
+					}
+				);
+			}
 		}
 
 		private void MontarNovidades ()
@@ -147,23 +158,6 @@ namespace InBox
 				lblNovidades.HorizontalOptions = LayoutOptions.CenterAndExpand;
 			}
 		}
-
-//		private void PopularLista (StackLayout lista)
-//		{
-//			try
-//			{
-//				lista.Children.Clear ();
-//
-//				foreach (var item in listaNoticiasViewModel.Noticias) {
-//					lista.Children.Add (Noticia (item));
-//				}
-//
-//				MontarNovidades ();
-//			}
-//			catch (Exception ex) 
-//			{
-//			}
-//		}
 
 		protected override void OnAppearing ()
 		{

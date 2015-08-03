@@ -86,13 +86,17 @@ namespace InBox
 			}
 		}
 
-		private void PopularListaNoticias()
+		private async void PopularListaNoticias()
 		{
 			using (var noticiaRep = DependencyService.Get<INoticiaRepository> ()) 
 			{
 				Titulo = Canal != null ? Canal.Nome : "Noticias";
 
-				_atualizarDadosService.Atualizar(true);
+				try
+				{
+					_atualizarDadosService.Atualizar();
+				}
+				catch {}
 
 				Noticias = noticiaRep.BuscarPersonalizadaLocal(Canal, Favoritas);
 

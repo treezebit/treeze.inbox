@@ -10,6 +10,8 @@ namespace InBox
 	[ImplementPropertyChanged]
 	public class ListaComentariosView : ContentPage
 	{
+		#region Properties
+
 		private ListaComentariosViewModel listaComentariosViewModel { get; set; }
 
 		private Entry txtComentario { get; set; }
@@ -17,6 +19,12 @@ namespace InBox
 		private StackLayout ListaComentarios { get; set; }
 
 		private ScrollView Scroll { get; set; }
+
+		private StackLayoutPersonalizado conteudo { get; set; }
+
+		#endregion
+
+		#region Constructor
 
 		public ListaComentariosView (List<Comentarios> comentarios, Noticia noticia)
 		{
@@ -44,13 +52,18 @@ namespace InBox
 				VerticalOptions = LayoutOptions.FillAndExpand
 			};
 
-			var conteudo = new StackLayoutPersonalizado {
+			conteudo = new StackLayoutPersonalizado {
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				Children = {
 					new StackLayout {
-						VerticalOptions = LayoutOptions.Fill,
+						VerticalOptions = LayoutOptions.StartAndExpand,
 						Children = {
-							Scroll,
+							Scroll
+						}
+					},
+					new StackLayout {
+						VerticalOptions = LayoutOptions.End,
+						Children = {
 							BarraIncluirComentario()
 						}
 					},
@@ -59,7 +72,7 @@ namespace InBox
 			};
 
 			txtComentario.Focused += (sender, e) => {
-				placeholder.HeightRequest = 210;
+				placeholder.HeightRequest = 230;
 				ScrollToEnd();
 			};
 
@@ -71,10 +84,18 @@ namespace InBox
 			Content = conteudo;
 		}
 
+		#endregion
+
+		#region Methods Override
+
 		protected override void OnAppearing ()
 		{
 			ScrollToEnd();
 		}
+
+		#endregion
+
+		#region
 
 		private void PopularListaComentarios()
 		{
@@ -83,6 +104,11 @@ namespace InBox
 			for (int count = 0; count < listaComentariosViewModel.Comentarios.Count; count++) 
 			{
 				ListaComentarios.Children.Add (Comentario (listaComentariosViewModel.Comentarios [count]));
+			}
+
+			if (Scroll != null) 
+			{
+				ScrollToEnd ();
 			}
 		}
 
@@ -101,25 +127,11 @@ namespace InBox
 			var btnEnviar = new Button {
 				Text = "Enviar",
 				HeightRequest = 20,
+				VerticalOptions = LayoutOptions.CenterAndExpand,
 				HorizontalOptions = LayoutOptions.End
 			};
 
-			btnEnviar.Command = new Command (async parametros => {
-
-				btnEnviar.Text = "Enviando";
-				btnEnviar.IsEnabled = false;
-
-				await listaComentariosViewModel.IncluirComentarioCommand(txtComentario.Text);
-
-				PopularListaComentarios();
-				txtComentario.Text = string.Empty;
-				txtComentario.Unfocus();
-
-				ScrollToEnd();
-
-				btnEnviar.Text = "Enviar";
-				btnEnviar.IsEnabled = true;
-			});
+			btnEnviar.Command = IncluirComentarioCommand (btnEnviar);
 
 			return new StackLayout {
 				Orientation = StackOrientation.Horizontal,
@@ -152,170 +164,232 @@ namespace InBox
 
 		private StackLayout Comentario(Comentarios comentario)
 		{
-			var corTexto = Color.White;
-			var tamanhoImagemPerfil = 32;
-			var tamanhoTexto = 12;
-
-			var icone = comentario.MeuCometario ? ExcluirComentario (comentario) : ImagemCurtir (comentario);
-
-			icone.HeightRequest = 10;
-			icone.WidthRequest = 10;
-			icone.VerticalOptions = LayoutOptions.CenterAndExpand;
-			icone.HorizontalOptions = LayoutOptions.CenterAndExpand;
-
 			return new StackLayout {
 				VerticalOptions = LayoutOptions.FillAndExpand,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				Children = {
-					new StackLayout {
-						Orientation = StackOrientation.Horizontal,
-						VerticalOptions = LayoutOptions.FillAndExpand,
-						HorizontalOptions = LayoutOptions.FillAndExpand,
-						Padding = new Thickness(0, 0, 10, 0),
-						Children = {
-							new StackLayout {
-								Padding = new Thickness(comentario.MeuCometario ? 50 : 15, 10, 0, 0),
-								HorizontalOptions = LayoutOptions.FillAndExpand,
-								VerticalOptions = LayoutOptions.FillAndExpand,
-								Spacing = 8,
-								Children = {
-									new StackLayout {
-										Orientation = StackOrientation.Horizontal,
-										HorizontalOptions = LayoutOptions.FillAndExpand,
-										VerticalOptions = LayoutOptions.FillAndExpand,
-										Spacing = 3,
-										Children = {
-											new CircleImage
-											{
-												Source = ImageSource.FromUri( new Uri(comentario.Thumb)),
-												HeightRequest = tamanhoImagemPerfil,
-												WidthRequest = tamanhoImagemPerfil,
-												HorizontalOptions = LayoutOptions.Start
-											},
-											new StackLayout {
-												Spacing = 0,
-												HorizontalOptions = LayoutOptions.StartAndExpand,
-												Children = {
-													new Label {
-														Text = comentario.Name,
-														FontSize = tamanhoTexto,
-														TextColor = corTexto,
-														FontAttributes = FontAttributes.Bold,
-														HorizontalOptions = LayoutOptions.Start
-													},
-													new Label
-													{
-														Text = Convert.ToDateTime(comentario.Data).ToString("dd/MM/yyyy HH:mm"),
-														FontSize = tamanhoTexto - 2,
-														TextColor = corTexto,
-														HorizontalOptions = LayoutOptions.Start
-													}
-												}
-											}
-										}
-									},
-									new Label { 
-										Text = comentario.Comentario, 
-										TextColor = corTexto ,
-										FontSize = tamanhoTexto,
-										HorizontalOptions = LayoutOptions.FillAndExpand,
-										VerticalOptions = LayoutOptions.FillAndExpand,
-									}
-								}
-							},
-							new StackLayout {
-								HorizontalOptions = LayoutOptions.End,
-								VerticalOptions = LayoutOptions.CenterAndExpand,
-								HeightRequest = 45,
-								WidthRequest = 45,
-								Children = {
-									icone
-								}
-							}
-						}
+					MontarConteudo(comentario),
+					MontarLinhaSeparacao()
+				}
+			};
+		}
+
+		private  Layout<View> MontarConteudo(Comentarios comentario)
+		{
+			var corTexto = Color.White;
+			var tamanhoTexto = 12;
+			var imagem = IncluirImagemPerfil (comentario.Thumb, 28);
+
+			var conteudo = new Grid () 
+			{
+				Padding = new Thickness (comentario.MeuCometario ? 40 : 10, 10, 10, 10)
+			};
+
+			//CONTEUDO
+			var gridPerRow = new Grid () {
+				ColumnDefinitions = new ColumnDefinitionCollection () {
+					new ColumnDefinition () { }, 
+					new ColumnDefinition () { Width = 60 } 
+				}
+			};
+
+			//COLUNA PARA COMENTARIOS, FOTO, DATA
+			var gridLeftColumn = new Grid () {
+				RowDefinitions = new RowDefinitionCollection(){
+					new RowDefinition(), 
+					new RowDefinition() { Height = GridLength.Auto } 
+				}
+			};
+
+			//ADD CONTEUDO PARA COLUNA ESQUEDA -- FOTO, DATA, NOME
+			var gridCommentDetail = new Grid () {
+				ColumnDefinitions = new ColumnDefinitionCollection () {
+					new ColumnDefinition () { Width = GridLength.Auto }, 
+					new ColumnDefinition () {  } 
+				}
+			};
+
+			//COLUNA DO EVENTO: LIKE OU REMOVER COMENTARIO
+			var gridRightColumn = new Grid () ;
+
+			conteudo.Children.Add (gridPerRow);
+
+			gridPerRow.Children.Add (gridLeftColumn, 0, 0);
+
+			gridPerRow.Children.Add (gridRightColumn, 1, 0);
+
+			//ADICIONA ICONE ACAO
+			gridRightColumn.Children.Add( MontarIconeAcao(comentario), 0, 0);
+
+			gridLeftColumn.Children.Add (gridCommentDetail, 0, 0);
+
+			gridCommentDetail.Children.Add(imagem, 0, 0);
+
+			gridCommentDetail.Children.Add(new StackLayout {
+				Spacing = 3,
+				Children = {
+					IncluirNomeData (comentario.Name, Convert.ToDateTime (comentario.Data), tamanhoTexto, corTexto)
+				}
+			}, 1, 0);
+
+			//ADICIONA O COMENTARIO NA ULTIMA LINHA DO GRID
+			gridLeftColumn.Children.Add (new Label { 
+				Text = comentario.Comentario, 
+				TextColor = corTexto,
+				FontSize = tamanhoTexto,
+			}, 0, 1);
+
+			return conteudo;
+		}
+
+		private StackLayout MontarIconeAcao(Comentarios comentario)
+		{
+			var IconeAcao = new Image
+			{
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				HorizontalOptions = LayoutOptions.CenterAndExpand,
+				HeightRequest = 10,
+				WidthRequest = 10
+			};
+
+			Command command = null;
+
+			if (comentario.MeuCometario) 
+			{
+				IconeAcao.Source = FileImageSource.FromFile ("btn-fechar.png");
+				command = ExcluirComentarioCommand (comentario);
+			}
+			else 
+			{
+				IconeAcao.Source = FileImageSource.FromFile (comentario.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+				command = ImagemCurtirCommand (comentario, IconeAcao);
+			}
+
+			return new StackLayoutButton {
+				HeightRequest = 45,
+				WidthRequest = 45,
+				Command = command,
+				Children = {
+					IconeAcao
+				}
+			};
+		}
+
+		private StackLayout MontarLinhaSeparacao()
+		{
+			return new StackLayout {
+				HeightRequest = 1,
+				BackgroundColor = Color.Black
+			};
+		}
+
+		private CircleImage IncluirImagemPerfil(string caminhoImagem, int tamanhoImagem)
+		{
+			return new CircleImage {
+				Source = ImageSource.FromUri (new Uri (caminhoImagem)),
+				HeightRequest = tamanhoImagem,
+				WidthRequest = tamanhoImagem
+			};
+		}
+
+		private StackLayout IncluirNomeData(string nome, DateTime data, int tamanhoTexto, Color corTexto)
+		{
+			return new StackLayout {
+				Spacing = 0,
+				Children = {
+					new Label {
+						Text = nome,
+						FontSize = tamanhoTexto,
+						TextColor = corTexto,
+						FontAttributes = FontAttributes.Bold,
 					},
-					new StackLayout {
-						HeightRequest = 1,
-						BackgroundColor = Color.Black
+					new Label {
+						Text = Convert.ToDateTime (data).ToString ("dd/MM/yyyy HH:mm"),
+						FontSize = tamanhoTexto - 2,
+						TextColor = corTexto,
 					}
 				}
 			};
 		}
 
-		private ImageButton ExcluirComentario(Comentarios comentario)
+		#endregion
+
+		#region Commands
+
+		private Command ExcluirComentarioCommand(Comentarios comentario)
 		{
-			var imagem = new ImageButton 
-			{
-				HorizontalOptions = LayoutOptions.End,
-				Source = FileImageSource.FromFile ("btn-fechar.png"),
-				Command = new Command(async parametro => {
+			return new Command (async parametro => {
 
-					var comentarioRep = DependencyService.Get<IComentarioRepository>();
-					using (var usuarioRep = DependencyService.Get<IUsuarioRepository>())
+				if (await DisplayAlert("Atencao","Tem certeza que deseja excluir esse comentario?", "Sim", "Nao"))
+				{
+					conteudo.BarraCarregar.IsVisible = true;
+					
+					if (await listaComentariosViewModel.ExcluirComentario (comentario.Id, comentario))
 					{
-						try
-						{
-							await comentarioRep.Deletar(usuarioRep.ObterUsuarioLogadoLocal().Token, comentario.NoticiaId, comentario.Id);
-
-							listaComentariosViewModel.ExcluirComentario(comentario.Id);
-
-							PopularListaComentarios();
-						}
-						catch
-						{
-							var mensagem = DependencyService.Get<IMessageService> ();
-
-							await mensagem.ShowAsyncServerError ();
-						}
+						PopularListaComentarios ();
 					}
+
+					conteudo.BarraCarregar.IsVisible = false;
 
 					ScrollToEnd();
-				})
-			};
-
-			return imagem;
-		}
-
-		private ImageButton ImagemCurtir(Comentarios comentario)
-		{
-			var imagem = new ImageButton
-			{
-				HorizontalOptions = LayoutOptions.End
-			};
-
-			imagem.Source = IconeCurtir (comentario);
-
-			imagem.Command = new Command (async parametro => {
-
-				try 
-				{
-					var comentarioRep = DependencyService.Get<IComentarioRepository> ();
-
-					using (var usuarioRep = DependencyService.Get<IUsuarioRepository> ()) 
-					{
-						comentario.Curtiu = !comentario.Curtiu;
-						imagem.Source = IconeCurtir(comentario);
-
-						comentarioRep.Curtir (usuarioRep.ObterUsuarioLogadoLocal ().Token, comentario.Id, !comentario.Curtiu);
-					}
-				}
-				catch 
-				{
-					comentario.Curtiu = comentario.Curtiu;
-					imagem.Source = IconeCurtir(comentario);
-
-					var mensagem = DependencyService.Get<IMessageService> ();
-
-					await mensagem.ShowAsyncServerError ();
 				}
 			});
-
-			return imagem;
 		}
 
-		private ImageSource IconeCurtir(Comentarios comentario)
+		private Command ImagemCurtirCommand(Comentarios comentario, Image icone)
 		{
-			return FileImageSource.FromFile (comentario.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+			return new Command (async parametro => {
+
+				var originalScale = 1;
+				var height = 10;
+
+				comentario.Curtiu = !comentario.Curtiu;
+				icone.Source = FileImageSource.FromFile (comentario.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+
+				icone.HeightRequest = height;
+				await icone.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+				await icone.ScaleTo (originalScale, 150, Easing.Linear);
+
+				if (! (await listaComentariosViewModel.Curtir(comentario)))
+				{
+					comentario.Curtiu = !comentario.Curtiu;
+					icone.Source = FileImageSource.FromFile (comentario.Curtiu ? "likeGrande-ativo.png" : "likeGrande.png");
+
+					icone.HeightRequest = height;
+					await icone.ScaleTo (originalScale + 0.3, 150, Easing.Linear);
+					await icone.ScaleTo (originalScale, 150, Easing.Linear);
+				}
+			});
 		}
+
+		private Command IncluirComentarioCommand(Button btnEnviar)
+		{
+			return new Command (async parametros => {
+
+				conteudo.BarraCarregar.IsVisible = true;
+
+				btnEnviar.Text = "Enviando";
+				btnEnviar.IsEnabled = false;
+				txtComentario.IsEnabled = false;
+
+				await listaComentariosViewModel.IncluirComentarioCommand(txtComentario.Text);
+
+				PopularListaComentarios();
+				txtComentario.Text = string.Empty;
+				txtComentario.Unfocus();
+
+				ScrollToEnd();
+
+				btnEnviar.Text = "Enviar";
+				btnEnviar.IsEnabled = true;
+				txtComentario.IsEnabled = true;
+
+				conteudo.BarraCarregar.IsVisible = false;
+
+				ScrollToEnd();
+			});
+		}
+
+		#endregion
 	}
 }

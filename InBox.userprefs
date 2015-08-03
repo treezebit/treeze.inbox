@@ -1,13 +1,15 @@
 ﻿<Properties StartupItem="iOS/InBox.iOS.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone4s.8.4" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="InBox/View/ListaComentariosView.cs">
+    <Files>
+      <File FileName="InBox/View/ListaComentariosView.cs" Line="87" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/felipepimentel/Projects/TreezeBit/EmporioDoAco/treeze.inbox/InBox/Converters/NegativeConverter.cs" line="11" column="1" />
       <Breakpoint file="/Users/felipepimentel/Projects/TreezeBit/EmporioDoAco/treeze.inbox/InBox/Converters/NegativeConverter.cs" line="15" column="1" />
       <Breakpoint file="/Users/EduardoBaltazar/treeze.inbox/treeze.inbox/InBox/ViewModel/ListaNoticiasViewModel.cs" line="60" column="1" />
-      <Breakpoint file="/Users/EduardoBaltazar/treeze.inbox/InBox/Infra/Repositories/ComentarioRepository.cs" line="49" column="1" />
-      <Breakpoint file="/Users/EduardoBaltazar/treeze.inbox/InBox/Infra/Repositories/ComentarioRepository.cs" line="74" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

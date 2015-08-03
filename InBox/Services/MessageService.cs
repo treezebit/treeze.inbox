@@ -14,6 +14,11 @@ namespace InBox
 		{
 			await InBox.App.Current.MainPage.DisplayAlert ("Atencao", "Nossos servidores estao em manutencao, por favor acesse novamente em 10 minutos", "ok");
 		}
+
+		public async Task ShowAsyncConnectFailure ()
+		{
+			await InBox.App.Current.MainPage.DisplayAlert ("Atencao", "Voce precisa estar conectado na internet", "ok");
+		}
 	}
 }
 
